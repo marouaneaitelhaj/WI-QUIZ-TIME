@@ -1,5 +1,6 @@
 package com.wi.quiz.Controllers;
 
+import com.wi.quiz.DTO.QuestionDto;
 import com.wi.quiz.Entities.Question;
 import com.wi.quiz.Services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Question question) {
+    public ResponseEntity<?> save(@RequestBody QuestionDto question) {
         try {
             return ResponseEntity.ok(questionService.save(question));
         } catch (Exception e) {
@@ -41,7 +42,7 @@ public class QuestionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Question question, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody QuestionDto question, @PathVariable Long id) {
         try {
             if (questionService.findById(id) == null) return ResponseEntity.badRequest().body("Question not found");
             return ResponseEntity.ok(questionService.update(question, id));

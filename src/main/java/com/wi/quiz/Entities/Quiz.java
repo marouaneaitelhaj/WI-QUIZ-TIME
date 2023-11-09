@@ -1,13 +1,11 @@
 package com.wi.quiz.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Data
@@ -23,4 +21,6 @@ public class Quiz {
     private Boolean resultAccess;
     private int numberOfChances;
     private String comment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Teacher teacher;
 }

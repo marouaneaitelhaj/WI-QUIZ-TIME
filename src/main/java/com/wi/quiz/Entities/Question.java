@@ -1,5 +1,6 @@
 package com.wi.quiz.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.wi.quiz.Enums.QuestionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class Question {
     private int points;
     private int time;
     @ManyToOne
+    @JsonManagedReference
     private Level level;
     @ManyToOne
     private Subject subject;

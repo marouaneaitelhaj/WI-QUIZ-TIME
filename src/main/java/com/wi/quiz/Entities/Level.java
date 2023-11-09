@@ -1,13 +1,13 @@
 package com.wi.quiz.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Data
@@ -21,6 +21,11 @@ public class Level {
     private String description;
     private int maxPoints;
     private int minPoints;
+
+    @OneToMany(mappedBy = "level")
+    @JsonBackReference
+    private List<Question> questions;
+
 
     public Level(Long id) {
         this.id = id;

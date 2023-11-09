@@ -1,13 +1,11 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.Entities.Subject;
+import com.wi.quiz.DTO.SubjectDto;
 import com.wi.quiz.Services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/subject")
@@ -16,9 +14,9 @@ public class SubjectController {
     private SubjectService subjectService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Subject subject) {
+    public ResponseEntity<?> save(@RequestBody SubjectDto subjectDto) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.save(subject));
+            return ResponseEntity.status(HttpStatus.CREATED).body(subjectService.save(subjectDto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
@@ -27,8 +25,7 @@ public class SubjectController {
     @GetMapping
     public ResponseEntity<?> findAll() {
         try {
-            List<Subject> subjects = subjectService.findAll();
-            return ResponseEntity.status(HttpStatus.OK).body(subjects);
+            return ResponseEntity.status(HttpStatus.OK).body(subjectService.findAll());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
@@ -44,10 +41,9 @@ public class SubjectController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Subject subject, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody SubjectDto subjectDto, @PathVariable Long id) {
         try {
-            if (subjectService.findById(id) == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Subject not found");
-            return ResponseEntity.status(HttpStatus.OK).body(subjectService.update(subject, id));
+            return ResponseEntity.status(HttpStatus.OK).body(subjectService.update(subjectDto, id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
@@ -56,7 +52,6 @@ public class SubjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         try {
-            if (subjectService.findById(id) == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Subject not found");
             subjectService.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body("Subject deleted successfully");
         } catch (Exception e) {

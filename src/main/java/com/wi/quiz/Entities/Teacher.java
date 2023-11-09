@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Data
@@ -19,4 +20,6 @@ public class Teacher extends Person{
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String speciality;
+    @OneToMany(mappedBy = "teacher")
+    private List<Quiz> quizzes;
 }

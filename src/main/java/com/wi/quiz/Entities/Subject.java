@@ -1,14 +1,18 @@
 package com.wi.quiz.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
+@ToString(exclude = {"top", "subs", "questions"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -23,8 +27,10 @@ public class Subject {
     private Subject top;
 
     @OneToMany(mappedBy = "top", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Subject> subs;
+
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    private List<Question> questions;
 
     public Subject(Long id) {
         this.id = id;

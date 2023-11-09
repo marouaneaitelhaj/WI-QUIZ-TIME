@@ -1,17 +1,18 @@
 package com.wi.quiz.Services;
 
+import com.wi.quiz.DTO.LevelDto;
 import com.wi.quiz.Entities.Level;
 
 import java.util.List;
 
 public interface LevelService {
-    public Level save(Level level);
+    public LevelDto save(Level level) throws Exception;
 
-    public Level update(Level level, Long id);
+    public LevelDto update(LevelDto levelDto, Long id) throws Exception;
 
-    public void delete(Long id);
+    public void delete(Long id) throws Exception;
 
-    public Level findById(Long id);
+    public LevelDto findById(Long id) throws Exception;
 
-    public List<Level> findAll();
+    public List<LevelDto> findAll() throws Exception;
 }

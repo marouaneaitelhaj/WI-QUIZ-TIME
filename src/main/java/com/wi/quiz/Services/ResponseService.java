@@ -1,6 +1,6 @@
 package com.wi.quiz.Services;
 
-import com.wi.quiz.Entities.Response;
+import com.wi.quiz.DTO.ResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 public interface ResponseService {
 
-    public Response save(Response response);
+    public ResponseDto save(ResponseDto responseDto) throws Exception;
 
-    public Response update(Response response, Long id);
+    public ResponseDto update(ResponseDto responseDto, Long id) throws Exception;
 
-    public void delete(Long id);
+    public void delete(Long id) throws Exception;
 
-    public Response findById(Long id);
+    public ResponseDto findById(Long id) throws Exception;
 
-    public List<Response> findAll();
+    public List<ResponseDto> findAll() throws Exception;
 }

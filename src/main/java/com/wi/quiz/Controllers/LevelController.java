@@ -1,5 +1,6 @@
 package com.wi.quiz.Controllers;
 
+import com.wi.quiz.DTO.LevelDto;
 import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Services.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class LevelController {
     @GetMapping
     public ResponseEntity<?> findAll() {
         try {
-            List<Level> levels = levelService.findAll();
+            List<LevelDto> levels = levelService.findAll();
             return ResponseEntity.ok(levels);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
@@ -36,7 +37,7 @@ public class LevelController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
-            Level level = levelService.findById(id);
+            LevelDto level = levelService.findById(id);
             return ResponseEntity.ok(level);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
@@ -44,10 +45,9 @@ public class LevelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Level level, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody LevelDto levelDto, @PathVariable Long id) {
         try {
-            if (levelService.findById(id) == null) return ResponseEntity.badRequest().body("Level not found");
-            return ResponseEntity.ok(levelService.update(level, id));
+            return ResponseEntity.ok(levelService.update(levelDto, id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
@@ -56,7 +56,6 @@ public class LevelController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
-            if (levelService.findById(id) == null) return ResponseEntity.badRequest().body("Level not found");
             levelService.delete(id);
             return ResponseEntity.ok("Level deleted successfully");
         } catch (Exception e) {
