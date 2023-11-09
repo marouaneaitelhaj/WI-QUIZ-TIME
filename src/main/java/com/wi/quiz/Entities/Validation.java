@@ -1,12 +1,11 @@
 package com.wi.quiz.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +19,8 @@ public class Validation {
     private Question question;
     @ManyToOne
     private Response response;
+    @OneToMany(mappedBy = "validation")
+    private List<Answer> answers;
     private boolean isCorrect;
     private int points;
 }

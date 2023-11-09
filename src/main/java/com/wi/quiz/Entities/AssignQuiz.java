@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -20,6 +21,8 @@ public class AssignQuiz {
     private Student student;
     @ManyToOne
     private Quiz quiz;
+    @OneToMany(mappedBy = "assignQuiz")
+    private List<Answer> answers;
     private int score;
     private int chance;
     private String notes;

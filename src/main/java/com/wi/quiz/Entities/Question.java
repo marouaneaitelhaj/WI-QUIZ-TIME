@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Data
@@ -28,6 +29,12 @@ public class Question {
     private Level level;
     @ManyToOne
     private Subject subject;
+    @OneToMany(mappedBy = "question")
+    private List<Media> media;
+    @OneToMany(mappedBy = "question")
+    private List<QuestionOfQuiz> questionOfQuizs;
+    @OneToMany(mappedBy = "question")
+    private List<Validation> validations;
 
     public Question(Long id) {
         this.id = id;

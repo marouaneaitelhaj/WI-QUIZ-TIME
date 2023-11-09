@@ -1,5 +1,6 @@
 package com.wi.quiz.Entities;
 
+import com.wi.quiz.Enums.QuestionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,6 +18,7 @@ public class Media {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String src;
+    private QuestionType type;
     @ManyToOne
     private Question question;
 }

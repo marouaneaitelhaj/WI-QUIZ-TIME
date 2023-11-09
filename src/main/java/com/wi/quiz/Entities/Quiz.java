@@ -23,4 +23,8 @@ public class Quiz {
     private String comment;
     @ManyToOne(fetch = FetchType.LAZY)
     private Teacher teacher;
+    @OneToMany(mappedBy = "quiz")
+    private List<QuestionOfQuiz> questionOfQuizs;
+    @OneToMany(mappedBy = "quiz")
+    private List<AssignQuiz> assignQuizs;
 }

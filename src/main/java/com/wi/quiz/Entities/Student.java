@@ -18,4 +18,6 @@ public class Student extends Person {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private LocalDate enrollmentDate;
+    @OneToMany(mappedBy = "student")
+    private List<AssignQuiz> quizzes;
 }
