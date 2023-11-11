@@ -23,7 +23,6 @@ public class Level {
     private int minPoints;
 
     @OneToMany(mappedBy = "level")
-    @JsonBackReference
     private List<Question> questions;
 
 

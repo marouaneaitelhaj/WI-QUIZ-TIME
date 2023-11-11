@@ -20,9 +20,9 @@ public class LevelServiceImpl implements LevelService {
     private ModelMapper modelMapper;
 
     @Override
-    public LevelDto save(Level level) throws Exception {
+    public LevelDto save(LevelDto level) throws Exception {
         try {
-            return modelMapper.map(levelRepository.save(level), LevelDto.class);
+            return modelMapper.map(levelRepository.save(modelMapper.map(level, Level.class)), LevelDto.class);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

@@ -16,7 +16,7 @@ public class LevelController {
     private LevelService levelService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Level level) {
+    public ResponseEntity<?> save(@RequestBody LevelDto level) {
         try {
             return ResponseEntity.ok(levelService.save(level));
         } catch (Exception e) {

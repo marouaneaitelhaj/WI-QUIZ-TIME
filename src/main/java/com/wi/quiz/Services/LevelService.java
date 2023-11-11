@@ -6,7 +6,7 @@ import com.wi.quiz.Entities.Level;
 import java.util.List;
 
 public interface LevelService {
-    public LevelDto save(Level level) throws Exception;
+    public LevelDto save(LevelDto level) throws Exception;
 
     public LevelDto update(LevelDto levelDto, Long id) throws Exception;
 
