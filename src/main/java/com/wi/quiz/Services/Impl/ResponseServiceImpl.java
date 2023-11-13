@@ -1,12 +1,13 @@
 package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.ResponseDto;
+import com.wi.quiz.DTO.Rsp.ResponseDtoRsp;
 import com.wi.quiz.Entities.Response;
 import com.wi.quiz.Repositories.ResponseRepository;
-import com.wi.quiz.Services.ResponseService;
-import org.aspectj.apache.bcel.classfile.Module;
+import com.wi.quiz.Services.Inter.ResponseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,69 +20,62 @@ public class ResponseServiceImpl implements ResponseService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Override
-    public ResponseDto save(ResponseDto responseDto) throws Exception {
+    public ResponseEntity<ResponseDto> save(ResponseDto responseDto) {
         try {
             Response response = modelMapper.map(responseDto, Response.class);
             responseRepository.save(response);
-            return responseDto;
+            return ResponseEntity.ok(responseDto);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public ResponseDto update(ResponseDto responseDto, Long id) throws Exception {
+    public ResponseEntity<ResponseDto> update(ResponseDto responseDto, Long aLong) {
         try {
-            Optional<Response> optionalResponse = responseRepository.findById(id);
-            if (optionalResponse.isPresent()) {
-                Response response = modelMapper.map(responseDto, Response.class);
-                response.setId(id);
-                responseRepository.save(response);
-                return responseDto;
-            } else {
-                throw new Exception("Response not found for id: " + id);
-            }
+            Response response = modelMapper.map(responseDto, Response.class);
+            response.setId(aLong);
+            responseRepository.save(response);
+            return ResponseEntity.ok(responseDto);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public ResponseEntity<String> delete(Long aLong) {
         try {
-            Optional<Response> response = responseRepository.findById(id);
-            if (response.isPresent()) {
-                responseRepository.deleteById(id);
-            } else {
-                throw new Exception("Response not found for id: " + id);
-            }
+            responseRepository.deleteById(aLong);
+            return ResponseEntity.ok("Response deleted successfully");
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public ResponseDto findById(Long id) throws Exception {
+    public ResponseEntity<ResponseDtoRsp> findOne(Long aLong) {
         try {
-            Optional<Response> response = responseRepository.findById(id);
-            if (response.isPresent()) {
-                return modelMapper.map(response.get(), ResponseDto.class);
-            } else {
-                throw new Exception("Response not found for id: " + id);
+            Optional<Response> response = responseRepository.findById(aLong);
+            if (response.isEmpty()) {
+                throw new RuntimeException("Response not found for id: " + aLong);
             }
+            ResponseDtoRsp responseDtoRsp = modelMapper.map(response.get(), ResponseDtoRsp.class);
+            return ResponseEntity.ok(responseDtoRsp);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public List<ResponseDto> findAll() throws Exception {
+    public ResponseEntity<List<ResponseDtoRsp>> findAll() {
         try {
             List<Response> responses = responseRepository.findAll();
-            return responses.stream().map(response -> modelMapper.map(response, ResponseDto.class)).toList();
+            List<ResponseDtoRsp> responseDtoRsps = responses.stream().map(response -> modelMapper.map(response, ResponseDtoRsp.class)).toList();
+            return ResponseEntity.ok(responseDtoRsps);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

@@ -1,5 +1,8 @@
-package com.wi.quiz.DTO;
+package com.wi.quiz.DTO.Rsp;
 
+import com.wi.quiz.DTO.QuestionDto;
+import com.wi.quiz.DTO.SubjectDto;
+import com.wi.quiz.Entities.Question;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +11,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubjectRespDto {
+public class SubjectDtoRsp {
     private Long id;
     private String name;
-
     private SubjectDto top;
-
     private List<SubjectDto> subs;
+    private List<QuestionDto> questions;
 }

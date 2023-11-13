@@ -1,11 +1,13 @@
 package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.LevelDto;
+import com.wi.quiz.DTO.Rsp.LevelDtoRsp;
 import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Repositories.LevelRepository;
-import com.wi.quiz.Services.LevelService;
+import com.wi.quiz.Services.Inter.LevelService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,66 +22,69 @@ public class LevelServiceImpl implements LevelService {
     private ModelMapper modelMapper;
 
     @Override
-    public LevelDto save(LevelDto level) throws Exception {
+    public ResponseEntity<LevelDto> save(LevelDto levelDto) {
         try {
-            return modelMapper.map(levelRepository.save(modelMapper.map(level, Level.class)), LevelDto.class);
+            Level level = modelMapper.map(levelDto, Level.class);
+            levelRepository.save(level);
+            return ResponseEntity.ok(levelDto);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public LevelDto update(LevelDto levelDto, Long id) throws Exception {
+    public ResponseEntity<LevelDto> update(LevelDto levelDto, Long aLong) {
         try {
-            Optional<Level> optionalLevel = levelRepository.findById(id);
+            Optional<Level> optionalLevel = levelRepository.findById(aLong);
             if (optionalLevel.isPresent()) {
                 Level level = modelMapper.map(levelDto, Level.class);
-                level.setId(id);
+                level.setId(aLong);
                 levelRepository.save(level);
-                return levelDto;
+                return ResponseEntity.ok(levelDto);
             } else {
-                throw new Exception("Level not found for id: " + id);
+                throw new RuntimeException("Level not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public ResponseEntity<String> delete(Long aLong) {
         try {
-            Optional<Level> level = levelRepository.findById(id);
+            Optional<Level> level = levelRepository.findById(aLong);
             if (level.isPresent()) {
-                levelRepository.deleteById(id);
+                levelRepository.deleteById(aLong);
+                return ResponseEntity.ok("Level deleted successfully");
             } else {
-                throw new Exception("Level not found for id: " + id);
+                throw new RuntimeException("Level not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public LevelDto findById(Long id) throws Exception {
+    public ResponseEntity<LevelDtoRsp> findOne(Long aLong) {
         try {
-            Optional<Level> level = levelRepository.findById(id);
-            if (level.isPresent()) {
-                return modelMapper.map(level.get(), LevelDto.class);
+            Optional<Level> optionalLevel = levelRepository.findById(aLong);
+            if (optionalLevel.isPresent()) {
+                return ResponseEntity.ok(modelMapper.map(optionalLevel.get(), LevelDtoRsp.class));
             } else {
-                throw new Exception("Level not found for id: " + id);
+                throw new RuntimeException("Level not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public List<LevelDto> findAll() throws Exception {
+    public ResponseEntity<List<LevelDtoRsp>> findAll() {
         try {
             List<Level> levels = levelRepository.findAll();
-            return levels.stream().map(level -> modelMapper.map(level, LevelDto.class)).toList();
+            return ResponseEntity.ok(levels.stream().map(level -> modelMapper.map(level, LevelDtoRsp.class)).toList());
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

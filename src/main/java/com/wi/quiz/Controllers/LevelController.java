@@ -1,8 +1,8 @@
 package com.wi.quiz.Controllers;
 
 import com.wi.quiz.DTO.LevelDto;
-import com.wi.quiz.Entities.Level;
-import com.wi.quiz.Services.LevelService;
+import com.wi.quiz.DTO.Rsp.LevelDtoRsp;
+import com.wi.quiz.Services.Impl.LevelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,54 +13,31 @@ import java.util.List;
 @RequestMapping("/level")
 public class LevelController {
     @Autowired
-    private LevelService levelService;
+    private LevelServiceImpl levelService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody LevelDto level) {
-        try {
-            return ResponseEntity.ok(levelService.save(level));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public void save(@RequestBody LevelDto level) {
+            levelService.save(level);
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        try {
-            List<LevelDto> levels = levelService.findAll();
-            return ResponseEntity.ok(levels);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<List<LevelDtoRsp>> findAll() {
+        return levelService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
-        try {
-            LevelDto level = levelService.findById(id);
-            return ResponseEntity.ok(level);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<LevelDtoRsp> findById(@PathVariable Long id) {
+        return levelService.findOne(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody LevelDto levelDto, @PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(levelService.update(levelDto, id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<LevelDto> update(@RequestBody LevelDto levelDto, @PathVariable Long id) {
+            return levelService.update(levelDto, id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            levelService.delete(id);
-            return ResponseEntity.ok("Level deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        return levelService.delete(id);
     }
 
 

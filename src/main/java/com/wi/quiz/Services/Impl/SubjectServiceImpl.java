@@ -1,12 +1,13 @@
 package com.wi.quiz.Services.Impl;
 
+import com.wi.quiz.DTO.Rsp.SubjectDtoRsp;
 import com.wi.quiz.DTO.SubjectDto;
-import com.wi.quiz.DTO.SubjectResponseDto;
 import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Repositories.SubjectRepository;
-import com.wi.quiz.Services.SubjectService;
+import com.wi.quiz.Services.Inter.SubjectService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,74 +22,71 @@ public class SubjectServiceImpl implements SubjectService {
     private ModelMapper modelMapper;
 
     @Override
-    public SubjectDto save(SubjectDto subjectDto) throws Exception {
+    public ResponseEntity<SubjectDto> save(SubjectDto subjectDto) {
         try {
             Subject subject = modelMapper.map(subjectDto, Subject.class);
             subjectRepository.save(subject);
-            return subjectDto;
+            return ResponseEntity.ok(subjectDto);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public SubjectDto update(SubjectDto subjectDto, Long id) throws Exception {
+    public ResponseEntity<SubjectDto> update(SubjectDto subjectDto, Long aLong) {
         try {
-            Optional<Subject> optionalSubject = subjectRepository.findById(id);
+            Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
             if (optionalSubject.isPresent()) {
                 Subject subject = modelMapper.map(subjectDto, Subject.class);
-                subject.setId(id);
+                subject.setId(aLong);
                 subjectRepository.save(subject);
-                return subjectDto;
-            }else {
-                throw new Exception("Subject not found for id: " + id);
-            }
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public void delete(Long id) throws Exception {
-        try {
-            Optional<Subject> subject = subjectRepository.findById(id);
-            if (subject.isPresent()) {
-                subjectRepository.deleteById(id);
-            }else {
-                throw new Exception("Subject not found for id: " + id);
-            }
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    @Override
-    public SubjectResponseDto findById(Long id) throws Exception {
-        try {
-            Optional<Subject> optionalSubject = subjectRepository.findById(id);
-            if (optionalSubject.isPresent()) {
-                Subject subject = optionalSubject.get();
-                SubjectDto top = modelMapper.map(subject.getTop(), SubjectDto.class);
-                List<SubjectDto> sub = subject.getSubs().stream().map(subject1 -> modelMapper.map(subject1, SubjectDto.class)).toList();
-                SubjectResponseDto subjectDtoResponse = modelMapper.map(subject, SubjectResponseDto.class);
-                subjectDtoResponse.setTop(top);
-                subjectDtoResponse.setSubs(sub);
-                return subjectDtoResponse;
-            }else {
-                throw new Exception("Subject not found for id: " + id);
+                return ResponseEntity.ok(subjectDto);
+            } else {
+                throw new RuntimeException("Subject not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public List<SubjectResponseDto> findAll() throws Exception {
+    public ResponseEntity<String> delete(Long aLong) {
+        try {
+            Optional<Subject> subject = subjectRepository.findById(aLong);
+            if (subject.isPresent()) {
+                subjectRepository.deleteById(aLong);
+                return ResponseEntity.ok("Subject deleted successfully");
+            } else {
+                throw new RuntimeException("Subject not found for id: " + aLong);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseEntity<SubjectDtoRsp> findOne(Long aLong) {
+        try {
+            Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
+            if (optionalSubject.isPresent()) {
+                SubjectDtoRsp subjectDtoRsp = modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
+                return ResponseEntity.ok(subjectDtoRsp);
+            } else {
+                throw new RuntimeException("Subject not found for id: " + aLong);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseEntity<List<SubjectDtoRsp>> findAll() {
         try {
             List<Subject> subjects = subjectRepository.findAll();
-            return subjects.stream().map(subject -> modelMapper.map(subject, SubjectResponseDto.class)).toList();
+            List<SubjectDtoRsp> subjectDtoRsps = subjects.stream().map(subject -> modelMapper.map(subject, SubjectDtoRsp.class)).toList();
+            return ResponseEntity.ok(subjectDtoRsps);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

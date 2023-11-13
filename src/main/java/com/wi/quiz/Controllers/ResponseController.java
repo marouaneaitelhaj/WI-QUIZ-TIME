@@ -1,64 +1,43 @@
 package com.wi.quiz.Controllers;
 
 import com.wi.quiz.DTO.ResponseDto;
-import com.wi.quiz.Entities.Response;
-import com.wi.quiz.Services.ResponseService;
+import com.wi.quiz.DTO.Rsp.ResponseDtoRsp;
+import com.wi.quiz.Services.Impl.ResponseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/response")
 public class ResponseController {
     @Autowired
-    private ResponseService responseService;
+    private ResponseServiceImpl responseService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody ResponseDto response) {
-        try {
-            return ResponseEntity.ok(responseService.save(response));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<ResponseDto> save(@RequestBody ResponseDto response) {
+        return responseService.save(response);
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        try {
-            return ResponseEntity.ok(responseService.findAll());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<List<ResponseDtoRsp>> findAll() {
+        return responseService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(responseService.findById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<ResponseDtoRsp> findById(@PathVariable Long id) {
+        return responseService.findOne(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody ResponseDto response, @PathVariable Long id) {
-        try {
-            if (responseService.findById(id) == null) return ResponseEntity.badRequest().body("Response not found");
-            return ResponseEntity.ok(responseService.update(response, id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<ResponseDto> update(@RequestBody ResponseDto response, @PathVariable Long id) {
+        return responseService.update(response, id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            if (responseService.findById(id) == null) return ResponseEntity.badRequest().body("Response not found");
-            responseService.delete(id);
-            return ResponseEntity.ok("Response deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        return responseService.delete(id);
     }
 
 }

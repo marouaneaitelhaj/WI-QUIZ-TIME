@@ -25,7 +25,6 @@ public class Question {
     private int points;
     private int time;
     @ManyToOne
-    @JsonManagedReference
     private Level level;
     @ManyToOne
     private Subject subject;

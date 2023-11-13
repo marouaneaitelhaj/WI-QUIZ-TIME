@@ -1,11 +1,13 @@
 package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.QuestionDto;
+import com.wi.quiz.DTO.Rsp.QuestionDtoRsp;
 import com.wi.quiz.Entities.Question;
 import com.wi.quiz.Repositories.QuestionRepository;
-import com.wi.quiz.Services.QuestionService;
+import com.wi.quiz.Services.Inter.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,69 +22,71 @@ public class QuestionServiceImpl implements QuestionService {
     private ModelMapper modelMapper;
 
     @Override
-    public QuestionDto save(QuestionDto questionDto) throws Exception {
+    public ResponseEntity<QuestionDto> save(QuestionDto questionDto) {
         try {
             Question question = modelMapper.map(questionDto, Question.class);
             questionRepository.save(question);
-            return questionDto;
+            return ResponseEntity.ok(questionDto);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public QuestionDto update(QuestionDto questionDto, Long id) throws Exception {
+    public ResponseEntity<QuestionDto> update(QuestionDto questionDto, Long aLong) {
         try {
-            Optional<Question> optionalQuestion = questionRepository.findById(id);
+            Optional<Question> optionalQuestion = questionRepository.findById(aLong);
             if (optionalQuestion.isPresent()) {
                 Question question = modelMapper.map(questionDto, Question.class);
-                question.setId(id);
+                question.setId(aLong);
                 questionRepository.save(question);
-                return questionDto;
+                return ResponseEntity.ok(questionDto);
             } else {
-                throw new Exception("Question not found for id: " + id);
+                throw new RuntimeException("Question not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public ResponseEntity<String> delete(Long aLong) {
         try {
-            Optional<Question> question = questionRepository.findById(id);
+            Optional<Question> question = questionRepository.findById(aLong);
             if (question.isPresent()) {
-                questionRepository.deleteById(id);
+                questionRepository.deleteById(aLong);
+                return ResponseEntity.ok("Question deleted successfully");
             } else {
-                throw new Exception("Question not found for id: " + id);
+                throw new RuntimeException("Question not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public QuestionDto findById(Long id) throws Exception {
+    public ResponseEntity<QuestionDtoRsp> findOne(Long aLong) {
         try {
-            Optional<Question> question = questionRepository.findById(id);
-            if (question.isPresent()) {
-                QuestionDto questionDto = modelMapper.map(question.get(), QuestionDto.class);
-                return questionDto;
+            Optional<Question> optionalQuestion = questionRepository.findById(aLong);
+            if (optionalQuestion.isPresent()) {
+                QuestionDtoRsp questionDtoRsp = modelMapper.map(optionalQuestion.get(), QuestionDtoRsp.class);
+                return ResponseEntity.ok(questionDtoRsp);
             } else {
-                throw new Exception("Question not found for id: " + id);
+                throw new RuntimeException("Question not found for id: " + aLong);
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public List<QuestionDto> findAll() throws Exception {
+    public ResponseEntity<List<QuestionDtoRsp>> findAll() {
         try {
             List<Question> questions = questionRepository.findAll();
-            return questions.stream().map(question -> modelMapper.map(question, QuestionDto.class)).toList();
+            List<QuestionDtoRsp> questionDtoRsps = questions.stream().map(question -> modelMapper.map(question, QuestionDtoRsp.class)).toList();
+            return ResponseEntity.ok(questionDtoRsps);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
