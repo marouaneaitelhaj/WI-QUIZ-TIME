@@ -1,7 +1,7 @@
 package com.wi.quiz.Services;
 
 import com.wi.quiz.DTO.SubjectDto;
-import com.wi.quiz.DTO.Rsp.SubjectResponseDto;
+import com.wi.quiz.DTO.SubjectResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

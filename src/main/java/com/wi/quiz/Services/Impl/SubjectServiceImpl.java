@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.SubjectDto;
-import com.wi.quiz.DTO.Rsp.SubjectResponseDto;
+import com.wi.quiz.DTO.SubjectResponseDto;
 import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.SubjectService;
