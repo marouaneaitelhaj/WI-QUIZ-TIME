@@ -1,7 +1,7 @@
 package com.wi.quiz.Services;
 
 import com.wi.quiz.DTO.SubjectDto;
-import com.wi.quiz.DTO.SubjectRespDto;
+import com.wi.quiz.DTO.Rsp.SubjectResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface SubjectService {
 
     public void delete(Long id) throws Exception;
 
-    public SubjectRespDto findById(Long id) throws Exception;
+    public SubjectResponseDto findById(Long id) throws Exception;
 
-    public List<SubjectRespDto> findAll() throws Exception;
+    public List<SubjectResponseDto> findAll() throws Exception;
 }

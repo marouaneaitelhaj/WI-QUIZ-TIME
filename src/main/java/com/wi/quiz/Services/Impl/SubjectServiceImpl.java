@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.SubjectDto;
-import com.wi.quiz.DTO.SubjectRespDto;
+import com.wi.quiz.DTO.Rsp.SubjectResponseDto;
 import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.SubjectService;
@@ -63,14 +63,14 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public SubjectRespDto findById(Long id) throws Exception {
+    public SubjectResponseDto findById(Long id) throws Exception {
         try {
             Optional<Subject> optionalSubject = subjectRepository.findById(id);
             if (optionalSubject.isPresent()) {
                 Subject subject = optionalSubject.get();
                 SubjectDto top = modelMapper.map(subject.getTop(), SubjectDto.class);
                 List<SubjectDto> sub = subject.getSubs().stream().map(subject1 -> modelMapper.map(subject1, SubjectDto.class)).toList();
-                SubjectRespDto subjectDtoResponse = modelMapper.map(subject, SubjectRespDto.class);
+                SubjectResponseDto subjectDtoResponse = modelMapper.map(subject, SubjectResponseDto.class);
                 subjectDtoResponse.setTop(top);
                 subjectDtoResponse.setSubs(sub);
                 return subjectDtoResponse;
@@ -83,10 +83,10 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public List<SubjectRespDto> findAll() throws Exception {
+    public List<SubjectResponseDto> findAll() throws Exception {
         try {
             List<Subject> subjects = subjectRepository.findAll();
-            return subjects.stream().map(subject -> modelMapper.map(subject, SubjectRespDto.class)).toList();
+            return subjects.stream().map(subject -> modelMapper.map(subject, SubjectResponseDto.class)).toList();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
