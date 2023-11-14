@@ -1,4 +1,8 @@
 package com.wi.quiz.Services.Inter;
 
-public interface TeacherService {
+import com.wi.quiz.DTO.Rsp.TeacherDtoRsp;
+import com.wi.quiz.DTO.TeacherDto;
+import com.wi.quiz.Services.BaseService;
+
+public interface TeacherService extends BaseService<TeacherDtoRsp, TeacherDto, Long> {
 }

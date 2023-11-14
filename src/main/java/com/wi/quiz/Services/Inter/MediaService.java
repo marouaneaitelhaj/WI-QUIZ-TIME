@@ -1,4 +1,8 @@
 package com.wi.quiz.Services.Inter;
 
-public interface MediaService {
+import com.wi.quiz.DTO.MediaDto;
+import com.wi.quiz.DTO.Rsp.MediaDtoRsp;
+import com.wi.quiz.Services.BaseService;
+
+public interface MediaService extends BaseService<MediaDtoRsp, MediaDto, Long> {
 }
