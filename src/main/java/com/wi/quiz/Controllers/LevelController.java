@@ -48,10 +48,14 @@ public class LevelController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        levelService.delete(id);
         Map<String, Object> message = new HashMap<>();
-        message.put("message", "Level deleted successfully");
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        if (levelService.delete(id)) {
+            message.put("message", "Level deleted successfully");
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            message.put("message", "Level not deleted");
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
     }
 
 

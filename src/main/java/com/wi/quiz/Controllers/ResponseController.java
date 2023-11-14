@@ -48,10 +48,14 @@ public class ResponseController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        responseService.delete(id);
         Map<String, Object> message = new HashMap<>();
-        message.put("message", "Response deleted successfully");
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        if (responseService.delete(id)){
+            message.put("message", "Response deleted successfully");
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            message.put("message", "Response not deleted");
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
     }
 
 }

@@ -49,9 +49,13 @@ public class SubjectController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        subjectService.delete(id);
         Map<String, Object> message = new HashMap<>();
-        message.put("message", "Subject deleted successfully");
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        if (subjectService.delete(id)){
+            message.put("message", "Subject deleted successfully");
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            message.put("message", "Subject not deleted");
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
     }
 }
