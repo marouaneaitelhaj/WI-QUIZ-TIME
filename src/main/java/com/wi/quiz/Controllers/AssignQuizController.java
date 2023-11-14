@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/assignquiz")
 public class AssignQuizController {
@@ -21,7 +20,7 @@ public class AssignQuizController {
     public ResponseEntity<?> save(@RequestBody AssignQuizDto assignQuiz) {
         Map<String, Object> message = new HashMap<>();
         AssignQuizDto assignQuizDto =  quizService.save(assignQuiz);
-        message.put("message", "Level created successfully");
+        message.put("message", "Assign Quiz created successfully");
         message.put("assignQuiz", assignQuizDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
@@ -40,7 +39,7 @@ public class AssignQuizController {
     public ResponseEntity<?> update(@RequestBody AssignQuizDto assignQuizDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
         AssignQuizDto assignQuiz = quizService.update(assignQuizDto, id);
-        message.put("message", "Level updated successfully");
+        message.put("message", "Assign Quiz updated successfully");
         message.put("assignQuiz", assignQuiz);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
@@ -49,10 +48,10 @@ public class AssignQuizController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
         if (quizService.delete(id)) {
-            message.put("message", "Level deleted successfully");
+            message.put("message", "Assign Quiz deleted successfully");
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
-            message.put("message", "Level not deleted");
+            message.put("message", "Assign Quiz not deleted");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }

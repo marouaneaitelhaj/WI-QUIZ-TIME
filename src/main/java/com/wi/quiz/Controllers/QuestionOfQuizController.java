@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/questionofquizDto")
+@RequestMapping("/questionofquiz")
 public class QuestionOfQuizController {
     @Autowired
     private QuestionOfQuizServiceImpl questionOfQuizService;
@@ -22,7 +22,7 @@ public class QuestionOfQuizController {
     public ResponseEntity<?> save(@RequestBody QuestionOfQuizDto questionOfQuiz) {
         Map<String, Object> message = new HashMap<>();
         QuestionOfQuizDto questionOfQuizDto =  questionOfQuizService.save(questionOfQuiz);
-        message.put("message", "Level created successfully");
+        message.put("message", "Question of Quiz created successfully");
         message.put("questionOfQuiz", questionOfQuizDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
@@ -41,7 +41,7 @@ public class QuestionOfQuizController {
     public ResponseEntity<?> update(@RequestBody QuestionOfQuizDto questionOfQuizDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
         QuestionOfQuizDto questionOfQuiz = questionOfQuizService.update(questionOfQuizDto, id);
-        message.put("message", "Level updated successfully");
+        message.put("message", "Question of Quiz updated successfully");
         message.put("questionOfQuiz", questionOfQuiz);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
@@ -50,10 +50,10 @@ public class QuestionOfQuizController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
         if (questionOfQuizService.delete(id)) {
-            message.put("message", "Level deleted successfully");
+            message.put("message", "Question of Quiz deleted successfully");
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
-            message.put("message", "Level not deleted");
+            message.put("message", "Question of Quiz not deleted");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }

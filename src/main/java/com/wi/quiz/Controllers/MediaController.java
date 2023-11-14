@@ -22,7 +22,7 @@ public class MediaController {
     public ResponseEntity<?> save(@RequestBody MediaDto media) {
         Map<String, Object> message = new HashMap<>();
         MediaDto mediaDto =  mediaService.save(media);
-        message.put("message", "Level created successfully");
+        message.put("message", "Media created successfully");
         message.put("media", mediaDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
@@ -41,7 +41,7 @@ public class MediaController {
     public ResponseEntity<?> update(@RequestBody MediaDto mediaDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
         MediaDto media = mediaService.update(mediaDto, id);
-        message.put("message", "Level updated successfully");
+        message.put("message", "Media updated successfully");
         message.put("media", media);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
@@ -50,10 +50,10 @@ public class MediaController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
         if (mediaService.delete(id)) {
-            message.put("message", "Level deleted successfully");
+            message.put("message", "Media deleted successfully");
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
-            message.put("message", "Level not deleted");
+            message.put("message", "Media not deleted");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
