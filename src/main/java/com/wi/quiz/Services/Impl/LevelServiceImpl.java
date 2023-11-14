@@ -22,18 +22,16 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public LevelDto save(LevelDto levelDto) {
-        try {
+        
             Level level = modelMapper.map(levelDto, Level.class);
             levelRepository.save(level);
             return levelDto;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public LevelDto update(LevelDto levelDto, Long aLong) {
-        try {
+        
             Optional<Level> optionalLevel = levelRepository.findById(aLong);
             if (optionalLevel.isPresent()) {
                 Level level = modelMapper.map(levelDto, Level.class);
@@ -44,14 +42,12 @@ public class LevelServiceImpl implements LevelService {
             } else {
                 throw new RuntimeException("Level not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public Boolean delete(Long aLong) {
-        try {
+        
             Optional<Level> level = levelRepository.findById(aLong);
             if (level.isPresent()) {
                 levelRepository.deleteById(aLong);
@@ -60,32 +56,22 @@ public class LevelServiceImpl implements LevelService {
             } else {
                 throw new RuntimeException("Level not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public LevelDtoRsp findOne(Long aLong) {
-        try {
             Optional<Level> optionalLevel = levelRepository.findById(aLong);
             if (optionalLevel.isPresent()) {
                 return modelMapper.map(optionalLevel.get(), LevelDtoRsp.class);
             } else {
                 throw new RuntimeException("Level not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
     }
 
     @Override
     public List<LevelDtoRsp> findAll() {
-        try {
             List<Level> levels = levelRepository.findAll();
             return levels.stream().map(level -> modelMapper.map(level, LevelDtoRsp.class)).toList();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
     }
 }

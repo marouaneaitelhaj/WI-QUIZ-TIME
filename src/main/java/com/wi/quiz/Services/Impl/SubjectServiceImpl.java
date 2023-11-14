@@ -26,18 +26,16 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) {
-        try {
+        
             Subject subject = modelMapper.map(subjectDto, Subject.class);
             subjectRepository.save(subject);
             return subjectDto;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public SubjectDto update(SubjectDto subjectDto, Long aLong) {
-        try {
+        
             Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
             if (optionalSubject.isPresent()) {
                 Subject subject = modelMapper.map(subjectDto, Subject.class);
@@ -48,14 +46,12 @@ public class SubjectServiceImpl implements SubjectService {
             } else {
                 throw new RuntimeException("Subject not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public Boolean delete(Long aLong) {
-        try {
+        
             Optional<Subject> subject = subjectRepository.findById(aLong);
             if (subject.isPresent()) {
                 subjectRepository.deleteById(aLong);
@@ -63,32 +59,26 @@ public class SubjectServiceImpl implements SubjectService {
             } else {
                 throw new RuntimeException("Subject not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public SubjectDtoRsp findOne(Long aLong) {
-        try {
+        
             Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
             if (optionalSubject.isPresent()) {
                 return modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
             } else {
                 throw new RuntimeException("Subject not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public List<SubjectDtoRsp> findAll() {
-        try {
+        
             List<Subject> subjects = subjectRepository.findAll();
             return subjects.stream().map(subject -> modelMapper.map(subject, SubjectDtoRsp.class)).toList();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 }

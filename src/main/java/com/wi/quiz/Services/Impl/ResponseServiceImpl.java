@@ -26,62 +26,52 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public ResponseDto save(ResponseDto responseDto) {
-        try {
+        
             Response response = modelMapper.map(responseDto, Response.class);
             responseRepository.save(response);
             return responseDto;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public ResponseDto update(ResponseDto responseDto, Long aLong) {
-        try {
+        
             Response response = modelMapper.map(responseDto, Response.class);
             response.setId(aLong);
             responseRepository.save(response);
             responseDto.setId(aLong);
             return responseDto;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public Boolean delete(Long aLong) {
-        try {
+        
             Optional<Response> response = responseRepository.findById(aLong);
             if (response.isEmpty()) {
                 throw new RuntimeException("Response not found for id: " + aLong);
             }
             responseRepository.deleteById(aLong);
             return responseRepository.findById(aLong).isEmpty();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public ResponseDtoRsp findOne(Long aLong) {
-        try {
+        
             Optional<Response> response = responseRepository.findById(aLong);
             if (response.isEmpty()) {
                 throw new RuntimeException("Response not found for id: " + aLong);
             }
             return modelMapper.map(response.get(), ResponseDtoRsp.class);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public List<ResponseDtoRsp> findAll() {
-        try {
+        
             List<Response> responses = responseRepository.findAll();
             return responses.stream().map(response -> modelMapper.map(response, ResponseDtoRsp.class)).toList();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 }

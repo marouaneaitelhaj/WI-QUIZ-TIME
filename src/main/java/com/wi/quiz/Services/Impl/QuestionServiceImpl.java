@@ -26,18 +26,16 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDto save(QuestionDto questionDto) {
-        try {
+        
             Question question = modelMapper.map(questionDto, Question.class);
             questionRepository.save(question);
             return questionDto;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public QuestionDto update(QuestionDto questionDto, Long aLong) {
-        try {
+        
             Optional<Question> optionalQuestion = questionRepository.findById(aLong);
             if (optionalQuestion.isPresent()) {
                 Question question = modelMapper.map(questionDto, Question.class);
@@ -48,14 +46,12 @@ public class QuestionServiceImpl implements QuestionService {
             } else {
                 throw new RuntimeException("Question not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public Boolean delete(Long aLong) {
-        try {
+        
             Optional<Question> question = questionRepository.findById(aLong);
             if (question.isPresent()) {
                 questionRepository.deleteById(aLong);
@@ -63,32 +59,26 @@ public class QuestionServiceImpl implements QuestionService {
             } else {
                 throw new RuntimeException("Question not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public QuestionDtoRsp findOne(Long aLong) {
-        try {
+        
             Optional<Question> optionalQuestion = questionRepository.findById(aLong);
             if (optionalQuestion.isPresent()) {
                 return modelMapper.map(optionalQuestion.get(), QuestionDtoRsp.class);
             } else {
                 throw new RuntimeException("Question not found for id: " + aLong);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 
     @Override
     public List<QuestionDtoRsp> findAll() {
-        try {
+        
             List<Question> questions = questionRepository.findAll();
             return questions.stream().map(question -> modelMapper.map(question, QuestionDtoRsp.class)).toList();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        
     }
 }
