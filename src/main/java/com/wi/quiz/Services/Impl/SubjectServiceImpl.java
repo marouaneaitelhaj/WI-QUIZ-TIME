@@ -7,10 +7,13 @@ import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.Inter.SubjectService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,25 +25,26 @@ public class SubjectServiceImpl implements SubjectService {
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<SubjectDto> save(SubjectDto subjectDto) {
+    public SubjectDto save(SubjectDto subjectDto) {
         try {
             Subject subject = modelMapper.map(subjectDto, Subject.class);
             subjectRepository.save(subject);
-            return ResponseEntity.ok(subjectDto);
+            return subjectDto;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<SubjectDto> update(SubjectDto subjectDto, Long aLong) {
+    public SubjectDto update(SubjectDto subjectDto, Long aLong) {
         try {
             Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
             if (optionalSubject.isPresent()) {
                 Subject subject = modelMapper.map(subjectDto, Subject.class);
                 subject.setId(aLong);
                 subjectRepository.save(subject);
-                return ResponseEntity.ok(subjectDto);
+                subjectDto.setId(aLong);
+                return subjectDto;
             } else {
                 throw new RuntimeException("Subject not found for id: " + aLong);
             }
@@ -50,12 +54,12 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public ResponseEntity<String> delete(Long aLong) {
+    public Boolean delete(Long aLong) {
         try {
             Optional<Subject> subject = subjectRepository.findById(aLong);
             if (subject.isPresent()) {
                 subjectRepository.deleteById(aLong);
-                return ResponseEntity.ok("Subject deleted successfully");
+                return subjectRepository.findById(aLong).isEmpty();
             } else {
                 throw new RuntimeException("Subject not found for id: " + aLong);
             }
@@ -65,12 +69,11 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public ResponseEntity<SubjectDtoRsp> findOne(Long aLong) {
+    public SubjectDtoRsp findOne(Long aLong) {
         try {
             Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
             if (optionalSubject.isPresent()) {
-                SubjectDtoRsp subjectDtoRsp = modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
-                return ResponseEntity.ok(subjectDtoRsp);
+                return modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
             } else {
                 throw new RuntimeException("Subject not found for id: " + aLong);
             }
@@ -80,11 +83,10 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public ResponseEntity<List<SubjectDtoRsp>> findAll() {
+    public List<SubjectDtoRsp> findAll() {
         try {
             List<Subject> subjects = subjectRepository.findAll();
-            List<SubjectDtoRsp> subjectDtoRsps = subjects.stream().map(subject -> modelMapper.map(subject, SubjectDtoRsp.class)).toList();
-            return ResponseEntity.ok(subjectDtoRsps);
+            return subjects.stream().map(subject -> modelMapper.map(subject, SubjectDtoRsp.class)).toList();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

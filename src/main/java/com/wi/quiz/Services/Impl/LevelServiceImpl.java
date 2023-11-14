@@ -7,7 +7,6 @@ import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Services.Inter.LevelService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,25 +21,26 @@ public class LevelServiceImpl implements LevelService {
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<LevelDto> save(LevelDto levelDto) {
+    public LevelDto save(LevelDto levelDto) {
         try {
             Level level = modelMapper.map(levelDto, Level.class);
             levelRepository.save(level);
-            return ResponseEntity.ok(levelDto);
+            return levelDto;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<LevelDto> update(LevelDto levelDto, Long aLong) {
+    public LevelDto update(LevelDto levelDto, Long aLong) {
         try {
             Optional<Level> optionalLevel = levelRepository.findById(aLong);
             if (optionalLevel.isPresent()) {
                 Level level = modelMapper.map(levelDto, Level.class);
                 level.setId(aLong);
                 levelRepository.save(level);
-                return ResponseEntity.ok(levelDto);
+                levelDto.setId(aLong);
+                return levelDto;
             } else {
                 throw new RuntimeException("Level not found for id: " + aLong);
             }
@@ -50,12 +50,13 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public ResponseEntity<String> delete(Long aLong) {
+    public Boolean delete(Long aLong) {
         try {
             Optional<Level> level = levelRepository.findById(aLong);
             if (level.isPresent()) {
                 levelRepository.deleteById(aLong);
-                return ResponseEntity.ok("Level deleted successfully");
+                Optional<Level> level1 = levelRepository.findById(aLong);
+                return level1.isEmpty();
             } else {
                 throw new RuntimeException("Level not found for id: " + aLong);
             }
@@ -65,11 +66,11 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public ResponseEntity<LevelDtoRsp> findOne(Long aLong) {
+    public LevelDtoRsp findOne(Long aLong) {
         try {
             Optional<Level> optionalLevel = levelRepository.findById(aLong);
             if (optionalLevel.isPresent()) {
-                return ResponseEntity.ok(modelMapper.map(optionalLevel.get(), LevelDtoRsp.class));
+                return modelMapper.map(optionalLevel.get(), LevelDtoRsp.class);
             } else {
                 throw new RuntimeException("Level not found for id: " + aLong);
             }
@@ -79,10 +80,10 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public ResponseEntity<List<LevelDtoRsp>> findAll() {
+    public List<LevelDtoRsp> findAll() {
         try {
             List<Level> levels = levelRepository.findAll();
-            return ResponseEntity.ok(levels.stream().map(level -> modelMapper.map(level, LevelDtoRsp.class)).toList());
+            return levels.stream().map(level -> modelMapper.map(level, LevelDtoRsp.class)).toList();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

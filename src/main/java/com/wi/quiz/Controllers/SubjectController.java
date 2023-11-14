@@ -4,10 +4,13 @@ import com.wi.quiz.DTO.Rsp.SubjectDtoRsp;
 import com.wi.quiz.DTO.SubjectDto;
 import com.wi.quiz.Services.Impl.SubjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/subject")
@@ -16,28 +19,39 @@ public class SubjectController {
     private SubjectServiceImpl subjectService;
 
     @PostMapping
-    public ResponseEntity<SubjectDto> save(@RequestBody SubjectDto subjectDto) {
-        return subjectService.save(subjectDto);
-
+    public ResponseEntity<?> save(@RequestBody SubjectDto subjectDto) {
+        Map<String, Object> message = new HashMap<>();
+        SubjectDto subject = subjectService.save(subjectDto);
+        message.put("message", "Subject created successfully");
+        message.put("subject", subject);
+        return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<SubjectDtoRsp>> findAll() {
-        return subjectService.findAll();
+
+        return ResponseEntity.ok(subjectService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SubjectDtoRsp> findById(@PathVariable Long id) {
-        return subjectService.findOne(id);
+        return ResponseEntity.ok(subjectService.findOne(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubjectDto> update(@RequestBody SubjectDto subjectDto, @PathVariable Long id) {
-        return subjectService.update(subjectDto, id);
+    public ResponseEntity<?> update(@RequestBody SubjectDto subjectDto, @PathVariable Long id) {
+        Map<String, Object> message = new HashMap<>();
+        SubjectDto subject = subjectService.update(subjectDto, id);
+        message.put("message", "Subject updated successfully");
+        message.put("subject", subject);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        return subjectService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        subjectService.delete(id);
+        Map<String, Object> message = new HashMap<>();
+        message.put("message", "Subject deleted successfully");
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

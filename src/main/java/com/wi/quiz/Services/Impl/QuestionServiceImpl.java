@@ -7,10 +7,13 @@ import com.wi.quiz.Repositories.QuestionRepository;
 import com.wi.quiz.Services.Inter.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,25 +25,26 @@ public class QuestionServiceImpl implements QuestionService {
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<QuestionDto> save(QuestionDto questionDto) {
+    public QuestionDto save(QuestionDto questionDto) {
         try {
             Question question = modelMapper.map(questionDto, Question.class);
             questionRepository.save(question);
-            return ResponseEntity.ok(questionDto);
+            return questionDto;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity<QuestionDto> update(QuestionDto questionDto, Long aLong) {
+    public QuestionDto update(QuestionDto questionDto, Long aLong) {
         try {
             Optional<Question> optionalQuestion = questionRepository.findById(aLong);
             if (optionalQuestion.isPresent()) {
                 Question question = modelMapper.map(questionDto, Question.class);
                 question.setId(aLong);
                 questionRepository.save(question);
-                return ResponseEntity.ok(questionDto);
+                questionDto.setId(aLong);
+                return questionDto;
             } else {
                 throw new RuntimeException("Question not found for id: " + aLong);
             }
@@ -50,12 +54,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public ResponseEntity<String> delete(Long aLong) {
+    public Boolean delete(Long aLong) {
         try {
             Optional<Question> question = questionRepository.findById(aLong);
             if (question.isPresent()) {
                 questionRepository.deleteById(aLong);
-                return ResponseEntity.ok("Question deleted successfully");
+                return questionRepository.findById(aLong).isEmpty();
             } else {
                 throw new RuntimeException("Question not found for id: " + aLong);
             }
@@ -65,12 +69,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public ResponseEntity<QuestionDtoRsp> findOne(Long aLong) {
+    public QuestionDtoRsp findOne(Long aLong) {
         try {
             Optional<Question> optionalQuestion = questionRepository.findById(aLong);
             if (optionalQuestion.isPresent()) {
-                QuestionDtoRsp questionDtoRsp = modelMapper.map(optionalQuestion.get(), QuestionDtoRsp.class);
-                return ResponseEntity.ok(questionDtoRsp);
+                return modelMapper.map(optionalQuestion.get(), QuestionDtoRsp.class);
             } else {
                 throw new RuntimeException("Question not found for id: " + aLong);
             }
@@ -80,11 +83,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public ResponseEntity<List<QuestionDtoRsp>> findAll() {
+    public List<QuestionDtoRsp> findAll() {
         try {
             List<Question> questions = questionRepository.findAll();
-            List<QuestionDtoRsp> questionDtoRsps = questions.stream().map(question -> modelMapper.map(question, QuestionDtoRsp.class)).toList();
-            return ResponseEntity.ok(questionDtoRsps);
+            return questions.stream().map(question -> modelMapper.map(question, QuestionDtoRsp.class)).toList();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

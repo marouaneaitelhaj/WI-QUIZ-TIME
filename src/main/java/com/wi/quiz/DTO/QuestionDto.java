@@ -16,6 +16,9 @@ import lombok.NoArgsConstructor;
 public class QuestionDto {
     private Long id;
     private String question;
+    private int numberOfAnswers;
+    private int numberOfCorrectAnswers;
     private QuestionType questionType;
     private int points;
+    private int time;
 }
