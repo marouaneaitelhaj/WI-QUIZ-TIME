@@ -1,2 +1,4 @@
-package com.wi.quiz.Services.Inter;public interface QuestOfQuizService {
+package com.wi.quiz.Services.Inter;
+
+public interface QuestOfQuizService {
 }
