@@ -9,6 +9,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(RuntimeException.class)
     public Map<String, String> handle(RuntimeException e) {
         return Map.of("error", e.getMessage());
