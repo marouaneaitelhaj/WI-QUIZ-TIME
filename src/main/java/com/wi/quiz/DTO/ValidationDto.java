@@ -18,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ValidationDto {
     private Long id;
+    private Question question;
+    private Response response;
     private boolean isCorrect;
     private int points;
 }

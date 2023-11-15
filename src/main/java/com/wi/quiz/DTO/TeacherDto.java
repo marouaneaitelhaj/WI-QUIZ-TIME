@@ -1,5 +1,6 @@
 package com.wi.quiz.DTO;
 
+import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.Quiz;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherDto {
-    private String lastName;
-    private String firstName;
-    private String dateOfBirth;
-    private String address;
+public class TeacherDto extends Person {
     private Long id;
     private String speciality;
 }

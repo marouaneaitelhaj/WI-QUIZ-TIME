@@ -18,4 +18,5 @@ public class QuizDto {
     private Boolean resultAccess;
     private int numberOfChances;
     private String comment;
+    private TeacherDto teacher;
 }

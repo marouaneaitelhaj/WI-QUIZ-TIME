@@ -1,5 +1,10 @@
 package com.wi.quiz.DTO.Rsp;
 
+import java.util.List;
+
+import com.wi.quiz.Entities.Validation;
+
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,4 +15,6 @@ import lombok.NoArgsConstructor;
 public class ResponseDtoRsp {
     private Long id;
     private String response;
+
+    List<Validation> validations;
 }

@@ -18,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class AssignQuizDto {
     private Long id;
+    private StudentDto student;
+    private QuizDto quiz;
     private int score;
     private int chance;
     private String notes;

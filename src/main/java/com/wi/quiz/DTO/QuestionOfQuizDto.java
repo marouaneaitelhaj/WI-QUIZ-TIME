@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionOfQuizDto {
     private Long id;
+    private QuestionDto question;
+    private QuizDto quiz;
 }

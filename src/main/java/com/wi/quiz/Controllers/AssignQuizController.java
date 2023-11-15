@@ -2,6 +2,7 @@ package com.wi.quiz.Controllers;
 
 import com.wi.quiz.DTO.AssignQuizDto;
 import com.wi.quiz.DTO.Rsp.AssignQuizDtoRsp;
+import com.wi.quiz.Entities.AssignQuiz;
 import com.wi.quiz.Services.Impl.AssignQuizServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,5 +55,10 @@ public class AssignQuizController {
             message.put("message", "Assign Quiz not deleted");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/schema")
+    public AssignQuizDto getSchema() {
+        return new AssignQuizDto();
     }
 }

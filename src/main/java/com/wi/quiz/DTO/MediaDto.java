@@ -16,4 +16,5 @@ public class MediaDto {
     private Long id;
     private String src;
     private QuestionType type;
+    private QuestionDto question;
 }

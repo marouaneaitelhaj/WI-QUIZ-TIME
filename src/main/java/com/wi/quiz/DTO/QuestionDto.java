@@ -1,5 +1,7 @@
 package com.wi.quiz.DTO;
 
+import java.util.List;
+
 import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Enums.QuestionType;
@@ -21,4 +23,6 @@ public class QuestionDto {
     private QuestionType questionType;
     private int points;
     private int time;
+    private LevelDto level;
+    private SubjectDto subject;
 }

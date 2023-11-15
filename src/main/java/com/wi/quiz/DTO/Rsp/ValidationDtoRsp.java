@@ -21,9 +21,9 @@ import java.util.List;
 @NoArgsConstructor
 public class ValidationDtoRsp {
     private Long id;
-    private QuestionDto question;
-    private ResponseDto response;
-    private List<AnswerDto> answers;
+    private Question question;
+    private Response response;
+    private List<Answer> answers;
     private boolean isCorrect;
     private int points;
 }

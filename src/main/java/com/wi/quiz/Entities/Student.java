@@ -14,9 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Student extends Person {
-    @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long id;
     private LocalDate enrollmentDate;
     @OneToMany(mappedBy = "student")
     private List<AssignQuiz> quizzes;

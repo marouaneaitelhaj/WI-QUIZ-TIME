@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnswerDto {
     private Long id;
+    private AssignQuizDto assignQuiz;
+    private ValidationDto validation;
 }
