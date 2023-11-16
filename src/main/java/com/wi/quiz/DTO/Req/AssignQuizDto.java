@@ -1,18 +1,11 @@
-package com.wi.quiz.DTO;
+package com.wi.quiz.DTO.Req;
 
-import com.wi.quiz.Entities.Answer;
-import com.wi.quiz.Entities.Quiz;
-import com.wi.quiz.Entities.Student;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

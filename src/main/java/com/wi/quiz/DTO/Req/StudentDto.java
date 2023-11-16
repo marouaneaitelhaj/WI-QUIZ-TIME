@@ -1,4 +1,4 @@
-package com.wi.quiz.DTO;
+package com.wi.quiz.DTO.Req;
 
 import com.wi.quiz.Entities.AssignQuiz;
 import com.wi.quiz.Entities.Person;
@@ -14,7 +14,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentDto extends Person {
-    private Long id;
+public class StudentDto extends PersonDto {
     private LocalDate enrollmentDate;
 }

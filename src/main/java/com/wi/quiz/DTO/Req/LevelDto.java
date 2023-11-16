@@ -1,4 +1,4 @@
-package com.wi.quiz.DTO;
+package com.wi.quiz.DTO.Req;
 
 import com.wi.quiz.Entities.Question;
 import lombok.AllArgsConstructor;

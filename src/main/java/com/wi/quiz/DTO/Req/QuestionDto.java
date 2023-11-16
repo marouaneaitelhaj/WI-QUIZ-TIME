@@ -1,13 +1,6 @@
-package com.wi.quiz.DTO;
+package com.wi.quiz.DTO.Req;
 
-import java.util.List;
-
-import com.wi.quiz.Entities.Level;
-import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Enums.QuestionType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

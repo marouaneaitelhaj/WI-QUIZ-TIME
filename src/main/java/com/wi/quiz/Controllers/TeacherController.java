@@ -1,8 +1,7 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.TeacherDto;
+import com.wi.quiz.DTO.Req.TeacherDto;
 import com.wi.quiz.DTO.Rsp.TeacherDtoRsp;
-import com.wi.quiz.Entities.Student;
 import com.wi.quiz.Entities.Teacher;
 import com.wi.quiz.Services.Impl.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

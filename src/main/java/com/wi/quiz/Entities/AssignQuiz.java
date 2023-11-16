@@ -11,8 +11,8 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Data
+@Entity
 public class AssignQuiz {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

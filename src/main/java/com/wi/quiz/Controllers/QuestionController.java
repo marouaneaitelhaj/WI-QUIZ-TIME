@@ -1,6 +1,6 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.QuestionDto;
+import com.wi.quiz.DTO.Req.QuestionDto;
 import com.wi.quiz.DTO.Rsp.QuestionDtoRsp;
 import com.wi.quiz.Services.Impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

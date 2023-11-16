@@ -1,13 +1,12 @@
 package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.Rsp.ValidationDtoRsp;
-import com.wi.quiz.DTO.ValidationDto;
+import com.wi.quiz.DTO.Req.ValidationDto;
 import com.wi.quiz.Entities.Validation;
 import com.wi.quiz.Repositories.ValidationRepository;
 import com.wi.quiz.Services.Inter.ValidationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

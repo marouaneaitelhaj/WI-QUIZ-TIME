@@ -2,6 +2,7 @@ package com.wi.quiz.DTO.Rsp;
 
 import java.util.List;
 
+import com.wi.quiz.DTO.Req.ValidationDto;
 import com.wi.quiz.Entities.Validation;
 
 import jakarta.persistence.OneToMany;
@@ -16,5 +17,5 @@ public class ResponseDtoRsp {
     private Long id;
     private String response;
 
-    List<Validation> validations;
+    List<ValidationDto> validations;
 }

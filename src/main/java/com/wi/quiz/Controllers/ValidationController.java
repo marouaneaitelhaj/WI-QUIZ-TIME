@@ -1,8 +1,7 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.ValidationDto;
+import com.wi.quiz.DTO.Req.ValidationDto;
 import com.wi.quiz.DTO.Rsp.ValidationDtoRsp;
-import com.wi.quiz.Services.Impl.LevelServiceImpl;
 import com.wi.quiz.Services.Impl.ValidationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

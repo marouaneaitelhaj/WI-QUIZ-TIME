@@ -1,9 +1,8 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.QuizDto;
+import com.wi.quiz.DTO.Req.QuizDto;
 import com.wi.quiz.DTO.Rsp.QuizDtoRsp;
 import com.wi.quiz.Services.Impl.QuizServiceImpl;
-import com.wi.quiz.Services.Inter.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

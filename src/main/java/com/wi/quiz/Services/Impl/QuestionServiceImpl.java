@@ -1,19 +1,15 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.QuestionDto;
+import com.wi.quiz.DTO.Req.QuestionDto;
 import com.wi.quiz.DTO.Rsp.QuestionDtoRsp;
 import com.wi.quiz.Entities.Question;
 import com.wi.quiz.Repositories.QuestionRepository;
 import com.wi.quiz.Services.Inter.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
