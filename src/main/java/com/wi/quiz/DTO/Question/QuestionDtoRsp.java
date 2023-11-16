@@ -1,11 +1,10 @@
 package com.wi.quiz.DTO.Rsp;
 
-import com.wi.quiz.DTO.Req.LevelDto;
+import com.wi.quiz.DTO.Level.LevelDto;
 import com.wi.quiz.DTO.Req.MediaDto;
 import com.wi.quiz.DTO.Req.QuestionOfQuizDto;
 import com.wi.quiz.DTO.Req.SubjectDto;
 import com.wi.quiz.DTO.Req.ValidationDto;
-import com.wi.quiz.Entities.QuestionOfQuiz;
 import com.wi.quiz.Enums.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

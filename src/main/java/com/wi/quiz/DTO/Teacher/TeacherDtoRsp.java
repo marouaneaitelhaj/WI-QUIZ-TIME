@@ -1,12 +1,7 @@
 package com.wi.quiz.DTO.Rsp;
 
 import com.wi.quiz.DTO.Req.PersonDto;
-import com.wi.quiz.DTO.Req.QuizDto;
-import com.wi.quiz.Entities.Person;
-import com.wi.quiz.Entities.Quiz;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.wi.quiz.DTO.Req.QuizDtoForTeacher;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 public class TeacherDtoRsp extends PersonDto {
     private String speciality;
-    private List<Quiz> quizzes;
+    private List<QuizDtoForTeacher> quizzes;
 }

@@ -1,14 +1,8 @@
 package com.wi.quiz.DTO.Rsp;
 
-import com.wi.quiz.DTO.Req.AssignQuizDto;
+import com.wi.quiz.DTO.AssignQuiz.AssignQuizDto;
 import com.wi.quiz.DTO.Req.QuestionOfQuizDto;
 import com.wi.quiz.DTO.Req.TeacherDto;
-import com.wi.quiz.Entities.AssignQuiz;
-import com.wi.quiz.Entities.QuestionOfQuiz;
-import com.wi.quiz.Entities.Teacher;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.wi.quiz.DTO.Rsp;
 
-import com.wi.quiz.DTO.Req.QuestionDto;
+import com.wi.quiz.DTO.Question.QuestionDto;
 import com.wi.quiz.DTO.Req.SubjectDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
