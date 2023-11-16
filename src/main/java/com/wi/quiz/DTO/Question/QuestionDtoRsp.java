@@ -1,10 +1,11 @@
-package com.wi.quiz.DTO.Rsp;
+package com.wi.quiz.DTO.Question;
 
 import com.wi.quiz.DTO.Level.LevelDto;
-import com.wi.quiz.DTO.Req.MediaDto;
-import com.wi.quiz.DTO.Req.QuestionOfQuizDto;
-import com.wi.quiz.DTO.Req.SubjectDto;
-import com.wi.quiz.DTO.Req.ValidationDto;
+import com.wi.quiz.DTO.Media.MediaDto;
+import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDto;
+import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDtoNoRel;
+import com.wi.quiz.DTO.Subject.SubjectDto;
+import com.wi.quiz.DTO.Validation.ValidationDto;
 import com.wi.quiz.Enums.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +28,5 @@ public class QuestionDtoRsp {
     private SubjectDto subject;
     private List<ValidationDto> validations;
     private List<MediaDto> media;
-    private List<QuestionOfQuizDto> questionOfQuizs;
+    private List<QuestionOfQuizDtoNoRel> questionOfQuizs;
 }

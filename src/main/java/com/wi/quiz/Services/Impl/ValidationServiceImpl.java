@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Rsp.ValidationDtoRsp;
-import com.wi.quiz.DTO.Req.ValidationDto;
+import com.wi.quiz.DTO.Validation.ValidationDtoRsp;
+import com.wi.quiz.DTO.Validation.ValidationDto;
 import com.wi.quiz.Entities.Validation;
 import com.wi.quiz.Repositories.ValidationRepository;
 import com.wi.quiz.Services.Inter.ValidationService;

@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Req.MediaDto;
-import com.wi.quiz.DTO.Rsp.MediaDtoRsp;
+import com.wi.quiz.DTO.Media.MediaDto;
+import com.wi.quiz.DTO.Media.MediaDtoRsp;
 import com.wi.quiz.Entities.Media;
 import com.wi.quiz.Repositories.MediaRepository;
 import com.wi.quiz.Services.Inter.MediaService;

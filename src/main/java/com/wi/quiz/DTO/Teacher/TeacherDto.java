@@ -1,13 +1,10 @@
-package com.wi.quiz.DTO.Req;
+package com.wi.quiz.DTO.Teacher;
 
-import com.wi.quiz.Entities.Person;
-import com.wi.quiz.Entities.Quiz;
-import jakarta.persistence.OneToMany;
+import com.wi.quiz.DTO.Person.PersonDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

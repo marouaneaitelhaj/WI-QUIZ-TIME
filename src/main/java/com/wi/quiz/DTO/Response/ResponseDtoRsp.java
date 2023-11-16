@@ -1,11 +1,9 @@
-package com.wi.quiz.DTO.Rsp;
+package com.wi.quiz.DTO.Response;
 
 import java.util.List;
 
-import com.wi.quiz.DTO.Req.ValidationDto;
-import com.wi.quiz.Entities.Validation;
+import com.wi.quiz.DTO.Validation.ValidationDto;
 
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.Req.MediaDto;
-import com.wi.quiz.DTO.Rsp.MediaDtoRsp;
+import com.wi.quiz.DTO.Media.MediaDto;
+import com.wi.quiz.DTO.Media.MediaDtoRsp;
 import com.wi.quiz.Services.Impl.MediaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

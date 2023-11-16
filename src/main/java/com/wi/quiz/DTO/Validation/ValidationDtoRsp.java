@@ -1,4 +1,4 @@
-package com.wi.quiz.DTO.Rsp;
+package com.wi.quiz.DTO.Validation;
 
 import com.wi.quiz.DTO.Answer.AnswerDto;
 import com.wi.quiz.DTO.Question.QuestionDto;

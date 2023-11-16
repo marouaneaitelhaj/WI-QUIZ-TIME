@@ -1,7 +1,7 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.Req.StudentDto;
-import com.wi.quiz.DTO.Rsp.StudentDtoRsp;
+import com.wi.quiz.DTO.Student.StudentDto;
+import com.wi.quiz.DTO.Student.StudentDtoRsp;
 import com.wi.quiz.Services.Impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,7 @@
-package com.wi.quiz.DTO.Req;
+package com.wi.quiz.DTO.Question;
 
 import com.wi.quiz.DTO.Level.LevelDto;
+import com.wi.quiz.DTO.Subject.SubjectDto;
 import com.wi.quiz.Enums.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

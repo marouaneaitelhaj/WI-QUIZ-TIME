@@ -1,8 +1,10 @@
-package com.wi.quiz.DTO.Rsp;
+package com.wi.quiz.DTO.Quiz;
 
 import com.wi.quiz.DTO.AssignQuiz.AssignQuizDto;
-import com.wi.quiz.DTO.Req.QuestionOfQuizDto;
-import com.wi.quiz.DTO.Req.TeacherDto;
+import com.wi.quiz.DTO.AssignQuiz.AssignQuizDtoNoRel;
+import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDto;
+import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDtoNoRel;
+import com.wi.quiz.DTO.Teacher.TeacherDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,6 @@ public class QuizDtoRsp {
     private int numberOfChances;
     private String comment;
     private TeacherDto teacher;
-    private List<QuestionOfQuizDto> questionOfQuizs;
-    private List<AssignQuizDto> assignQuizs;
+    private List<QuestionOfQuizDtoNoRel> questionOfQuizs;
+    private List<AssignQuizDtoNoRel> assignQuizs;
 }

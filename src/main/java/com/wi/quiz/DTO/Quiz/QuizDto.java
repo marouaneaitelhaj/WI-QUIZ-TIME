@@ -1,10 +1,9 @@
-package com.wi.quiz.DTO.Req;
+package com.wi.quiz.DTO.Quiz;
 
+import com.wi.quiz.DTO.Teacher.TeacherDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

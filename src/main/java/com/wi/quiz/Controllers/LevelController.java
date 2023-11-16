@@ -1,7 +1,7 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.Req.LevelDto;
-import com.wi.quiz.DTO.Rsp.LevelDtoRsp;
+import com.wi.quiz.DTO.Level.LevelDto;
+import com.wi.quiz.DTO.Level.LevelDtoRsp;
 import com.wi.quiz.Services.Impl.LevelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

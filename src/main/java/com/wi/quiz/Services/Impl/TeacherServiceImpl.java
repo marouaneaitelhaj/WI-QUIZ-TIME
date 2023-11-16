@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Rsp.TeacherDtoRsp;
-import com.wi.quiz.DTO.Req.TeacherDto;
+import com.wi.quiz.DTO.Teacher.TeacherDto;
+import com.wi.quiz.DTO.Teacher.TeacherDtoRsp;
 import com.wi.quiz.Entities.Teacher;
 import com.wi.quiz.Repositories.TeacherRepository;
 import com.wi.quiz.Services.Inter.TeacherService;
@@ -60,6 +60,8 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<TeacherDtoRsp> findAll() {
         List<Teacher> teachers = teacherRepository.findAll();
-        return teachers.stream().map(teacher -> modelMapper.map(teacher, TeacherDtoRsp.class)).toList();
+        return teachers.stream().map(teacher ->
+                modelMapper.map(teacher, TeacherDtoRsp.class)
+        ).toList();
     }
 }

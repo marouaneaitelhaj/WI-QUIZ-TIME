@@ -1,4 +1,4 @@
-package com.wi.quiz.DTO.Req;
+package com.wi.quiz.DTO.Response;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.wi.quiz.Controllers;
 
-import com.wi.quiz.DTO.Req.QuizDto;
-import com.wi.quiz.DTO.Rsp.QuizDtoRsp;
+import com.wi.quiz.DTO.Quiz.QuizDto;
+import com.wi.quiz.DTO.Quiz.QuizDtoRsp;
 import com.wi.quiz.Services.Impl.QuizServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,5 +55,9 @@ public class QuizController {
             message.put("message", "Quiz not deleted");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/schema")
+    public QuizDto getSchema() {
+        return new QuizDto();
     }
 }

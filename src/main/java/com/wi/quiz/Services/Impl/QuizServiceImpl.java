@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Req.QuizDto;
-import com.wi.quiz.DTO.Rsp.QuizDtoRsp;
+import com.wi.quiz.DTO.Quiz.QuizDto;
+import com.wi.quiz.DTO.Quiz.QuizDtoRsp;
 import com.wi.quiz.Entities.Quiz;
 import com.wi.quiz.Repositories.QuizRepository;
 import com.wi.quiz.Services.Inter.QuizService;

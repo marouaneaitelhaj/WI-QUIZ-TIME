@@ -1,4 +1,4 @@
-package com.wi.quiz.DTO.Req;
+package com.wi.quiz.DTO.Person;
 
 import lombok.Data;
 

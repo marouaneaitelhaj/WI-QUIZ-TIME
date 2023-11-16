@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Req.LevelDto;
-import com.wi.quiz.DTO.Rsp.LevelDtoRsp;
+import com.wi.quiz.DTO.Level.LevelDto;
+import com.wi.quiz.DTO.Level.LevelDtoRsp;
 import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Services.Inter.LevelService;

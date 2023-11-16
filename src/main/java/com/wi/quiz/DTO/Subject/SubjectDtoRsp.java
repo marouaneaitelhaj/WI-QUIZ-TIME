@@ -1,7 +1,7 @@
-package com.wi.quiz.DTO.Rsp;
+package com.wi.quiz.DTO.Subject;
 
 import com.wi.quiz.DTO.Question.QuestionDto;
-import com.wi.quiz.DTO.Req.SubjectDto;
+import com.wi.quiz.DTO.Question.QuestionDtoNoRel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ public class SubjectDtoRsp {
     private String name;
     private SubjectDto top;
     private List<SubjectDto> subs;
-    private List<QuestionDto> questions;
+    private List<QuestionDtoNoRel> questions;
 }

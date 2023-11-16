@@ -1,5 +1,7 @@
-package com.wi.quiz.DTO.Req;
+package com.wi.quiz.DTO.AssignQuiz;
 
+import com.wi.quiz.DTO.Quiz.QuizDto;
+import com.wi.quiz.DTO.Student.StudentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +18,5 @@ public class AssignQuizDto {
     private int score;
     private int chance;
     private String notes;
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
 }

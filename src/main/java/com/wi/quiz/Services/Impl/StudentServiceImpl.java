@@ -1,7 +1,7 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Rsp.StudentDtoRsp;
-import com.wi.quiz.DTO.Req.StudentDto;
+import com.wi.quiz.DTO.Student.StudentDtoRsp;
+import com.wi.quiz.DTO.Student.StudentDto;
 import com.wi.quiz.Entities.Student;
 import com.wi.quiz.Repositories.StudentRepository;
 import com.wi.quiz.Services.Inter.StudentService;
