@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Student.StudentDtoRsp;
 import com.wi.quiz.DTO.Student.StudentDto;
 import com.wi.quiz.Entities.Student;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.StudentRepository;
 import com.wi.quiz.Services.Inter.StudentService;
 import org.modelmapper.ModelMapper;
@@ -30,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto update(StudentDto studentDto, Long aLong) {
         Optional<Student> optionalStudent = studentService.findById(aLong);
         if (optionalStudent.isEmpty()) {
-            throw new RuntimeException("Student not found for id: " + aLong);
+            throw new NotFoundEx("Student not found for id: " + aLong);
         }
         Student student = modelMapper.map(studentDto, Student.class);
         student = studentService.save(student);
@@ -41,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
     public Boolean delete(Long aLong) {
         Optional<Student> optionalStudent = studentService.findById(aLong);
         if (optionalStudent.isEmpty()) {
-            throw new RuntimeException("Student not found for id: " + aLong);
+            throw new NotFoundEx("Student not found for id: " + aLong);
         }
         studentService.deleteById(aLong);
         return studentService.findById(aLong).isEmpty();
@@ -51,7 +52,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentDtoRsp findOne(Long aLong) {
         Optional<Student> optionalStudent = studentService.findById(aLong);
         if (optionalStudent.isEmpty()) {
-            throw new RuntimeException("Student not found for id: " + aLong);
+            throw new NotFoundEx("Student not found for id: " + aLong);
         }
         Student student = optionalStudent.get();
         return modelMapper.map(student, StudentDtoRsp.class);

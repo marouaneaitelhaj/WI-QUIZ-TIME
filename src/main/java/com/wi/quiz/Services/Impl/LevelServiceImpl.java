@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Level.LevelDto;
 import com.wi.quiz.DTO.Level.LevelDtoRsp;
 import com.wi.quiz.Entities.Level;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Services.Inter.LevelService;
 import org.modelmapper.ModelMapper;
@@ -40,7 +41,7 @@ public class LevelServiceImpl implements LevelService {
                 levelDto.setId(aLong);
                 return levelDto;
             } else {
-                throw new RuntimeException("Level not found for id: " + aLong);
+                throw new NotFoundEx("Level not found for id: " + aLong);
             }
         
     }
@@ -54,7 +55,7 @@ public class LevelServiceImpl implements LevelService {
                 Optional<Level> level1 = levelRepository.findById(aLong);
                 return level1.isEmpty();
             } else {
-                throw new RuntimeException("Level not found for id: " + aLong);
+                throw new NotFoundEx("Level not found for id: " + aLong);
             }
         
     }
@@ -65,7 +66,7 @@ public class LevelServiceImpl implements LevelService {
             if (optionalLevel.isPresent()) {
                 return modelMapper.map(optionalLevel.get(), LevelDtoRsp.class);
             } else {
-                throw new RuntimeException("Level not found for id: " + aLong);
+                throw new NotFoundEx("Level not found for id: " + aLong);
             }
     }
 

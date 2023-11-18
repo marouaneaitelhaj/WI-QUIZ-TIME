@@ -5,4 +5,5 @@ import com.wi.quiz.DTO.Media.MediaDtoRsp;
 import com.wi.quiz.Services.BaseService;
 
 public interface MediaService extends BaseService<MediaDtoRsp, MediaDto, Long> {
+    void checkIfMediaExist(MediaDto mediaDto);
 }

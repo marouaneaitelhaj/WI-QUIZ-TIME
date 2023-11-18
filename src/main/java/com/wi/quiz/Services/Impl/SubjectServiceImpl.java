@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Subject.SubjectDtoRsp;
 import com.wi.quiz.DTO.Subject.SubjectDto;
 import com.wi.quiz.Entities.Subject;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.Inter.SubjectService;
 import org.modelmapper.ModelMapper;
@@ -40,7 +41,7 @@ public class SubjectServiceImpl implements SubjectService {
                 subjectDto.setId(aLong);
                 return subjectDto;
             } else {
-                throw new RuntimeException("Subject not found for id: " + aLong);
+                throw new NotFoundEx("Subject not found for id: " + aLong);
             }
         
     }
@@ -53,7 +54,7 @@ public class SubjectServiceImpl implements SubjectService {
                 subjectRepository.deleteById(aLong);
                 return subjectRepository.findById(aLong).isEmpty();
             } else {
-                throw new RuntimeException("Subject not found for id: " + aLong);
+                throw new NotFoundEx("Subject not found for id: " + aLong);
             }
         
     }
@@ -65,7 +66,7 @@ public class SubjectServiceImpl implements SubjectService {
             if (optionalSubject.isPresent()) {
                 return modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
             } else {
-                throw new RuntimeException("Subject not found for id: " + aLong);
+                throw new NotFoundEx("Subject not found for id: " + aLong);
             }
         
     }

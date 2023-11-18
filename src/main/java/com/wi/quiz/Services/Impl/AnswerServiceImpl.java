@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Answer.AnswerDto;
 import com.wi.quiz.DTO.Answer.AnswerDtoRsp;
 import com.wi.quiz.Entities.Answer;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.AnswerRepository;
 import com.wi.quiz.Services.Inter.AnswerService;
 import org.modelmapper.ModelMapper;
@@ -31,7 +32,7 @@ public class AnswerServiceImpl implements AnswerService {
     public AnswerDto update(AnswerDto answerDto, Long aLong) {
         Optional<Answer> optionalAnswer = answerRepository.findById(aLong);
         if (optionalAnswer.isEmpty()) {
-            throw new RuntimeException("Answer not found for id: " + aLong);
+            throw new NotFoundEx("Answer not found for id: " + aLong);
         }
         Answer answer = modelMapper.map(answerDto, Answer.class);
         answer = answerRepository.save(answer);
@@ -42,7 +43,7 @@ public class AnswerServiceImpl implements AnswerService {
     public Boolean delete(Long aLong) {
         Optional<Answer> optionalAnswer = answerRepository.findById(aLong);
         if (optionalAnswer.isEmpty()) {
-            throw new RuntimeException("Answer not found for id: " + aLong);
+            throw new NotFoundEx("Answer not found for id: " + aLong);
         }
         answerRepository.deleteById(aLong);
         return answerRepository.findById(aLong).isEmpty();
@@ -52,7 +53,7 @@ public class AnswerServiceImpl implements AnswerService {
     public AnswerDtoRsp findOne(Long aLong) {
         Optional<Answer> optionalAnswer = answerRepository.findById(aLong);
         if (optionalAnswer.isEmpty()) {
-            throw new RuntimeException("Answer not found for id: " + aLong);
+            throw new NotFoundEx("Answer not found for id: " + aLong);
         }
         Answer answer = optionalAnswer.get();
         return modelMapper.map(answer, AnswerDtoRsp.class);

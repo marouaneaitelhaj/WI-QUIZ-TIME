@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.AssignQuiz.AssignQuizDto;
 import com.wi.quiz.DTO.AssignQuiz.AssignQuizDtoRsp;
 import com.wi.quiz.Entities.AssignQuiz;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.AssignQuizRepository;
 import com.wi.quiz.Services.Inter.AssignQuizService;
 import org.modelmapper.ModelMapper;
@@ -30,7 +31,7 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     public AssignQuizDto update(AssignQuizDto assignQuizDto, Long aLong) {
         Optional<AssignQuiz> optionalAssignQuiz = assignQuizRepository.findById(aLong);
         if (optionalAssignQuiz.isEmpty()) {
-            throw new RuntimeException("AssignQuiz not found for id: " + aLong);
+            throw new NotFoundEx("AssignQuiz not found for id: " + aLong);
         }
         AssignQuiz assignQuiz = modelMapper.map(assignQuizDto, AssignQuiz.class);
         assignQuiz = assignQuizRepository.save(assignQuiz);
@@ -41,7 +42,7 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     public Boolean delete(Long aLong) {
         Optional<AssignQuiz> optionalAssignQuiz = assignQuizRepository.findById(aLong);
         if (optionalAssignQuiz.isEmpty()) {
-            throw new RuntimeException("AssignQuiz not found for id: " + aLong);
+            throw new NotFoundEx("AssignQuiz not found for id: " + aLong);
         }
         assignQuizRepository.deleteById(aLong);
         return assignQuizRepository.findById(aLong).isEmpty();
@@ -51,7 +52,7 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     public AssignQuizDtoRsp findOne(Long aLong) {
         Optional<AssignQuiz> optionalAssignQuiz = assignQuizRepository.findById(aLong);
         if (optionalAssignQuiz.isEmpty()) {
-            throw new RuntimeException("AssignQuiz not found for id: " + aLong);
+            throw new NotFoundEx("AssignQuiz not found for id: " + aLong);
         }
         AssignQuiz assignQuiz = optionalAssignQuiz.get();
         return modelMapper.map(assignQuiz, AssignQuizDtoRsp.class);

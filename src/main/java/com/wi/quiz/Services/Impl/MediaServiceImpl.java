@@ -3,6 +3,8 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Media.MediaDto;
 import com.wi.quiz.DTO.Media.MediaDtoRsp;
 import com.wi.quiz.Entities.Media;
+import com.wi.quiz.Exceptions.DuplicateEx;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.MediaRepository;
 import com.wi.quiz.Services.Inter.MediaService;
 import org.modelmapper.ModelMapper;
@@ -19,9 +21,13 @@ public class MediaServiceImpl implements MediaService {
     @Autowired
     private ModelMapper modelMapper;
 
+
+
+
     @Override
     public MediaDto save(MediaDto mediaDto) {
         Media media = modelMapper.map(mediaDto, Media.class);
+        checkIfMediaExist(mediaDto);
         media = mediaRepository.save(media);
         return modelMapper.map(media, MediaDto.class);
     }
@@ -30,9 +36,10 @@ public class MediaServiceImpl implements MediaService {
     public MediaDto update(MediaDto mediaDto, Long aLong) {
         Optional<Media> optionalMedia = mediaRepository.findById(aLong);
         if (optionalMedia.isEmpty()) {
-            throw new RuntimeException("Media not found for id: " + aLong);
+            throw new NotFoundEx("Media not found for id: " + aLong);
         }
         Media media = modelMapper.map(mediaDto, Media.class);
+        checkIfMediaExist(mediaDto);
         media = mediaRepository.save(media);
         return modelMapper.map(media, MediaDto.class);
     }
@@ -41,7 +48,7 @@ public class MediaServiceImpl implements MediaService {
     public Boolean delete(Long aLong) {
         Optional<Media> optionalMedia = mediaRepository.findById(aLong);
         if (optionalMedia.isEmpty()) {
-            throw new RuntimeException("Media not found for id: " + aLong);
+            throw new NotFoundEx("Media not found for id: " + aLong);
         }
         mediaRepository.deleteById(aLong);
         return mediaRepository.findById(aLong).isEmpty();
@@ -51,7 +58,7 @@ public class MediaServiceImpl implements MediaService {
     public MediaDtoRsp findOne(Long aLong) {
         Optional<Media> optionalMedia = mediaRepository.findById(aLong);
         if (optionalMedia.isEmpty()) {
-            throw new RuntimeException("Media not found for id: " + aLong);
+            throw new NotFoundEx("Media not found for id: " + aLong);
         }
         Media media = optionalMedia.get();
         return modelMapper.map(media, MediaDtoRsp.class);
@@ -61,5 +68,13 @@ public class MediaServiceImpl implements MediaService {
     public List<MediaDtoRsp> findAll() {
         List<Media> mediaList = mediaRepository.findAll();
         return mediaList.stream().map(media -> modelMapper.map(media, MediaDtoRsp.class)).toList();
+    }
+
+    @Override
+    public void checkIfMediaExist(MediaDto mediaDto) {
+        Optional<Media> optionalMedia = mediaRepository.findBySrcAndTypeAndQuestionId(mediaDto.getSrc(), mediaDto.getType(), mediaDto.getQuestion().getId());
+        if (optionalMedia.isPresent()) {
+            throw new DuplicateEx("Media already exist");
+        }
     }
 }

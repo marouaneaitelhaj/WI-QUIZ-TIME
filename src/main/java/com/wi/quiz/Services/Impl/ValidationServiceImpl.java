@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Validation.ValidationDtoRsp;
 import com.wi.quiz.DTO.Validation.ValidationDto;
 import com.wi.quiz.Entities.Validation;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.ValidationRepository;
 import com.wi.quiz.Services.Inter.ValidationService;
 import org.modelmapper.ModelMapper;
@@ -30,7 +31,7 @@ public class ValidationServiceImpl implements ValidationService {
     public ValidationDto update(ValidationDto validationDto, Long aLong) {
         Optional<Validation> optionalValidation = validationRepository.findById(aLong);
         if (optionalValidation.isEmpty()) {
-            throw new RuntimeException("Validation not found for id: " + aLong);
+            throw new NotFoundEx("Validation not found for id: " + aLong);
         }
         Validation validation = modelMapper.map(validationDto, Validation.class);
         validation = validationRepository.save(validation);
@@ -41,7 +42,7 @@ public class ValidationServiceImpl implements ValidationService {
     public Boolean delete(Long aLong) {
         Optional<Validation> optionalValidation = validationRepository.findById(aLong);
         if (optionalValidation.isEmpty()) {
-            throw new RuntimeException("Validation not found for id: " + aLong);
+            throw new NotFoundEx("Validation not found for id: " + aLong);
         }
         validationRepository.deleteById(aLong);
         return validationRepository.findById(aLong).isEmpty();
@@ -51,7 +52,7 @@ public class ValidationServiceImpl implements ValidationService {
     public ValidationDtoRsp findOne(Long aLong) {
         Optional<Validation> optionalValidation = validationRepository.findById(aLong);
         if (optionalValidation.isEmpty()) {
-            throw new RuntimeException("Validation not found for id: " + aLong);
+            throw new NotFoundEx("Validation not found for id: " + aLong);
         }
         Validation validation = optionalValidation.get();
         return modelMapper.map(validation, ValidationDtoRsp.class);

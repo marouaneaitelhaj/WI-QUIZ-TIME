@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Question.QuestionDto;
 import com.wi.quiz.DTO.Question.QuestionDtoRsp;
 import com.wi.quiz.Entities.Question;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.QuestionRepository;
 import com.wi.quiz.Services.Inter.QuestionService;
 import org.modelmapper.ModelMapper;
@@ -40,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
                 questionDto.setId(aLong);
                 return questionDto;
             } else {
-                throw new RuntimeException("Question not found for id: " + aLong);
+                throw new NotFoundEx("Question not found for id: " + aLong);
             }
         
     }
@@ -53,7 +54,7 @@ public class QuestionServiceImpl implements QuestionService {
                 questionRepository.deleteById(aLong);
                 return questionRepository.findById(aLong).isEmpty();
             } else {
-                throw new RuntimeException("Question not found for id: " + aLong);
+                throw new NotFoundEx("Question not found for id: " + aLong);
             }
         
     }
@@ -65,7 +66,7 @@ public class QuestionServiceImpl implements QuestionService {
             if (optionalQuestion.isPresent()) {
                 return modelMapper.map(optionalQuestion.get(), QuestionDtoRsp.class);
             } else {
-                throw new RuntimeException("Question not found for id: " + aLong);
+                throw new NotFoundEx("Question not found for id: " + aLong);
             }
         
     }

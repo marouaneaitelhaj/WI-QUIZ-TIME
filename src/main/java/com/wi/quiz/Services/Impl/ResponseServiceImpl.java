@@ -3,6 +3,7 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Response.ResponseDto;
 import com.wi.quiz.DTO.Response.ResponseDtoRsp;
 import com.wi.quiz.Entities.Response;
+import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.ResponseRepository;
 import com.wi.quiz.Services.Inter.ResponseService;
 import org.modelmapper.ModelMapper;
@@ -45,7 +46,7 @@ public class ResponseServiceImpl implements ResponseService {
         
             Optional<Response> response = responseRepository.findById(aLong);
             if (response.isEmpty()) {
-                throw new RuntimeException("Response not found for id: " + aLong);
+                throw new NotFoundEx("Response not found for id: " + aLong);
             }
             responseRepository.deleteById(aLong);
             return responseRepository.findById(aLong).isEmpty();
@@ -57,7 +58,7 @@ public class ResponseServiceImpl implements ResponseService {
         
             Optional<Response> response = responseRepository.findById(aLong);
             if (response.isEmpty()) {
-                throw new RuntimeException("Response not found for id: " + aLong);
+                throw new NotFoundEx("Response not found for id: " + aLong);
             }
             return modelMapper.map(response.get(), ResponseDtoRsp.class);
         

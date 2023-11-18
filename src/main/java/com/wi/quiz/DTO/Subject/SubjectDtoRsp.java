@@ -13,7 +13,7 @@ import java.util.List;
 public class SubjectDtoRsp {
     private Long id;
     private String name;
-    private SubjectDto top;
-    private List<SubjectDto> subs;
+    private SubjectDtoNoRel top;
+    private List<SubjectDtoNoRel> subs;
     private List<QuestionDtoNoRel> questions;
 }

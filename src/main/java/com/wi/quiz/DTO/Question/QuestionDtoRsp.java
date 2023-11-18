@@ -2,6 +2,7 @@ package com.wi.quiz.DTO.Question;
 
 import com.wi.quiz.DTO.Level.LevelDto;
 import com.wi.quiz.DTO.Media.MediaDto;
+import com.wi.quiz.DTO.Media.MediaDtoNoRel;
 import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDto;
 import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDtoNoRel;
 import com.wi.quiz.DTO.Subject.SubjectDto;
@@ -27,6 +28,6 @@ public class QuestionDtoRsp {
     private LevelDto level;
     private SubjectDto subject;
     private List<ValidationDto> validations;
-    private List<MediaDto> media;
+    private List<MediaDtoNoRel> media;
     private List<QuestionOfQuizDtoNoRel> questionOfQuizs;
 }
