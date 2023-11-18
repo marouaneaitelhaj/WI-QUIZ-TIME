@@ -1,6 +1,7 @@
 package com.wi.quiz.DTO.AssignQuiz;
 
 import com.wi.quiz.DTO.Answer.AnswerDto;
+import com.wi.quiz.DTO.Answer.AnswerDtoNoRel;
 import com.wi.quiz.DTO.Quiz.QuizDto;
 import com.wi.quiz.DTO.Student.StudentDto;
 import lombok.AllArgsConstructor;
@@ -20,5 +21,5 @@ public class AssignQuizDtoRsp {
     private int chance;
     private String notes;
     private LocalDate date;
-    private List<AnswerDto> answers;
+    private List<AnswerDtoNoRel> answers;
 }

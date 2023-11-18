@@ -1,6 +1,7 @@
 package com.wi.quiz.DTO.Validation;
 
 import com.wi.quiz.DTO.Answer.AnswerDto;
+import com.wi.quiz.DTO.Answer.AnswerDtoNoRel;
 import com.wi.quiz.DTO.Question.QuestionDto;
 import com.wi.quiz.DTO.Response.ResponseDto;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class ValidationDtoRsp {
     private Long id;
     private QuestionDto question;
     private ResponseDto response;
-    private List<AnswerDto> answers;
+    private List<AnswerDtoNoRel> answers;
     private boolean isCorrect;
     private int points;
 }
