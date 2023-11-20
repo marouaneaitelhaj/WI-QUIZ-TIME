@@ -23,6 +23,7 @@ public class ValidationServiceImpl implements ValidationService {
     @Override
     public ValidationDto save(ValidationDto validationDto) {
         Validation validation = modelMapper.map(validationDto, Validation.class);
+        checkIfExist(validation.getQuestion().getId(), validation.getResponse().getId());
         validation = validationRepository.save(validation);
         return modelMapper.map(validation, ValidationDto.class);
     }
@@ -34,6 +35,7 @@ public class ValidationServiceImpl implements ValidationService {
             throw new NotFoundEx("Validation not found for id: " + aLong);
         }
         Validation validation = modelMapper.map(validationDto, Validation.class);
+        checkIfExist(validation.getQuestion().getId(), validation.getResponse().getId());
         validation = validationRepository.save(validation);
         return modelMapper.map(validation, ValidationDto.class);
     }
@@ -62,5 +64,12 @@ public class ValidationServiceImpl implements ValidationService {
     public List<ValidationDtoRsp> findAll() {
         List<Validation> validations = validationRepository.findAll();
         return validations.stream().map(validation -> modelMapper.map(validation, ValidationDtoRsp.class)).toList();
+    }
+
+    @Override
+    public void checkIfExist(Long question, Long response) {
+        validationRepository.findByQuestionIdAndResponseId(question, response).ifPresent(validationDtoRsp -> {
+            throw new NotFoundEx("Validation already exist for question: " + question + " and response: " + response);
+        });
     }
 }
