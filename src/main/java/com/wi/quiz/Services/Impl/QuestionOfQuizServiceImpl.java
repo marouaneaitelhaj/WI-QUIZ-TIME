@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.QuestionOfQuizRepository;
 import com.wi.quiz.Services.Inter.QuestionOfQuizService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,9 +56,9 @@ public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
     }
 
     @Override
-    public List<QuestionOfQuizDtoRsp> findAll() {
-        List<QuestionOfQuiz> questionOfQuizList = questionOfQuizRepository.findAll();
-        return questionOfQuizList.stream().map(questionOfQuiz -> modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class)).toList();
+    public Page<QuestionOfQuizDtoRsp> findAll(Pageable pageable) {
+        Page<QuestionOfQuiz> questionOfQuizList = questionOfQuizRepository.findAll(pageable);
+        return questionOfQuizList.map(questionOfQuiz -> modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class));
     }
 
     @Override

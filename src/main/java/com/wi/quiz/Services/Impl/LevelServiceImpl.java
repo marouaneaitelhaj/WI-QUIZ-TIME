@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Services.Inter.LevelService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,8 +73,8 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public List<LevelDtoRsp> findAll() {
-            List<Level> levels = levelRepository.findAll();
-            return levels.stream().map(level -> modelMapper.map(level, LevelDtoRsp.class)).toList();
+    public Page<LevelDtoRsp> findAll(Pageable pageable) {
+            Page<Level> levels = levelRepository.findAll(pageable);
+            return levels.map(level -> modelMapper.map(level, LevelDtoRsp.class));
     }
 }

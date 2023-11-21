@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,12 +125,13 @@ public class LevelServiceImplTest {
     @Test
     public void findAll() {
         try {
+            Pageable pageable = PageRequest.of(0, 10);
             List<Level> levels = new ArrayList<>();
             levels.add(level);
             levels.add(level);
             levels.add(level);
             given(levelRepository.findAll()).willReturn(levels);
-            assertEquals(levels.size(), levelService.findAll().size());
+            assertEquals(levels.size(), levelService.findAll(pageable).getTotalElements());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

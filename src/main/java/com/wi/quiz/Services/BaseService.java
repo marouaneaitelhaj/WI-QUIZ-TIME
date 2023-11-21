@@ -1,6 +1,5 @@
 package com.wi.quiz.Services;
-
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -14,5 +13,5 @@ public interface BaseService<DTO_RSP, DTO_MINI, F> {
 
     DTO_RSP findOne(F f);
 
-    List<DTO_RSP> findAll();
+    Page<DTO_RSP> findAll(Pageable pageable);
 }

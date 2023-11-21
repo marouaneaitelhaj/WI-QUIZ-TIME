@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,14 +108,14 @@ public class ResponseServiceImplTest {
 
     @Test
     public void findAll() {
-
+        Pageable pageable = PageRequest.of(0, 10);
         List<Response> responses = new ArrayList<>();
         responses.add(response);
         responses.add(response);
         responses.add(response);
         responses.add(response);
         given(responseRepository.findAll()).willReturn(responses);
-        assertEquals(4, responseService.findAll().size());
+        assertEquals(4, responseService.findAll(pageable).getTotalElements());
 
     }
 

@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.ResponseRepository;
 import com.wi.quiz.Services.Inter.ResponseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,10 +67,10 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public List<ResponseDtoRsp> findAll() {
+    public Page<ResponseDtoRsp> findAll(Pageable pageable) {
         
-            List<Response> responses = responseRepository.findAll();
-            return responses.stream().map(response -> modelMapper.map(response, ResponseDtoRsp.class)).toList();
+            Page<Response> responses = responseRepository.findAll(pageable);
+            return responses.map(response -> modelMapper.map(response, ResponseDtoRsp.class));
         
     }
 }

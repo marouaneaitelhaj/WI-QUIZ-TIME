@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.AssignQuizRepository;
 import com.wi.quiz.Services.Inter.AssignQuizService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,8 +61,8 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     }
 
     @Override
-    public List<AssignQuizDtoRsp> findAll() {
-        List<AssignQuiz> assignQuizList = assignQuizRepository.findAll();
-        return assignQuizList.stream().map(assignQuiz -> modelMapper.map(assignQuiz, AssignQuizDtoRsp.class)).toList();
+    public Page<AssignQuizDtoRsp> findAll(Pageable pageable) {
+        Page<AssignQuiz> assignQuizList = assignQuizRepository.findAll(pageable);
+        return assignQuizList.map(assignQuiz -> modelMapper.map(assignQuiz, AssignQuizDtoRsp.class));
     }
 }

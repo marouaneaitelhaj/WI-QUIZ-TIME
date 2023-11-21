@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.TeacherRepository;
 import com.wi.quiz.Services.Inter.TeacherService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,10 +61,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<TeacherDtoRsp> findAll() {
-        List<Teacher> teachers = teacherRepository.findAll();
-        return teachers.stream().map(teacher ->
-                modelMapper.map(teacher, TeacherDtoRsp.class)
-        ).toList();
+    public Page<TeacherDtoRsp> findAll(Pageable pageable) {
+        Page<Teacher> teachers = teacherRepository.findAll(pageable);
+        return teachers.map(teacher -> modelMapper.map(teacher, TeacherDtoRsp.class));
     }
 }

@@ -8,9 +8,10 @@ import com.wi.quiz.Repositories.AnswerRepository;
 import com.wi.quiz.Services.Inter.AnswerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,8 +61,8 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public List<AnswerDtoRsp> findAll() {
-        List<Answer> answers = answerRepository.findAll();
-        return answers.stream().map(answer -> modelMapper.map(answer, AnswerDtoRsp.class)).toList();
+    public Page<AnswerDtoRsp> findAll(Pageable pageable) {
+        Page<Answer> answers = answerRepository.findAll(pageable);
+        return answers.map(answer -> modelMapper.map(answer, AnswerDtoRsp.class));
     }
 }

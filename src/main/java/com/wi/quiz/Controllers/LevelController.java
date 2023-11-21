@@ -4,6 +4,9 @@ import com.wi.quiz.DTO.Level.LevelDto;
 import com.wi.quiz.DTO.Level.LevelDtoRsp;
 import com.wi.quiz.Services.Impl.LevelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +31,9 @@ public class LevelController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LevelDtoRsp>> findAll() {
-        return ResponseEntity.ok(levelService.findAll());
+    public ResponseEntity<Page<LevelDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(levelService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

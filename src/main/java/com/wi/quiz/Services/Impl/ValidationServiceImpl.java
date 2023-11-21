@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.ValidationRepository;
 import com.wi.quiz.Services.Inter.ValidationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,9 +63,9 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
-    public List<ValidationDtoRsp> findAll() {
-        List<Validation> validations = validationRepository.findAll();
-        return validations.stream().map(validation -> modelMapper.map(validation, ValidationDtoRsp.class)).toList();
+    public Page<ValidationDtoRsp> findAll(Pageable pageable) {
+        Page<Validation> validations = validationRepository.findAll(pageable);
+        return validations.map(validation -> modelMapper.map(validation, ValidationDtoRsp.class));
     }
 
     @Override

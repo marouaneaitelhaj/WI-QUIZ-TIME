@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.QuestionRepository;
 import com.wi.quiz.Services.Inter.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,10 +74,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDtoRsp> findAll() {
+    public Page<QuestionDtoRsp> findAll(Pageable pageable) {
         
-            List<Question> questions = questionRepository.findAll();
-            return questions.stream().map(question -> modelMapper.map(question, QuestionDtoRsp.class)).toList();
+            Page<Question> questions = questionRepository.findAll(pageable);
+            return questions.map(question -> modelMapper.map(question, QuestionDtoRsp.class));
         
     }
 }

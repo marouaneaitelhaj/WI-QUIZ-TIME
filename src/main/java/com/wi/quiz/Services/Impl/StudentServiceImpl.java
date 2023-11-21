@@ -8,6 +8,8 @@ import com.wi.quiz.Repositories.StudentRepository;
 import com.wi.quiz.Services.Inter.StudentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,8 +61,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDtoRsp> findAll() {
-        List<Student> students = studentService.findAll();
-        return students.stream().map(student -> modelMapper.map(student, StudentDtoRsp.class)).toList();
+    public Page<StudentDtoRsp> findAll(Pageable pageable) {
+        Page<Student> students = studentService.findAll(pageable);
+        return students.map(student -> modelMapper.map(student, StudentDtoRsp.class));
     }
 }

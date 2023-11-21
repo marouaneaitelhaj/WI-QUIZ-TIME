@@ -4,6 +4,9 @@ import com.wi.quiz.DTO.Quiz.QuizDto;
 import com.wi.quiz.DTO.Quiz.QuizDtoRsp;
 import com.wi.quiz.Services.Impl.QuizServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +30,9 @@ public class QuizController {
     }
 
     @GetMapping
-    public ResponseEntity<List<QuizDtoRsp>> findAll() {
-        return ResponseEntity.ok(quizService.findAll());
+    public ResponseEntity<Page<QuizDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(quizService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
