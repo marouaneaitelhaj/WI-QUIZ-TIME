@@ -4,77 +4,110 @@ https://lucid.app/lucidchart/ada89605-6805-4dfe-852a-10997e466a84/edit?viewport_
 
 
 ## Api documentation
+### Answer
+endpoint| method | payload | description
+-|--------|-|-
+/answer| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a answer
+/answer/{id}| `GET`  | `-` | find answer by id
+/answer/{id}| `DELETE`  | `-` | delete answer by id
+/answer/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a answer
+/answer| `GET` | `-` | get all levels
+
+### Answer Quiz
+endpoint| method | payload | description
+-|--------|-|-
+/assignquiz| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a assignquiz
+/assignquiz/{id}| `GET`  | `-` | find assignquiz by id
+/assignquiz/{id}| `DELETE`  | `-` | delete assignquiz by id
+/assignquiz/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a assignquiz
+/assignquiz| `GET` | `-` | get all assignquizs
+
 ### Level
 endpoint| method | payload | description
 -|--------|-|-
-/level| `POST` |`{description:string, maxScore: int, minScore: int}`| create a level
+/level| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a level
 /level/{id}| `GET`  | `-` | find level by id
-/level/{id}| `PUT`  | `{description:string, maxScore: int, minScore: int}` | edit a level
-/level/{id}/questions | `GET` | `-` | get questions of a specific level
+/level/{id}| `DELETE`  | `-` | delete level by id
+/level/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a level
 /level| `GET` | `-` | get all levels
 
-### Subject
-endpoint| method | payload                          | description
--|--------|----------------------------------|-
-/level| `POST` | `{title:string, parend_id: int}` | create a subject
-/subject/{id}| `GET`  | `-`                              | find subject by id
-/subject/{id}| `PUT`  | `{title:string, parent_id: int}` | edit a subject
-/subject/{id}/questions | `GET` | `-`                              | get questions of a specific subject
-/level| `GET` | `-`                              | get all subjects
+### Media
+endpoint| method | payload | description
+-|--------|-|-
+/media| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a media
+/media/{id}| `GET`  | `-` | find media by id
+/media/{id}| `DELETE`  | `-` | delete media by id
+/media/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a media
+/media| `GET` | `-` | get all medias
+
+### Question Of Quiz
+endpoint| method | payload | description
+-|--------|-|-
+/questionofquiz| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a questionofquiz
+/questionofquiz/{id}| `GET`  | `-` | find questionofquiz by id
+/questionofquiz/{id}| `DELETE`  | `-` | delete questionofquiz by id
+/questionofquiz/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a questionofquiz
+/questionofquiz| `GET` | `-` | get all questionofquizs
 
 ### Question
-endpoint| method | payload                                                                                                                                                                        | description                         
--|-------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------
-/question| `POST` | `{responseNbr:int, correctResponseNbr: int, questionText: string, type: string, totalScore: double, subject_id: int, level_id: int, medias: Array{name:string, type: string}}` | create a question                   
-/question/{id}| `GET` | `-`                                                                                                                                                                            | find question by id                 
-/question/{id}| `PUT` | `{responseNbr:int, correctResponseNbr: int, questionText: string, type: string, totalScore: double, subject_id: int, level_id: int, medias: Array{name:string, type: string}}`| edit question                      
-/question/{id}/medias | `GET` | `-`                                                                                                                                                                            | get medias of a specific media 
-/question| `GET` | `-`                                                                                                                                                                            | get all questions
-/question/{id}/responses| `GET` | `-`| find response of question
-/question/{id} | `DELETE` | `-` | delete question by id
+endpoint| method | payload | description
+-|--------|-|-
+/question| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a question
+/question/{id}| `GET`  | `-` | find question by id
+/question/{id}| `DELETE`  | `-` | delete question by id
+/question/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a question
+/question| `GET` | `-` | get all questions
 
 ### Quiz
-endpoint | method | payload                                                                                                                                                     | description
--| - |-------------------------------------------------------------------------------------------------------------------------------------------------------------| - 
-/quizz | `POST` | `{score: double, showAnswers: double, showFinalResults: boolean, chanceNbr: int, durationInMinutes: int, remark: string, teacher_id: int, subject_id: int}` | create a quiz
-/quizz | `GET` | `-`                                                                                                                                                         | final all quizzes
-/quiz/{id} | `GET` | `-`                                                                                                                                                         | final specific id |
-/quiz/{id} | `PUT` | `{score: double, showAnswers: double, showFinalResults: boolean, chanceNbr: int, durationInMinutes: int, remark: string, teacher_id: int, subject_id: int}` | edit specific quiz
-/quiz/{id} | `DELETE` | `-`                                                                                                                                                         | delete a specific quiz
+endpoint| method | payload | description
+-|--------|-|-
+/quiz| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a quiz
+/quiz/{id}| `GET`  | `-` | find quiz by id
+/quiz/{id}| `DELETE`  | `-` | delete quiz by id
+/quiz/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a quiz
+/quiz| `GET` | `-` | get all quizs
 
 ### Response
-
-endpoint | method | payload                                                                                                                                                     | description
- -| - |-------------------------------------------------------------------------------------------------------------------------------------------------------------| - 
-  /response | `POST` | `{response: int, point: double, question_id: int}` | create a response and assigned to a question
-  /response/{id} | `PUT` | `{response: int, point: double, question_id: int}` | edit a specific response
-  /response/{id} | `GET` | `-` | find a speicifc response by id
+endpoint| method | payload | description
+-|--------|-|-
+/response| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a response
+/response/{id}| `GET`  | `-` | find response by id
+/response/{id}| `DELETE`  | `-` | delete response by id
+/response/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a response
+/response| `GET` | `-` | get all responses
 
 ### Student
+endpoint| method | payload | description
+-|--------|-|-
+/student| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a student
+/student/{id}| `GET`  | `-` | find student by id
+/student/{id}| `DELETE`  | `-` | delete student by id
+/student/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a student
+/student| `GET` | `-` | get all students
 
-endpoint | method | payload                                                                                                                                                     | description
--| - |-------------------------------------------------------------------------------------------------------------------------------------------------------------| - 
-/student | `POST` | `{firstName: string, lastName: string, birthday: localDate, address: string, dateOfInscription: localDate}` | create a student
-/student | `GET` | `-` | get all students
-/student/{id} | `GET` | `-` | get a specific student by id
-/student/{id} | `PUT` | `{firstName: string, lastName: string, birthday: localDate, address: string, dateOfInscription: localDate}` | edit a specific student
-/student/{id} | `DELETE` | `-` | delete a specific student
+### Student
+endpoint| method | payload | description
+-|--------|-|-
+/student| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a student
+/student/{id}| `GET`  | `-` | find student by id
+/student/{id}| `DELETE`  | `-` | delete student by id
+/student/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a student
+/student| `GET` | `-` | get all students
 
-### Trainer
-endpoint | method | payload                                                                                                                                                     | description
--| - |-------------------------------------------------------------------------------------------------------------------------------------------------------------| - 
-/teacher | `POST` | `{firstName: string, lastName: string, birthday: localDate, address: string, role: string}` | create a teacher
-/teacher | `GET` | `-`                                                                                         | get all teachers
-/teacher/{id} | `GET` | `-`                                                                                         | get a specific teacher by id
-/teacher/{id} | `PUT` | `{firstName: string, lastName: string, birthday: localDate, address: string, role: string}` | edit a specific teacher
-/teacher/{id} | `DELETE` | `-`                                                                                         | delete a specific teacher
+### Teacher
+endpoint| method | payload | description
+-|--------|-|-
+/teacher| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a teacher
+/teacher/{id}| `GET`  | `-` | find teacher by id
+/teacher/{id}| `DELETE`  | `-` | delete teacher by id
+/teacher/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a teacher
+/teacher| `GET` | `-` | get all teachers
 
-### AssignQuiz
-
-endpoint | method | payload                                                                                                                                                     | description
--| - |-------------------------------------------------------------------------------------------------------------------------------------------------------------| - 
-/assignQuiz | `POST` | `[{score: double, played: int, reason: string, result: string, debutDate: localDateTime, endDate: localDateTime, student_id: int, quiz_id: int}]` | create an assignquiz for one or multiple student
-/assignQuiz | `GET` | `-` | get all assignedQuiz
-/assignQuiz/{id} | `GET` | `-` | get specific assigned quiz
-/assignQuiz/{id} | `PUT` | `{score: double, played: int, reason: string, result: string, debutDate: localDateTime, endDate: localDateTime, student_id: int, quiz_id: int}` | update a specific assigned quiz
-/assignQuiz/{id} | `DELELTE` | `-` | delete a specific quiz
+### Validation
+endpoint| method | payload | description
+-|--------|-|-
+/validation| `POST` |`{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }`| create a validation
+/validation/{id}| `GET`  | `-` | find validation by id
+/validation/{id}| `DELETE`  | `-` | delete validation by id
+/validation/{id}| `PUT`  | `{ "description": "mediem", "maxPoints": 0, "minPoints": 0 }` | edit a validation
+/validation| `GET` | `-` | get all validations
