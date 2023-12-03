@@ -21,7 +21,7 @@ public class AssignQuiz {
     private Student student;
     @ManyToOne
     private Quiz quiz;
-    @OneToMany(mappedBy = "assignQuiz")
+    @OneToMany(mappedBy = "assignQuiz", cascade = CascadeType.ALL)
     private List<Answer> answers;
     private int score;
     private int chance;

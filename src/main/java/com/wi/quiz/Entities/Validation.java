@@ -19,7 +19,7 @@ public class Validation {
     private Question question;
     @ManyToOne
     private Response response;
-    @OneToMany(mappedBy = "validation")
+    @OneToMany(mappedBy = "validation", cascade = CascadeType.ALL)
     private List<Answer> answers;
     private boolean isCorrect;
     private int points;

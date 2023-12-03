@@ -27,8 +27,8 @@ public class LevelServiceImpl implements LevelService {
     public LevelDto save(LevelDto levelDto) {
         
             Level level = modelMapper.map(levelDto, Level.class);
-            levelRepository.save(level);
-            return levelDto;
+            level= levelRepository.save(level);
+            return modelMapper.map(level, LevelDto.class);
         
     }
 
@@ -39,9 +39,8 @@ public class LevelServiceImpl implements LevelService {
             if (optionalLevel.isPresent()) {
                 Level level = modelMapper.map(levelDto, Level.class);
                 level.setId(aLong);
-                levelRepository.save(level);
-                levelDto.setId(aLong);
-                return levelDto;
+                level= levelRepository.save(level);
+                return modelMapper.map(level, LevelDto.class);
             } else {
                 throw new NotFoundEx("Level not found for id: " + aLong);
             }

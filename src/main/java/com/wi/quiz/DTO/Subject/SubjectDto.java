@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class SubjectDto {
     private Long id;
     private String name;
-    private SubjectDto top;
+    private SubjectDtoNoRel top;
 }

@@ -28,11 +28,11 @@ public class Question {
     private Level level;
     @ManyToOne
     private Subject subject;
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Media> media;
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<QuestionOfQuiz> questionOfQuizs;
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Validation> validations;
 
     public Question(Long id) {

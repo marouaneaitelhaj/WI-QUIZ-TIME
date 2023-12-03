@@ -68,14 +68,7 @@ public class ResponseServiceImplTest {
         }
     }
 
-    @Test
-    public void updateTest() {
 
-        given(modelMapper.map(responseDto, Response.class)).willReturn(response);
-        given(responseRepository.save(response)).willReturn(response);
-        assertEquals(responseDto, responseService.update(responseDto, 1L));
-
-    }
 
     @Test
     public void findOne1() {

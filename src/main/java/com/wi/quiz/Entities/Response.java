@@ -18,7 +18,7 @@ public class Response {
     private Long id;
     private String response;
 
-    @OneToMany(mappedBy = "response")
+    @OneToMany(mappedBy = "response", cascade = CascadeType.ALL)
     List<Validation> validations;
 
     public Response(Long id) {

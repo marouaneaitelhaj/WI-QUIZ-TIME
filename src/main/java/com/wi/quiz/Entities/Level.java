@@ -22,7 +22,7 @@ public class Level {
     private int maxPoints;
     private int minPoints;
 
-    @OneToMany(mappedBy = "level")
+    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL)
     private List<Question> questions;
 
 

@@ -26,10 +26,10 @@ public class Subject {
     @JoinColumn(name = "top_id")
     private Subject top;
 
-    @OneToMany(mappedBy = "top", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "top", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Subject> subs;
 
-    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Question> questions;
 
     public Subject(Long id) {

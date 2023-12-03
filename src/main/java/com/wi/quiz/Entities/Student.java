@@ -17,6 +17,6 @@ import java.util.List;
 @Entity
 public class Student extends Person {
     private LocalDate enrollmentDate;
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<AssignQuiz> quizzes;
 }

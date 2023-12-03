@@ -27,8 +27,8 @@ public class ResponseServiceImpl implements ResponseService {
     public ResponseDto save(ResponseDto responseDto) {
         
             Response response = modelMapper.map(responseDto, Response.class);
-            responseRepository.save(response);
-            return responseDto;
+            response= responseRepository.save(response);
+            return modelMapper.map(response, ResponseDto.class);
         
     }
 
@@ -37,9 +37,8 @@ public class ResponseServiceImpl implements ResponseService {
         
             Response response = modelMapper.map(responseDto, Response.class);
             response.setId(aLong);
-            responseRepository.save(response);
-            responseDto.setId(aLong);
-            return responseDto;
+            response= responseRepository.save(response);
+            return modelMapper.map(response, ResponseDto.class);
         
     }
 

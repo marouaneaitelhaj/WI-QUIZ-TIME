@@ -24,52 +24,48 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) {
-        
-            Subject subject = modelMapper.map(subjectDto, Subject.class);
-            subjectRepository.save(subject);
-            return subjectDto;
-        
+
+        Subject subject = modelMapper.map(subjectDto, Subject.class);
+        subject = subjectRepository.save(subject);
+        return modelMapper.map(subject, SubjectDto.class);
+
     }
 
     @Override
     public SubjectDto update(SubjectDto subjectDto, Long aLong) {
-        
-            Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
-            if (optionalSubject.isPresent()) {
-                Subject subject = modelMapper.map(subjectDto, Subject.class);
-                subject.setId(aLong);
-                subjectRepository.save(subject);
-                subjectDto.setId(aLong);
-                return subjectDto;
-            } else {
-                throw new NotFoundEx("Subject not found for id: " + aLong);
-            }
-        
+        Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
+        if (optionalSubject.isPresent()) {
+            Subject subject = modelMapper.map(subjectDto, Subject.class);
+            subject.setId(aLong);
+            return modelMapper.map(subjectRepository.save(subject), SubjectDto.class);
+        } else {
+            throw new NotFoundEx("Subject not found for id: " + aLong);
+        }
     }
 
     @Override
     public Boolean delete(Long aLong) {
-        
-            Optional<Subject> subject = subjectRepository.findById(aLong);
-            if (subject.isPresent()) {
-                subjectRepository.deleteById(aLong);
-                return subjectRepository.findById(aLong).isEmpty();
-            } else {
-                throw new NotFoundEx("Subject not found for id: " + aLong);
-            }
-        
+
+        Optional<Subject> subject = subjectRepository.findById(aLong);
+        if (subject.isPresent()) {
+            subjectRepository.deleteById(aLong);
+            return subjectRepository.findById(aLong).isEmpty();
+        } else {
+            throw new NotFoundEx("Subject not found for id: " + aLong);
+        }
+
     }
 
     @Override
     public SubjectDtoRsp findOne(Long aLong) {
-        
-            Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
-            if (optionalSubject.isPresent()) {
-                return modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
-            } else {
-                throw new NotFoundEx("Subject not found for id: " + aLong);
-            }
-        
+
+        Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
+        if (optionalSubject.isPresent()) {
+            return modelMapper.map(optionalSubject.get(), SubjectDtoRsp.class);
+        } else {
+            throw new NotFoundEx("Subject not found for id: " + aLong);
+        }
+
     }
 
     @Override
@@ -77,6 +73,6 @@ public class SubjectServiceImpl implements SubjectService {
 
         Page<Subject> subjects = subjectRepository.findAll(pageable);
         return subjects.map(subject -> modelMapper.map(subject, SubjectDtoRsp.class));
-        
+
     }
 }
