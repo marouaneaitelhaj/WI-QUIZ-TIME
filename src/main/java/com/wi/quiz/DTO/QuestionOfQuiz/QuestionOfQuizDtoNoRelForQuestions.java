@@ -9,8 +9,8 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionOfQuizDtoNoRel {
+public class QuestionOfQuizDtoNoRelForQuestions {
     private Long id;
-    private QuestionDtoNoRel question;
-    //private QuizDtoNoRel quiz;
+    //private QuestionDtoNoRel question;
+    private QuizDtoNoRel quiz;
 }

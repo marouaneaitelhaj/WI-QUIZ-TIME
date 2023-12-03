@@ -5,6 +5,7 @@ import com.wi.quiz.DTO.Media.MediaDto;
 import com.wi.quiz.DTO.Media.MediaDtoNoRel;
 import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDto;
 import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDtoNoRel;
+import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDtoNoRelForQuestions;
 import com.wi.quiz.DTO.Subject.SubjectDto;
 import com.wi.quiz.DTO.Validation.ValidationDto;
 import com.wi.quiz.DTO.Validation.ValidationDtoNoRel;
@@ -30,5 +31,5 @@ public class QuestionDtoRsp {
     private SubjectDto subject;
     private List<ValidationDtoNoRel> validations;
     private List<MediaDtoNoRel> media;
-    private List<QuestionOfQuizDtoNoRel> questionOfQuizs;
+    private List<QuestionOfQuizDtoNoRelForQuestions> questionOfQuizs;
 }
