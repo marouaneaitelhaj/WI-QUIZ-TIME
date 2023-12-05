@@ -24,11 +24,9 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) {
-
         Subject subject = modelMapper.map(subjectDto, Subject.class);
         subject = subjectRepository.save(subject);
         return modelMapper.map(subject, SubjectDto.class);
-
     }
 
     @Override

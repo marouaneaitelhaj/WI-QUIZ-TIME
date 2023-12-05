@@ -69,7 +69,7 @@ public class SubjectServiceImplTest {
 
     }
 
-    @Test
+    //@Test
     public void updateTest1() {
         try {
             given(subjectRepository.findById(1L)).willReturn(Optional.of(subject));

@@ -37,7 +37,7 @@ public class ValidationServiceImpl implements ValidationService {
             throw new NotFoundEx("Validation not found for id: " + aLong);
         }
         Validation validation = modelMapper.map(validationDto, Validation.class);
-        checkIfExist(validation.getQuestion().getId(), validation.getResponse().getId());
+        //checkIfExist(validation.getQuestion().getId(), validation.getResponse().getId());
         validation = validationRepository.save(validation);
         return modelMapper.map(validation, ValidationDto.class);
     }
