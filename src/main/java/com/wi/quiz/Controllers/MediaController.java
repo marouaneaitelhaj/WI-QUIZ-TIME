@@ -25,7 +25,7 @@ public class MediaController {
         Map<String, Object> message = new HashMap<>();
         MediaDto mediaDto =  mediaService.save(media);
         message.put("message", "Media created successfully");
-        message.put("media", mediaDto);
+        message.put("data", mediaDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -45,7 +45,7 @@ public class MediaController {
         Map<String, Object> message = new HashMap<>();
         MediaDto media = mediaService.update(mediaDto, id);
         message.put("message", "Media updated successfully");
-        message.put("media", media);
+        message.put("data", media);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

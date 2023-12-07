@@ -25,7 +25,7 @@ public class QuestionOfQuizController {
         Map<String, Object> message = new HashMap<>();
         QuestionOfQuizDto questionOfQuizDto =  questionOfQuizService.save(questionOfQuiz);
         message.put("message", "Question of Quiz created successfully");
-        message.put("questionOfQuiz", questionOfQuizDto);
+        message.put("data", questionOfQuizDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -45,7 +45,7 @@ public class QuestionOfQuizController {
         Map<String, Object> message = new HashMap<>();
         QuestionOfQuizDto questionOfQuiz = questionOfQuizService.update(questionOfQuizDto, id);
         message.put("message", "Question of Quiz updated successfully");
-        message.put("questionOfQuiz", questionOfQuiz);
+        message.put("data", questionOfQuiz);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

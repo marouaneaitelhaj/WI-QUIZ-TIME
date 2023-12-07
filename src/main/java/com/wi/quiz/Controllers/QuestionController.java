@@ -26,7 +26,7 @@ public class QuestionController {
         Map<String, Object> message = new HashMap<>();
         message.put("message", "Question created successfully");
         QuestionDto questionDto = questionService.save(question);
-        message.put("question", questionDto);
+        message.put("data", questionDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -46,7 +46,7 @@ public class QuestionController {
         Map<String, Object> message = new HashMap<>();
         QuestionDto questionDto = questionService.update(question, id);
         message.put("message", "Question updated successfully");
-        message.put("question", questionDto);
+        message.put("data", questionDto);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

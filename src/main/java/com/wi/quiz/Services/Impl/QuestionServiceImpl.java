@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,8 +26,7 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDto save(QuestionDto questionDto) {
         
             Question question = modelMapper.map(questionDto, Question.class);
-            questionRepository.save(question);
-            return questionDto;
+        return modelMapper.map(questionRepository.save(question), QuestionDto.class);
         
     }
 
@@ -39,9 +37,8 @@ public class QuestionServiceImpl implements QuestionService {
             if (optionalQuestion.isPresent()) {
                 Question question = modelMapper.map(questionDto, Question.class);
                 question.setId(aLong);
-                questionRepository.save(question);
-                questionDto.setId(aLong);
-                return questionDto;
+
+                return modelMapper.map(questionRepository.save(question), QuestionDto.class);
             } else {
                 throw new NotFoundEx("Question not found for id: " + aLong);
             }

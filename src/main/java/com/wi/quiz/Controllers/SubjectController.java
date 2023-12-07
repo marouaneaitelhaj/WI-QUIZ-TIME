@@ -26,7 +26,7 @@ public class SubjectController {
         Map<String, Object> message = new HashMap<>();
         SubjectDto subject = subjectService.save(subjectDto);
         message.put("message", "Subject created successfully");
-        message.put("subject", subject);
+        message.put("data", subject);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -46,7 +46,7 @@ public class SubjectController {
         Map<String, Object> message = new HashMap<>();
         SubjectDto subject = subjectService.update(subjectDto, id);
         message.put("message", "Subject updated successfully");
-        message.put("subject", subject);
+        message.put("data", subject);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

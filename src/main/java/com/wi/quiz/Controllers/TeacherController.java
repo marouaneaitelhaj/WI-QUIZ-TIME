@@ -27,7 +27,7 @@ public class TeacherController {
         Map<String, Object> message = new HashMap<>();
         TeacherDto teacherDto =  teacherService.save(teacher);
         message.put("message", "Teacher created successfully");
-        message.put("teacher", teacherDto);
+        message.put("data", teacherDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -47,7 +47,7 @@ public class TeacherController {
         Map<String, Object> message = new HashMap<>();
         TeacherDto teacher = teacherService.update(teacherDto, id);
         message.put("message", "Teacher updated successfully");
-        message.put("teacher", teacher);
+        message.put("data", teacher);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

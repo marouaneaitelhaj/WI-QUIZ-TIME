@@ -26,7 +26,7 @@ public class ResponseController {
         Map<String, Object> message = new HashMap<>();
         ResponseDto responseDto = responseService.save(response);
         message.put("message", "Response created successfully");
-        message.put("response", responseDto);
+        message.put("data", responseDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -46,7 +46,7 @@ public class ResponseController {
         Map<String, Object> message = new HashMap<>();
         ResponseDto responseDto = responseService.update(response, id);
         message.put("message", "Response updated successfully");
-        message.put("response", responseDto);
+        message.put("data", responseDto);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

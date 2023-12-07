@@ -26,7 +26,7 @@ public class LevelController {
         Map<String, Object> message = new HashMap<>();
         LevelDto levelDto =  levelService.save(level);
         message.put("message", "Level created successfully");
-        message.put("level", levelDto);
+        message.put("data", levelDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -46,7 +46,7 @@ public class LevelController {
             Map<String, Object> message = new HashMap<>();
             LevelDto level = levelService.update(levelDto, id);
             message.put("message", "Level updated successfully");
-            message.put("level", level);
+            message.put("data", level);
             return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

@@ -26,7 +26,7 @@ public class ValidationController {
         Map<String, Object> message = new HashMap<>();
         ValidationDto validationDto =  levelService.save(validation);
         message.put("message", "Validation created successfully");
-        message.put("validation", validationDto);
+        message.put("data", validationDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -46,7 +46,7 @@ public class ValidationController {
         Map<String, Object> message = new HashMap<>();
         ValidationDto validation = levelService.update(validationDto, id);
         message.put("message", "Validation updated successfully");
-        message.put("validation", validation);
+        message.put("data", validation);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

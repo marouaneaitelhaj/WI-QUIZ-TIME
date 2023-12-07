@@ -23,7 +23,7 @@ public class AnswerController {
         Map<String, Object> message = new HashMap<>();
         AnswerDto quizDto = answerService.save(quiz);
         message.put("message", "Answer created successfully");
-        message.put("quiz", quizDto);
+        message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -43,7 +43,7 @@ public class AnswerController {
         Map<String, Object> message = new HashMap<>();
         AnswerDto quizDto = answerService.update(quiz, id);
         message.put("message", "Answer updated successfully");
-        message.put("quiz", quizDto);
+        message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
