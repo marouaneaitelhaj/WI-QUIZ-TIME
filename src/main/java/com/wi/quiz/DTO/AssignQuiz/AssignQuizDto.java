@@ -19,4 +19,5 @@ public class AssignQuizDto {
     private int chance;
     private String notes;
     private LocalDate date = LocalDate.now();
+    private boolean played;
 }

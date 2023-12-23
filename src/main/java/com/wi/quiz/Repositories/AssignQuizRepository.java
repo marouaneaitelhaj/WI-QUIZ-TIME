@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AssignQuizRepository extends JpaRepository<AssignQuiz, Long> {
     Page<AssignQuiz> findAll(Pageable pageable);
+
 }

@@ -18,31 +18,39 @@ import java.util.Map;
 @RequestMapping("/assignquiz")
 public class AssignQuizController {
     @Autowired
-    private AssignQuizServiceImpl quizService;
+    private AssignQuizServiceImpl assignQuizService;
     @PostMapping
     public ResponseEntity<?> save(@RequestBody AssignQuizDto assignQuiz) {
         Map<String, Object> message = new HashMap<>();
-        AssignQuizDto assignQuizDto =  quizService.save(assignQuiz);
+        AssignQuizDto assignQuizDto =  assignQuizService.save(assignQuiz);
         message.put("message", "Assign Quiz created successfully");
         message.put("data", assignQuizDto);
+        return new ResponseEntity<>(message, HttpStatus.CREATED);
+    }
+    @GetMapping("/score/{id}")
+    public ResponseEntity<?> getScore(@PathVariable Long id) {
+        Map<String, Object> message = new HashMap<>();
+        int score = assignQuizService.getScore(id);
+        message.put("message", "Assign Quiz Score");
+        message.put("data", score);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<Page<AssignQuizDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(quizService.findAll(pageable));
+        return ResponseEntity.ok(assignQuizService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AssignQuizDtoRsp> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(quizService.findOne(id));
+        return ResponseEntity.ok(assignQuizService.findOne(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody AssignQuizDto assignQuizDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        AssignQuizDto assignQuiz = quizService.update(assignQuizDto, id);
+        AssignQuizDto assignQuiz = assignQuizService.update(assignQuizDto, id);
         message.put("message", "Assign Quiz updated successfully");
         message.put("data", assignQuiz);
         return new ResponseEntity<>(message, HttpStatus.OK);
@@ -51,7 +59,7 @@ public class AssignQuizController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        if (quizService.delete(id)) {
+        if (assignQuizService.delete(id)) {
             message.put("message", "Assign Quiz deleted successfully");
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {

@@ -27,4 +27,5 @@ public class AssignQuiz {
     private int chance;
     private String notes;
     private LocalDate date;
+    private boolean played;
 }

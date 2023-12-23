@@ -12,8 +12,8 @@ import org.springframework.data.annotation.AccessType;
 public class QuizDtoNoRel {
     private Long id;
     private int successResult;
-    private Boolean answerAccess = false;
-    private Boolean resultAccess = false;
+    private Boolean answerAccess;
+    private Boolean resultAccess;
     private int numberOfChances;
     private String comment;
 }

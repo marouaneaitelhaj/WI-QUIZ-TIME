@@ -22,4 +22,5 @@ public class AssignQuizDtoRsp {
     private String notes;
     private LocalDate date;
     private List<AnswerDtoNoRel> answers;
+    private boolean played;
 }

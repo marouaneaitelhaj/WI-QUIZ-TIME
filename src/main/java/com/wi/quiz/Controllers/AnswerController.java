@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @RestController
 @RequestMapping("/answer")
@@ -19,9 +20,9 @@ public class AnswerController {
     @Autowired
     private AnswerServiceImpl answerService;
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody AnswerDto quiz) {
+    public ResponseEntity<?> save(@RequestBody List<AnswerDto> quiz) {
         Map<String, Object> message = new HashMap<>();
-        AnswerDto quizDto = answerService.save(quiz);
+        List<AnswerDto> quizDto = answerService.save(quiz);
         message.put("message", "Answer created successfully");
         message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);

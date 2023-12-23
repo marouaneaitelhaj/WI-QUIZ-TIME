@@ -3,6 +3,7 @@ package com.wi.quiz.DTO.Question;
 import com.wi.quiz.DTO.Media.MediaDtoNoRel;
 import com.wi.quiz.DTO.Validation.ValidationDto;
 import com.wi.quiz.DTO.Validation.ValidationDtoForQuestion;
+import com.wi.quiz.DTO.Validation.ValidationDtoForQuestionFirstLook;
 import com.wi.quiz.Enums.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,5 @@ public class QuestionDtoNoRel {
     private int points;
     private int time;
     private List<MediaDtoNoRel> media;
-    private List<ValidationDtoForQuestion> validations;
+    private List<ValidationDtoForQuestionFirstLook> validations;
 }

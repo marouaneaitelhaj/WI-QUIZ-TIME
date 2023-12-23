@@ -12,4 +12,5 @@ public class AssignQuizDtoNoRel {
     private int chance;
     private String notes;
     private LocalDate date;
+    private boolean played;
 }
