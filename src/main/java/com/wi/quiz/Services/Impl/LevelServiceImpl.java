@@ -6,6 +6,9 @@ import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Services.Inter.LevelService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,12 +19,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class LevelServiceImpl implements LevelService {
-    @Autowired
-    private LevelRepository levelRepository;
+    
+    private final LevelRepository levelRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final ModelMapper modelMapper;
 
     @Override
     public LevelDto save(LevelDto levelDto) {

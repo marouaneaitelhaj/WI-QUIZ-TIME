@@ -6,6 +6,9 @@ import com.wi.quiz.Entities.Student;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.StudentRepository;
 import com.wi.quiz.Services.Inter.StudentService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
-    @Autowired
-    private StudentRepository studentService;
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final StudentRepository studentService;
+    
+    private final ModelMapper modelMapper;
 
     @Override
     public StudentDto save(StudentDto studentDto) {

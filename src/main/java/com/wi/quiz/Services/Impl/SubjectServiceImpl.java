@@ -6,6 +6,9 @@ import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.Inter.SubjectService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,12 +18,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SubjectServiceImpl implements SubjectService {
-    @Autowired
-    private SubjectRepository subjectRepository;
+    
+    private final SubjectRepository subjectRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final ModelMapper modelMapper;
 
     @Override
     public SubjectDto save(SubjectDto subjectDto) {

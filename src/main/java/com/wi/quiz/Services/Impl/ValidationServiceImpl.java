@@ -6,6 +6,9 @@ import com.wi.quiz.Entities.Validation;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.ValidationRepository;
 import com.wi.quiz.Services.Inter.ValidationService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ValidationServiceImpl implements ValidationService {
-    @Autowired
-    private ValidationRepository validationRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final ValidationRepository validationRepository;
+    
+    private final ModelMapper modelMapper;
 
     @Override
     public ValidationDto save(ValidationDto validationDto) {

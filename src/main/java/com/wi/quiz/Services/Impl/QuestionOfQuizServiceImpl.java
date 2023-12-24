@@ -6,6 +6,9 @@ import com.wi.quiz.Entities.QuestionOfQuiz;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.QuestionOfQuizRepository;
 import com.wi.quiz.Services.Inter.QuestionOfQuizService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
-    @Autowired
-    private QuestionOfQuizRepository questionOfQuizRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final QuestionOfQuizRepository questionOfQuizRepository;
+    
+    private final ModelMapper modelMapper;
 
     @Override
     public QuestionOfQuizDto save(QuestionOfQuizDto questionOfQuizDto) {

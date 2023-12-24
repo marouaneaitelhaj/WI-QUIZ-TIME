@@ -7,6 +7,9 @@ import com.wi.quiz.Exceptions.DuplicateEx;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.MediaRepository;
 import com.wi.quiz.Services.Inter.MediaService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,11 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MediaServiceImpl implements MediaService {
-    @Autowired
-    private MediaRepository mediaRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final MediaRepository mediaRepository;
+    
+    private final ModelMapper modelMapper;
 
 
 

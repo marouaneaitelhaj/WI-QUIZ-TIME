@@ -8,6 +8,9 @@ import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.AnswerRepository;
 import com.wi.quiz.Repositories.AssignQuizRepository;
 import com.wi.quiz.Services.Inter.AnswerService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -19,15 +22,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AnswerServiceImpl implements AnswerService {
-    @Autowired
-    private AnswerRepository answerRepository;
+    
+    private final AnswerRepository answerRepository;
 
-    @Autowired
-    private AssignQuizRepository assignQuizRepository;
+    
+    private final AssignQuizRepository assignQuizRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    
+    private final ModelMapper modelMapper;
 
     @Override
     public AnswerDto save(AnswerDto answerDto) {
