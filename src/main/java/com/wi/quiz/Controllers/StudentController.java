@@ -3,6 +3,9 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Student.StudentDto;
 import com.wi.quiz.DTO.Student.StudentDtoRsp;
 import com.wi.quiz.Services.Impl.StudentServiceImpl;
+import com.wi.quiz.Services.Inter.StudentService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/student")
+@RequiredArgsConstructor
 public class StudentController {
-    @Autowired
-    private StudentServiceImpl studentService;
+
+    private final StudentService studentService;
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody StudentDto student) {

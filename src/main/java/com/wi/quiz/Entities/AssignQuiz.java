@@ -1,9 +1,7 @@
 package com.wi.quiz.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,5 +25,7 @@ public class AssignQuiz {
     private int chance;
     private String notes;
     private LocalDate date;
+    @Setter
+    @Getter
     private boolean played;
 }

@@ -3,7 +3,11 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Answer.AnswerDto;
 import com.wi.quiz.DTO.Answer.AnswerDtoRsp;
 import com.wi.quiz.Services.Impl.AnswerServiceImpl;
+import com.wi.quiz.Services.Inter.AnswerService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +20,10 @@ import java.util.List;
 import java.util.Map;
 @RestController
 @RequestMapping("/answer")
+@RequiredArgsConstructor
 public class AnswerController {
-    @Autowired
-    private AnswerServiceImpl answerService;
+    private final AnswerService answerService;
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody List<AnswerDto> quiz) {
         Map<String, Object> message = new HashMap<>();

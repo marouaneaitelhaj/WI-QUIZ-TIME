@@ -3,6 +3,9 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Validation.ValidationDto;
 import com.wi.quiz.DTO.Validation.ValidationDtoRsp;
 import com.wi.quiz.Services.Impl.ValidationServiceImpl;
+import com.wi.quiz.Services.Inter.ValidationService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/validation")
+@RequiredArgsConstructor
 public class ValidationController {
-    @Autowired
-    private ValidationServiceImpl levelService;
+
+    private final ValidationService levelService;
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody ValidationDto validation) {

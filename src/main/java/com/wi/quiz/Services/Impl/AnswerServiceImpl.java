@@ -10,6 +10,7 @@ import com.wi.quiz.Repositories.AssignQuizRepository;
 import com.wi.quiz.Services.Inter.AnswerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -78,7 +79,7 @@ public class AnswerServiceImpl implements AnswerService {
     public List<AnswerDto> save(List<AnswerDto> answers) {
         List<Answer> answerList = answers.stream().map(answerDto -> {
             AssignQuiz assignQuiz = assignQuizRepository.findById(answerDto.getAssignQuiz().getId()).orElseThrow(() -> new NotFoundEx("AssignQuiz not found for id: " + answerDto.getAssignQuiz().getId()));
-            if (!assignQuiz.getPlayed()) {
+            if (!assignQuiz.isPlayed()) {
                 assignQuiz.setPlayed(true);
                 assignQuizRepository.save(assignQuiz);
             }

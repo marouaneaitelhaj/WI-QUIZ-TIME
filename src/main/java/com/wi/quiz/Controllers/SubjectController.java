@@ -3,6 +3,9 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Subject.SubjectDtoRsp;
 import com.wi.quiz.DTO.Subject.SubjectDto;
 import com.wi.quiz.Services.Impl.SubjectServiceImpl;
+import com.wi.quiz.Services.Inter.SubjectService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/subject")
+@RequiredArgsConstructor
 public class SubjectController {
-    @Autowired
-    private SubjectServiceImpl subjectService;
+
+    private final SubjectService subjectService;
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody SubjectDto subjectDto) {

@@ -3,6 +3,8 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Quiz.QuizDto;
 import com.wi.quiz.DTO.Quiz.QuizDtoRsp;
 import com.wi.quiz.Services.Impl.QuizServiceImpl;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +19,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/quiz")
+@RequiredArgsConstructor
 public class QuizController {
-    @Autowired
-    private QuizServiceImpl quizService;
+
+    private final QuizServiceImpl quizService;
     @PostMapping
     public ResponseEntity<?> save(@RequestBody QuizDto quiz) {
         Map<String, Object> message = new HashMap<>();

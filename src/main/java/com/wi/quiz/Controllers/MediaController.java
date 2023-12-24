@@ -3,6 +3,9 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Media.MediaDto;
 import com.wi.quiz.DTO.Media.MediaDtoRsp;
 import com.wi.quiz.Services.Impl.MediaServiceImpl;
+import com.wi.quiz.Services.Inter.MediaService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/media")
+@RequiredArgsConstructor
 public class MediaController {
-    @Autowired
-    private MediaServiceImpl mediaService;
+
+    private final MediaService mediaService;
     @PostMapping
     public ResponseEntity<?> save(@RequestBody MediaDto media) {
         Map<String, Object> message = new HashMap<>();

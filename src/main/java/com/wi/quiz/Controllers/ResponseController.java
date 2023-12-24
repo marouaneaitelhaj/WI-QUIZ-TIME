@@ -3,6 +3,9 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.Response.ResponseDto;
 import com.wi.quiz.DTO.Response.ResponseDtoRsp;
 import com.wi.quiz.Services.Impl.ResponseServiceImpl;
+import com.wi.quiz.Services.Inter.ResponseService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/response")
+@RequiredArgsConstructor
 public class ResponseController {
-    @Autowired
-    private ResponseServiceImpl responseService;
+
+    private final ResponseService responseService;
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody ResponseDto response) {

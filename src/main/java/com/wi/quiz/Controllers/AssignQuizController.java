@@ -3,6 +3,9 @@ package com.wi.quiz.Controllers;
 import com.wi.quiz.DTO.AssignQuiz.AssignQuizDto;
 import com.wi.quiz.DTO.AssignQuiz.AssignQuizDtoRsp;
 import com.wi.quiz.Services.Impl.AssignQuizServiceImpl;
+import com.wi.quiz.Services.Inter.AssignQuizService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +19,10 @@ import java.util.List;
 import java.util.Map;
 @RestController
 @RequestMapping("/assignquiz")
+@RequiredArgsConstructor
 public class AssignQuizController {
-    @Autowired
-    private AssignQuizServiceImpl assignQuizService;
+
+    private final AssignQuizService assignQuizService;
     @PostMapping
     public ResponseEntity<?> save(@RequestBody AssignQuizDto assignQuiz) {
         Map<String, Object> message = new HashMap<>();

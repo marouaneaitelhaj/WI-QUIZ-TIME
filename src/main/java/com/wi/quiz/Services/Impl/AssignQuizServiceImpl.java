@@ -67,7 +67,8 @@ public class AssignQuizServiceImpl implements AssignQuizService {
         return assignQuizList.map(assignQuiz -> modelMapper.map(assignQuiz, AssignQuizDtoRsp.class));
     }
 
-    public int getScore (Long id) {
+    @Override
+    public int getScore(Long id) {
         Optional<AssignQuiz> optionalAssignQuiz = assignQuizRepository.findById(id);
         if (optionalAssignQuiz.isEmpty()) {
             throw new NotFoundEx("AssignQuiz not found for id: " + id);
@@ -75,7 +76,7 @@ public class AssignQuizServiceImpl implements AssignQuizService {
         AssignQuiz assignQuiz = optionalAssignQuiz.get();
         int score = 0;
         for (Answer answer : assignQuiz.getAnswers()) {
-            if (answer.getValidation().getIsCorrect()) {
+            if (answer.getValidation().isCorrect()) {
                 score = score + answer.getValidation().getPoints();
             }
         }

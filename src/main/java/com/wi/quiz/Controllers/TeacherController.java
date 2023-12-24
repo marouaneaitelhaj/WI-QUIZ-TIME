@@ -4,6 +4,9 @@ import com.wi.quiz.DTO.Teacher.TeacherDto;
 import com.wi.quiz.DTO.Teacher.TeacherDtoRsp;
 import com.wi.quiz.Entities.Teacher;
 import com.wi.quiz.Services.Impl.TeacherServiceImpl;
+import com.wi.quiz.Services.Inter.TeacherService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +22,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/teacher")
+@RequiredArgsConstructor
 public class TeacherController {
-    @Autowired
-    private TeacherServiceImpl teacherService;
+
+    private final TeacherService teacherService;
     @PostMapping
     public ResponseEntity<?> save(@RequestBody TeacherDto teacher) {
         Map<String, Object> message = new HashMap<>();

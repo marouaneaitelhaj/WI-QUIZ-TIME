@@ -1,9 +1,7 @@
 package com.wi.quiz.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -21,6 +19,8 @@ public class Validation {
     private Response response;
     @OneToMany(mappedBy = "validation", cascade = CascadeType.ALL)
     private List<Answer> answers;
+    @Getter
+    @Setter
     private boolean isCorrect;
     private int points;
 }
