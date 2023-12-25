@@ -33,9 +33,10 @@ public class QuizController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<QuizDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(quizService.findAll(pageable));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("content", quizService.findAll());
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/{id}")

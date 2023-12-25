@@ -1,9 +1,6 @@
 package com.wi.quiz.DTO.AssignQuiz;
 
-import com.wi.quiz.DTO.Quiz.QuizDto;
-import com.wi.quiz.DTO.Student.StudentDto;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +14,9 @@ public class AssignQuizDto {
 
     private Long id;
     @NotNull
-    private Long student;
+    private Long student_id;
     @NotNull
-    private Long quiz;
+    private Long quiz_id;
     @NotNull
     private int score;
     @NotNull

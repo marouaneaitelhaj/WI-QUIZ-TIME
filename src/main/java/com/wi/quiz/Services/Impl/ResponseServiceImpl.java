@@ -6,12 +6,8 @@ import com.wi.quiz.Entities.Response;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.ResponseRepository;
 import com.wi.quiz.Services.Inter.ResponseService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -70,10 +66,10 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public Page<ResponseDtoRsp> findAll(Pageable pageable) {
-        
-            Page<Response> responses = responseRepository.findAll(pageable);
-            return responses.map(response -> modelMapper.map(response, ResponseDtoRsp.class));
+    public List<ResponseDtoRsp> findAll() {
+
+        List<Response> responses = responseRepository.findAll();
+        return  responses.stream().map(response -> modelMapper.map(response, ResponseDtoRsp.class)).collect(java.util.stream.Collectors.toList());
         
     }
 }

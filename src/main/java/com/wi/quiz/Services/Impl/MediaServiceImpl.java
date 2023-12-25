@@ -11,9 +11,6 @@ import com.wi.quiz.Services.Inter.MediaService;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,14 +68,14 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public Page<MediaDtoRsp> findAll(Pageable pageable) {
-        Page<Media> mediaList = mediaRepository.findAll(pageable);
-        return mediaList.map(media -> modelMapper.map(media, MediaDtoRsp.class));
+    public List<MediaDtoRsp> findAll() {
+        List<Media> mediaList = mediaRepository.findAll();
+        return mediaList.stream().map(media -> modelMapper.map(media, MediaDtoRsp.class)).collect(java.util.stream.Collectors.toList());
     }
 
     @Override
     public void checkIfMediaExist(MediaDto mediaDto) {
-        Optional<Media> optionalMedia = mediaRepository.findBySrcAndTypeAndQuestionId(mediaDto.getSrc(), mediaDto.getType(), mediaDto.getQuestion().getId());
+        Optional<Media> optionalMedia = mediaRepository.findBySrcAndTypeAndQuestionId(mediaDto.getSrc(), mediaDto.getType(), mediaDto.getQuestion_id());
         if (optionalMedia.isPresent()) {
             throw new DuplicateEx("Media already exist");
         }

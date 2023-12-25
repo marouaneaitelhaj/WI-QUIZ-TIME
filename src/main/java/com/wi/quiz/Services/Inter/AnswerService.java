@@ -10,6 +10,5 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface AnswerService extends BaseService<AnswerDtoRsp, AnswerDto, Long> {
-    Page<AnswerDtoRsp> findAll(Pageable pageable);
     List<AnswerDto> save(List<AnswerDto> answers);
 }

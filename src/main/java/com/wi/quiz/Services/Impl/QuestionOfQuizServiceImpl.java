@@ -10,9 +10,6 @@ import com.wi.quiz.Services.Inter.QuestionOfQuizService;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,16 +57,16 @@ public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
     }
 
     @Override
-    public Page<QuestionOfQuizDtoRsp> findAll(Pageable pageable) {
-        Page<QuestionOfQuiz> questionOfQuizList = questionOfQuizRepository.findAll(pageable);
-        return questionOfQuizList.map(questionOfQuiz -> modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class));
+    public List<QuestionOfQuizDtoRsp> findAll() {
+        List<QuestionOfQuiz> questionOfQuizList = questionOfQuizRepository.findAll();
+        return questionOfQuizList.stream().map(questionOfQuiz -> modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class)).toList();
     }
 
     @Override
     public void checkIfExist(QuestionOfQuizDto questionOfQuizDto) {
-        Optional<QuestionOfQuiz> optionalQuestionOfQuiz = questionOfQuizRepository.findByQuestionIdAndQuizId(questionOfQuizDto.getQuestion().getId(), questionOfQuizDto.getQuiz().getId());
+        Optional<QuestionOfQuiz> optionalQuestionOfQuiz = questionOfQuizRepository.findByQuestionIdAndQuizId(questionOfQuizDto.getQuestion_id(), questionOfQuizDto.getQuiz_id());
         if (optionalQuestionOfQuiz.isPresent()) {
-            throw new NotFoundEx("QuestionOfQuiz already exist for questionId: " + questionOfQuizDto.getQuestion().getId() + " and quizId: " + questionOfQuizDto.getQuiz().getId());
+            throw new NotFoundEx("QuestionOfQuiz already exist for questionId: " + questionOfQuizDto.getQuestion_id() + " and quizId: " + questionOfQuizDto.getQuiz_id());
         }
     }
 }

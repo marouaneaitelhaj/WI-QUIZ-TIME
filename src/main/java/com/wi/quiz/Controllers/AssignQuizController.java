@@ -41,9 +41,10 @@ public class AssignQuizController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<AssignQuizDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(assignQuizService.findAll(pageable));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("content", assignQuizService.findAll());
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/{id}")

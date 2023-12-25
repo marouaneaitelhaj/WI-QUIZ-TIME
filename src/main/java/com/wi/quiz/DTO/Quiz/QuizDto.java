@@ -1,6 +1,5 @@
 package com.wi.quiz.DTO.Quiz;
 
-import com.wi.quiz.DTO.Teacher.TeacherDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +14,5 @@ public class QuizDto {
     private boolean resultAccess;
     private int numberOfChances;
     private String comment;
-    private TeacherDto teacher;
+    private Long teacher_id;
 }

@@ -35,9 +35,10 @@ public class LevelController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<LevelDtoRsp>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(levelService.findAll(pageable));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("content", levelService.findAll());
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/{id}")

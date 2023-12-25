@@ -65,8 +65,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Page<TeacherDtoRsp> findAll(Pageable pageable) {
-        Page<Teacher> teachers = teacherRepository.findAll(pageable);
-        return teachers.map(teacher -> modelMapper.map(teacher, TeacherDtoRsp.class));
+    public List<TeacherDtoRsp> findAll() {
+        List<Teacher> teachers = teacherRepository.findAll();
+        return teachers.stream().map(teacher -> modelMapper.map(teacher, TeacherDtoRsp.class)).collect(java.util.stream.Collectors.toList());
     }
 }

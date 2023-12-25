@@ -11,15 +11,11 @@ import com.wi.quiz.Repositories.AssignQuizRepository;
 import com.wi.quiz.Repositories.QuizRepository;
 import com.wi.quiz.Repositories.StudentRepository;
 import com.wi.quiz.Services.Inter.AssignQuizService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,8 +31,8 @@ public class AssignQuizServiceImpl implements AssignQuizService {
 
     @Override
     public AssignQuizDtoRsp save(AssignQuizDto assignQuizDto) {
-        Quiz quiz = quizRepository.findById(assignQuizDto.getQuiz()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + assignQuizDto.getQuiz()));
-        Student student = studentRepository.findById(assignQuizDto.getStudent()).orElseThrow(() -> new NotFoundEx("Student not found for id: " + assignQuizDto.getStudent()));
+        Quiz quiz = quizRepository.findById(assignQuizDto.getQuiz_id()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + assignQuizDto.getQuiz_id()));
+        Student student = studentRepository.findById(assignQuizDto.getStudent_id()).orElseThrow(() -> new NotFoundEx("Student not found for id: " + assignQuizDto.getStudent_id()));
         AssignQuiz assignQuiz = modelMapper.map(assignQuizDto, AssignQuiz.class);
         assignQuiz.setQuiz(quiz);
         assignQuiz.setStudent(student);
@@ -50,14 +46,11 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     @Override
     public AssignQuizDtoRsp update(AssignQuizDto assignQuizDto, Long aLong) {
         assignQuizRepository.findById(aLong).orElseThrow(() -> new NotFoundEx("AssignQuiz not found for id: " + aLong));
-        Quiz quiz = quizRepository.findById(assignQuizDto.getQuiz()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + assignQuizDto.getQuiz()));
-        Student student = studentRepository.findById(assignQuizDto.getStudent()).orElseThrow(() -> new NotFoundEx("Student not found for id: " + assignQuizDto.getStudent()));
+        Quiz quiz = quizRepository.findById(assignQuizDto.getQuiz_id()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + assignQuizDto.getQuiz_id()));
+        Student student = studentRepository.findById(assignQuizDto.getStudent_id()).orElseThrow(() -> new NotFoundEx("Student not found for id: " + assignQuizDto.getStudent_id()));
         AssignQuiz assignQuiz = modelMapper.map(assignQuizDto, AssignQuiz.class);
         assignQuiz.setQuiz(quiz);
         assignQuiz.setStudent(student);
-        /*assignQuizRepository.findByStudentIdAndQuizId(student.getId(), quiz.getId()).ifPresent(assignQuiz1 -> {
-            throw new NotFoundEx("AssignQuiz already exists for student: " + student.getId() + " and quiz: " + quiz.getId());
-        });*/
         assignQuiz.setId(aLong);
         assignQuiz = assignQuizRepository.save(assignQuiz);
         return modelMapper.map(assignQuiz, AssignQuizDtoRsp.class);
@@ -84,9 +77,11 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     }
 
     @Override
-    public Page<AssignQuizDtoRsp> findAll(Pageable pageable) {
-        Page<AssignQuiz> assignQuizList = assignQuizRepository.findAll(pageable);
-        return assignQuizList.map(assignQuiz -> modelMapper.map(assignQuiz, AssignQuizDtoRsp.class));
+    public List<AssignQuizDtoRsp> findAll() {
+        List<AssignQuiz> assignQuizList = assignQuizRepository.findAll();
+        return assignQuizList.stream()
+                .map(assignQuiz -> modelMapper.map(assignQuiz, AssignQuizDtoRsp.class))
+                .toList();
     }
 
     @Override

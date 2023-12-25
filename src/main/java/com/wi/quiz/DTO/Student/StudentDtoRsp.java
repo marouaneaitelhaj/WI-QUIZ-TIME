@@ -1,7 +1,6 @@
 package com.wi.quiz.DTO.Student;
 
 import com.wi.quiz.DTO.AssignQuiz.AssignQuizDto;
-import com.wi.quiz.DTO.AssignQuiz.AssignQuizDtoNoRel;
 import com.wi.quiz.DTO.Person.PersonDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +15,5 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentDtoRsp extends PersonDto {
     private LocalDate enrollmentDate;
-    private List<AssignQuizDtoNoRel> quizzes;
+    private List<AssignQuizDto> quizzes;
 }

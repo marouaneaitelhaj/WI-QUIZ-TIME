@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,10 +73,8 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Page<SubjectDtoRsp> findAll(Pageable pageable) {
-
-        Page<Subject> subjects = subjectRepository.findAll(pageable);
-        return subjects.map(subject -> modelMapper.map(subject, SubjectDtoRsp.class));
-
+    public List<SubjectDtoRsp> findAll() {
+        List<Subject> subjects = subjectRepository.findAll();
+        return  subjects.stream().map(subject -> modelMapper.map(subject, SubjectDtoRsp.class)).toList();
     }
 }

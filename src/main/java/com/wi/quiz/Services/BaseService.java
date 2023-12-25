@@ -13,5 +13,5 @@ public interface BaseService<DTO_RSP, DTO_MINI, F> {
 
     DTO_RSP findOne(F f);
 
-    Page<DTO_RSP> findAll(Pageable pageable);
+    List<DTO_RSP> findAll();
 }

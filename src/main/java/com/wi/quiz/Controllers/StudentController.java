@@ -35,9 +35,10 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<StudentDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(studentService.findAll(pageable));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("content", studentService.findAll());
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/{id}")

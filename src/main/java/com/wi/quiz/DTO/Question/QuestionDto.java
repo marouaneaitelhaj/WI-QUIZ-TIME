@@ -1,7 +1,5 @@
 package com.wi.quiz.DTO.Question;
 
-import com.wi.quiz.DTO.Level.LevelDto;
-import com.wi.quiz.DTO.Subject.SubjectDto;
 import com.wi.quiz.Enums.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +16,6 @@ public class QuestionDto {
     private QuestionType questionType;
     private int points;
     private int time;
-    private LevelDto level;
-    private SubjectDto subject;
+    private Long level_id;
+    private Long subject_id;
 }

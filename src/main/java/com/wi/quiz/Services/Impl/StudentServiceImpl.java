@@ -65,8 +65,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Page<StudentDtoRsp> findAll(Pageable pageable) {
-        Page<Student> students = studentService.findAll(pageable);
-        return students.map(student -> modelMapper.map(student, StudentDtoRsp.class));
+    public List<StudentDtoRsp> findAll() {
+        List<Student> students = studentService.findAll();
+        return students.stream().map(student -> modelMapper.map(student, StudentDtoRsp.class)).collect(java.util.stream.Collectors.toList());
     }
 }

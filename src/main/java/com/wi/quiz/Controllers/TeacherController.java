@@ -36,9 +36,10 @@ public class TeacherController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<TeacherDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(teacherService.findAll(pageable));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("content", teacherService.findAll());
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/{id}")

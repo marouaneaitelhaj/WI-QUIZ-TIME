@@ -1,7 +1,5 @@
 package com.wi.quiz.DTO.QuestionOfQuiz;
 
-import com.wi.quiz.DTO.Question.QuestionDto;
-import com.wi.quiz.DTO.Quiz.QuizDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionOfQuizDto {
     private Long id;
-    private QuestionDto question;
-    private QuizDto quiz;
+    private Long question_id;
+    private Long quiz_id;
 }

@@ -1,7 +1,6 @@
 package com.wi.quiz.DTO.Level;
 
 import com.wi.quiz.DTO.Question.QuestionDto;
-import com.wi.quiz.DTO.Question.QuestionDtoNoRel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +14,5 @@ public class LevelDtoRsp {
     private String description;
     private int maxPoints;
     private int minPoints;
-    private List<QuestionDtoNoRel> questions;
+    private List<QuestionDto> questions;
 }

@@ -6,12 +6,8 @@ import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Services.Inter.LevelService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -76,8 +72,8 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public Page<LevelDtoRsp> findAll(Pageable pageable) {
-            Page<Level> levels = levelRepository.findAll(pageable);
-            return levels.map(level -> modelMapper.map(level, LevelDtoRsp.class));
+    public List<LevelDtoRsp> findAll() {
+        List<Level> levels = levelRepository.findAll();
+        return levels.stream().map(level -> modelMapper.map(level, LevelDtoRsp.class)).toList();
     }
 }

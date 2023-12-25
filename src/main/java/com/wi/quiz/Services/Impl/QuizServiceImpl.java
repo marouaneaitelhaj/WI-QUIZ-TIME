@@ -65,8 +65,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Page<QuizDtoRsp> findAll(Pageable pageable) {
-        Page<Quiz> quizzes = QuizRepository.findAll(pageable);
-        return quizzes.map(quiz -> modelMapper.map(quiz, QuizDtoRsp.class));
+    public List<QuizDtoRsp> findAll() {
+        List<Quiz> quizzes = QuizRepository.findAll();
+        return quizzes.stream().map(quiz -> modelMapper.map(quiz, QuizDtoRsp.class)).collect(java.util.stream.Collectors.toList());
     }
 }

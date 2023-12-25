@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,10 +76,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Page<QuestionDtoRsp> findAll(Pageable pageable) {
-        
-            Page<Question> questions = questionRepository.findAll(pageable);
-            return questions.map(question -> modelMapper.map(question, QuestionDtoRsp.class));
-        
+    public List<QuestionDtoRsp> findAll() {
+            List<Question> questions = questionRepository.findAll();
+            return questions.stream().map(question -> modelMapper.map(question, QuestionDtoRsp.class)).toList();
     }
 }

@@ -1,7 +1,6 @@
 package com.wi.quiz.DTO.Subject;
 
 import com.wi.quiz.DTO.Question.QuestionDto;
-import com.wi.quiz.DTO.Question.QuestionDtoNoRel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.List;
 public class SubjectDtoRsp {
     private Long id;
     private String name;
-    private SubjectDtoNoRel top;
-    private List<SubjectDtoNoRel> subs;
-    private List<QuestionDtoNoRel> questions;
+    private SubjectDto top;
+    private List<SubjectDto> subs;
+    private List<QuestionDto> questions;
 }

@@ -67,9 +67,9 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
-    public Page<ValidationDtoRsp> findAll(Pageable pageable) {
-        Page<Validation> validations = validationRepository.findAll(pageable);
-        return validations.map(validation -> modelMapper.map(validation, ValidationDtoRsp.class));
+    public List<ValidationDtoRsp> findAll() {
+        List<Validation> validations = validationRepository.findAll();
+        return validations.stream().map(validation -> modelMapper.map(validation, ValidationDtoRsp.class)).toList();
     }
 
     @Override

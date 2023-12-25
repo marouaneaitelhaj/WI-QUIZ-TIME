@@ -34,9 +34,10 @@ public class AnswerController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<AnswerDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(answerService.findAll(pageable));
+    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("content", answerService.findAll());
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/{id}")
@@ -46,8 +47,8 @@ public class AnswerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody AnswerDto quiz, @PathVariable Long id) {
-        Map<String, Object> message = new HashMap<>();
         AnswerDtoRsp quizDto = answerService.update(quiz, id);
+        Map<String, Object> message = new HashMap<>();
         message.put("message", "Answer updated successfully");
         message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.OK);
