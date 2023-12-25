@@ -28,21 +28,21 @@ public class ResponseServiceImpl implements ResponseService {
 
 
     @Override
-    public ResponseDto save(ResponseDto responseDto) {
+    public ResponseDtoRsp save(ResponseDto responseDto) {
         
             Response response = modelMapper.map(responseDto, Response.class);
             response= responseRepository.save(response);
-            return modelMapper.map(response, ResponseDto.class);
+            return modelMapper.map(response, ResponseDtoRsp.class);
         
     }
 
     @Override
-    public ResponseDto update(ResponseDto responseDto, Long aLong) {
+    public ResponseDtoRsp update(ResponseDto responseDto, Long aLong) {
         
             Response response = modelMapper.map(responseDto, Response.class);
             response.setId(aLong);
             response= responseRepository.save(response);
-            return modelMapper.map(response, ResponseDto.class);
+            return modelMapper.map(response, ResponseDtoRsp.class);
         
     }
 

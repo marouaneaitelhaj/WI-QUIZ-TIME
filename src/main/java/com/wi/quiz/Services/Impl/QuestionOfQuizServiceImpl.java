@@ -27,15 +27,15 @@ public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
     private final ModelMapper modelMapper;
 
     @Override
-    public QuestionOfQuizDto save(QuestionOfQuizDto questionOfQuizDto) {
+    public QuestionOfQuizDtoRsp save(QuestionOfQuizDto questionOfQuizDto) {
         QuestionOfQuiz questionOfQuiz = modelMapper.map(questionOfQuizDto, QuestionOfQuiz.class);
         checkIfExist(questionOfQuizDto);
         questionOfQuiz = questionOfQuizRepository.save(questionOfQuiz);
-        return modelMapper.map(questionOfQuiz, QuestionOfQuizDto.class);
+        return modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class);
     }
 
     @Override
-    public QuestionOfQuizDto update(QuestionOfQuizDto questionOfQuizDto, Long aLong) {
+    public QuestionOfQuizDtoRsp update(QuestionOfQuizDto questionOfQuizDto, Long aLong) {
         Optional<QuestionOfQuiz> optionalQuestionOfQuiz = questionOfQuizRepository.findById(aLong);
         if (optionalQuestionOfQuiz.isEmpty()) {
             throw new NotFoundEx("QuestionOfQuiz not found for id: " + aLong);
@@ -43,7 +43,7 @@ public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
         QuestionOfQuiz questionOfQuiz = modelMapper.map(questionOfQuizDto, QuestionOfQuiz.class);
         checkIfExist(questionOfQuizDto);
         questionOfQuiz = questionOfQuizRepository.save(questionOfQuiz);
-        return modelMapper.map(questionOfQuiz, QuestionOfQuizDto.class);
+        return modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class);
     }
 
     @Override

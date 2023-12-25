@@ -26,7 +26,7 @@ public class QuizController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody QuizDto quiz) {
         Map<String, Object> message = new HashMap<>();
-        QuizDto quizDto = quizService.save(quiz);
+        QuizDtoRsp quizDto = quizService.save(quiz);
         message.put("message", "Quiz created successfully");
         message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
@@ -46,7 +46,7 @@ public class QuizController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody QuizDto quiz, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        QuizDto quizDto = quizService.update(quiz, id);
+        QuizDtoRsp quizDto = quizService.update(quiz, id);
         message.put("message", "Quiz updated successfully");
         message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.OK);

@@ -29,7 +29,7 @@ public class TeacherController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody TeacherDto teacher) {
         Map<String, Object> message = new HashMap<>();
-        TeacherDto teacherDto =  teacherService.save(teacher);
+        TeacherDtoRsp teacherDto =  teacherService.save(teacher);
         message.put("message", "Teacher created successfully");
         message.put("data", teacherDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
@@ -49,7 +49,7 @@ public class TeacherController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody TeacherDto teacherDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        TeacherDto teacher = teacherService.update(teacherDto, id);
+        TeacherDtoRsp teacher = teacherService.update(teacherDto, id);
         message.put("message", "Teacher updated successfully");
         message.put("data", teacher);
         return new ResponseEntity<>(message, HttpStatus.OK);

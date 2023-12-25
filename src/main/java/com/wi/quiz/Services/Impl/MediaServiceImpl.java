@@ -31,15 +31,15 @@ public class MediaServiceImpl implements MediaService {
 
 
     @Override
-    public MediaDto save(MediaDto mediaDto) {
+    public MediaDtoRsp save(MediaDto mediaDto) {
         Media media = modelMapper.map(mediaDto, Media.class);
         checkIfMediaExist(mediaDto);
         media = mediaRepository.save(media);
-        return modelMapper.map(media, MediaDto.class);
+        return modelMapper.map(media, MediaDtoRsp.class);
     }
 
     @Override
-    public MediaDto update(MediaDto mediaDto, Long aLong) {
+    public MediaDtoRsp update(MediaDto mediaDto, Long aLong) {
         Optional<Media> optionalMedia = mediaRepository.findById(aLong);
         if (optionalMedia.isEmpty()) {
             throw new NotFoundEx("Media not found for id: " + aLong);
@@ -47,7 +47,7 @@ public class MediaServiceImpl implements MediaService {
         Media media = modelMapper.map(mediaDto, Media.class);
         checkIfMediaExist(mediaDto);
         media = mediaRepository.save(media);
-        return modelMapper.map(media, MediaDto.class);
+        return modelMapper.map(media, MediaDtoRsp.class);
     }
 
     @Override

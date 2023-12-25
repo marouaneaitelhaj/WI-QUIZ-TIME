@@ -28,9 +28,9 @@ public class ValidationController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody ValidationDto validation) {
         Map<String, Object> message = new HashMap<>();
-        ValidationDto validationDto =  levelService.save(validation);
+        ValidationDtoRsp validationDtoRsp =  levelService.save(validation);
         message.put("message", "Validation created successfully");
-        message.put("data", validationDto);
+        message.put("data", validationDtoRsp);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
@@ -48,7 +48,7 @@ public class ValidationController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody ValidationDto validationDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        ValidationDto validation = levelService.update(validationDto, id);
+        ValidationDtoRsp validation = levelService.update(validationDto, id);
         message.put("message", "Validation updated successfully");
         message.put("data", validation);
         return new ResponseEntity<>(message, HttpStatus.OK);

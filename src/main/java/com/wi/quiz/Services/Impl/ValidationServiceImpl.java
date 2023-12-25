@@ -27,15 +27,15 @@ public class ValidationServiceImpl implements ValidationService {
     private final ModelMapper modelMapper;
 
     @Override
-    public ValidationDto save(ValidationDto validationDto) {
+    public ValidationDtoRsp save(ValidationDto validationDto) {
         Validation validation = modelMapper.map(validationDto, Validation.class);
         checkIfExist(validation.getQuestion().getId(), validation.getResponse().getId());
         validation = validationRepository.save(validation);
-        return modelMapper.map(validation, ValidationDto.class);
+        return modelMapper.map(validation, ValidationDtoRsp.class);
     }
 
     @Override
-    public ValidationDto update(ValidationDto validationDto, Long aLong) {
+    public ValidationDtoRsp update(ValidationDto validationDto, Long aLong) {
         Optional<Validation> optionalValidation = validationRepository.findById(aLong);
         if (optionalValidation.isEmpty()) {
             throw new NotFoundEx("Validation not found for id: " + aLong);
@@ -43,7 +43,7 @@ public class ValidationServiceImpl implements ValidationService {
         Validation validation = modelMapper.map(validationDto, Validation.class);
         //checkIfExist(validation.getQuestion().getId(), validation.getResponse().getId());
         validation = validationRepository.save(validation);
-        return modelMapper.map(validation, ValidationDto.class);
+        return modelMapper.map(validation, ValidationDtoRsp.class);
     }
 
     @Override

@@ -28,14 +28,14 @@ public class LevelController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody LevelDto level) {
         Map<String, Object> message = new HashMap<>();
-        LevelDto levelDto =  levelService.save(level);
+        LevelDtoRsp levelDto = levelService.save(level);
         message.put("message", "Level created successfully");
         message.put("data", levelDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<Page<LevelDtoRsp>> findAll(@RequestParam(defaultValue = "0") int  page, @RequestParam(defaultValue = "10") int  size) {
+    public ResponseEntity<Page<LevelDtoRsp>> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(levelService.findAll(pageable));
     }
@@ -47,11 +47,11 @@ public class LevelController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody LevelDto levelDto, @PathVariable Long id) {
-            Map<String, Object> message = new HashMap<>();
-            LevelDto level = levelService.update(levelDto, id);
-            message.put("message", "Level updated successfully");
-            message.put("data", level);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+        Map<String, Object> message = new HashMap<>();
+        LevelDtoRsp level = levelService.update(levelDto, id);
+        message.put("message", "Level updated successfully");
+        message.put("data", level);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

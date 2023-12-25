@@ -27,21 +27,21 @@ public class TeacherServiceImpl implements TeacherService {
     private final ModelMapper modelMapper;
 
     @Override
-    public TeacherDto save(TeacherDto teacherDto) {
+    public TeacherDtoRsp save(TeacherDto teacherDto) {
         Teacher teacher = modelMapper.map(teacherDto, Teacher.class);
         teacher = teacherRepository.save(teacher);
-        return modelMapper.map(teacher, TeacherDto.class);
+        return modelMapper.map(teacher, TeacherDtoRsp.class);
     }
 
     @Override
-    public TeacherDto update(TeacherDto teacherDto, Long aLong) {
+    public TeacherDtoRsp update(TeacherDto teacherDto, Long aLong) {
         Optional<Teacher> optionalTeacher = teacherRepository.findById(aLong);
         if (optionalTeacher.isEmpty()) {
             throw new NotFoundEx("Teacher not found for id: " + aLong);
         }
         Teacher teacher = modelMapper.map(teacherDto, Teacher.class);
         teacher = teacherRepository.save(teacher);
-        return modelMapper.map(teacher, TeacherDto.class);
+        return modelMapper.map(teacher, TeacherDtoRsp.class);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class MediaController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody MediaDto media) {
         Map<String, Object> message = new HashMap<>();
-        MediaDto mediaDto =  mediaService.save(media);
+        MediaDtoRsp mediaDto =  mediaService.save(media);
         message.put("message", "Media created successfully");
         message.put("data", mediaDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
@@ -47,7 +47,7 @@ public class MediaController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody MediaDto mediaDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        MediaDto media = mediaService.update(mediaDto, id);
+        MediaDtoRsp media = mediaService.update(mediaDto, id);
         message.put("message", "Media updated successfully");
         message.put("data", media);
         return new ResponseEntity<>(message, HttpStatus.OK);

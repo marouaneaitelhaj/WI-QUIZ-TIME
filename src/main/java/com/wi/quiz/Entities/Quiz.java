@@ -27,4 +27,8 @@ public class Quiz {
     private List<QuestionOfQuiz> questionOfQuizs;
     @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AssignQuiz> assignQuizs;
+
+    public Quiz(Long id) {
+        this.id = id;
+    }
 }

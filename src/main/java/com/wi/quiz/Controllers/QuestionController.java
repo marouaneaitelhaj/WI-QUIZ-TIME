@@ -29,7 +29,7 @@ public class QuestionController {
     public ResponseEntity<?> save(@RequestBody QuestionDto question) {
         Map<String, Object> message = new HashMap<>();
         message.put("message", "Question created successfully");
-        QuestionDto questionDto = questionService.save(question);
+        QuestionDtoRsp questionDto = questionService.save(question);
         message.put("data", questionDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
@@ -48,7 +48,7 @@ public class QuestionController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody QuestionDto question, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        QuestionDto questionDto = questionService.update(question, id);
+        QuestionDtoRsp questionDto = questionService.update(question, id);
         message.put("message", "Question updated successfully");
         message.put("data", questionDto);
         return new ResponseEntity<>(message, HttpStatus.OK);

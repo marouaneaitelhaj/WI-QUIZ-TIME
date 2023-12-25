@@ -27,21 +27,21 @@ public class QuizServiceImpl implements QuizService {
     private final ModelMapper modelMapper;
 
     @Override
-    public QuizDto save(QuizDto quizDto) {
+    public QuizDtoRsp save(QuizDto quizDto) {
         Quiz quiz = modelMapper.map(quizDto, Quiz.class);
         quiz = QuizRepository.save(quiz);
-        return modelMapper.map(quiz, QuizDto.class);
+        return modelMapper.map(quiz, QuizDtoRsp.class);
     }
 
     @Override
-    public QuizDto update(QuizDto quizDto, Long aLong) {
+    public QuizDtoRsp update(QuizDto quizDto, Long aLong) {
         Optional<Quiz> optionalQuiz = QuizRepository.findById(aLong);
         if (optionalQuiz.isEmpty()) {
             throw new NotFoundEx("Quiz not found for id: " + aLong);
         }
         Quiz quiz = modelMapper.map(quizDto, Quiz.class);
         quiz = QuizRepository.save(quiz);
-        return modelMapper.map(quiz, QuizDto.class);
+        return modelMapper.map(quiz, QuizDtoRsp.class);
     }
 
     @Override

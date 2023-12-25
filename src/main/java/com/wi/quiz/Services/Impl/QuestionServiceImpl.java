@@ -27,22 +27,22 @@ public class QuestionServiceImpl implements QuestionService {
     private final ModelMapper modelMapper;
 
     @Override
-    public QuestionDto save(QuestionDto questionDto) {
+    public QuestionDtoRsp save(QuestionDto questionDto) {
         
             Question question = modelMapper.map(questionDto, Question.class);
-        return modelMapper.map(questionRepository.save(question), QuestionDto.class);
+        return modelMapper.map(questionRepository.save(question), QuestionDtoRsp.class);
         
     }
 
     @Override
-    public QuestionDto update(QuestionDto questionDto, Long aLong) {
+    public QuestionDtoRsp update(QuestionDto questionDto, Long aLong) {
         
             Optional<Question> optionalQuestion = questionRepository.findById(aLong);
             if (optionalQuestion.isPresent()) {
                 Question question = modelMapper.map(questionDto, Question.class);
                 question.setId(aLong);
 
-                return modelMapper.map(questionRepository.save(question), QuestionDto.class);
+                return modelMapper.map(questionRepository.save(question), QuestionDtoRsp.class);
             } else {
                 throw new NotFoundEx("Question not found for id: " + aLong);
             }

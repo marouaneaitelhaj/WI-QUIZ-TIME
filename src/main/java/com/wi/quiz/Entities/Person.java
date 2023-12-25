@@ -21,4 +21,8 @@ public abstract class Person {
     protected String firstName;
     protected LocalDate dateOfBirth;
     protected String address;
+
+    public Person(Long id) {
+        this.id = id;
+    }
 }

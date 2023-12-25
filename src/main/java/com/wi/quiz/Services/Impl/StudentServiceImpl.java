@@ -27,21 +27,21 @@ public class StudentServiceImpl implements StudentService {
     private final ModelMapper modelMapper;
 
     @Override
-    public StudentDto save(StudentDto studentDto) {
+    public StudentDtoRsp save(StudentDto studentDto) {
         Student student = modelMapper.map(studentDto, Student.class);
         student = studentService.save(student);
-        return modelMapper.map(student, StudentDto.class);
+        return modelMapper.map(student, StudentDtoRsp.class);
     }
 
     @Override
-    public StudentDto update(StudentDto studentDto, Long aLong) {
+    public StudentDtoRsp update(StudentDto studentDto, Long aLong) {
         Optional<Student> optionalStudent = studentService.findById(aLong);
         if (optionalStudent.isEmpty()) {
             throw new NotFoundEx("Student not found for id: " + aLong);
         }
         Student student = modelMapper.map(studentDto, Student.class);
         student = studentService.save(student);
-        return modelMapper.map(student, StudentDto.class);
+        return modelMapper.map(student, StudentDtoRsp.class);
     }
 
     @Override

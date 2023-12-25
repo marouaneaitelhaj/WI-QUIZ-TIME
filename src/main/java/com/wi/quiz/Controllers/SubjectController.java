@@ -28,7 +28,7 @@ public class SubjectController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody SubjectDto subjectDto) {
         Map<String, Object> message = new HashMap<>();
-        SubjectDto subject = subjectService.save(subjectDto);
+        SubjectDtoRsp subject = subjectService.save(subjectDto);
         message.put("message", "Subject created successfully");
         message.put("data", subject);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
@@ -48,7 +48,7 @@ public class SubjectController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody SubjectDto subjectDto, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        SubjectDto subject = subjectService.update(subjectDto, id);
+        SubjectDtoRsp subject = subjectService.update(subjectDto, id);
         message.put("message", "Subject updated successfully");
         message.put("data", subject);
         return new ResponseEntity<>(message, HttpStatus.OK);

@@ -34,23 +34,23 @@ public class AnswerServiceImpl implements AnswerService {
     private final ModelMapper modelMapper;
 
     @Override
-    public AnswerDto save(AnswerDto answerDto) {
+    public AnswerDtoRsp save(AnswerDto answerDto) {
         AssignQuiz assignQuiz = assignQuizRepository.findById(answerDto.getAssignQuiz().getId()).orElseThrow(() -> new NotFoundEx("AssignQuiz not found for id: " + answerDto.getAssignQuiz().getId()));
         //assignQuiz.getAnswers()
         Answer answer = modelMapper.map(answerDto, Answer.class);
         answer = answerRepository.save(answer);
-        return modelMapper.map(answer, AnswerDto.class);
+        return modelMapper.map(answer, AnswerDtoRsp.class);
     }
 
     @Override
-    public AnswerDto update(AnswerDto answerDto, Long aLong) {
+    public AnswerDtoRsp update(AnswerDto answerDto, Long aLong) {
         Optional<Answer> optionalAnswer = answerRepository.findById(aLong);
         if (optionalAnswer.isEmpty()) {
             throw new NotFoundEx("Answer not found for id: " + aLong);
         }
         Answer answer = modelMapper.map(answerDto, Answer.class);
         answer = answerRepository.save(answer);
-        return modelMapper.map(answer, AnswerDto.class);
+        return modelMapper.map(answer, AnswerDtoRsp.class);
     }
 
     @Override
@@ -87,9 +87,6 @@ public class AnswerServiceImpl implements AnswerService {
                 assignQuiz.setPlayed(true);
                 assignQuizRepository.save(assignQuiz);
             }
-            /*if (!assignQuiz.getAnswers().isEmpty()) {
-                throw new NotFoundEx("AssignQuiz already has answers");
-            }*/
             Answer answer = modelMapper.map(answerDto, Answer.class);
             answer.setAssignQuiz(assignQuiz);
             return answer;

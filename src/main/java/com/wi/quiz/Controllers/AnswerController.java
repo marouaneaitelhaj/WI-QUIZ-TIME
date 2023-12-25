@@ -47,7 +47,7 @@ public class AnswerController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody AnswerDto quiz, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        AnswerDto quizDto = answerService.update(quiz, id);
+        AnswerDtoRsp quizDto = answerService.update(quiz, id);
         message.put("message", "Answer updated successfully");
         message.put("data", quizDto);
         return new ResponseEntity<>(message, HttpStatus.OK);

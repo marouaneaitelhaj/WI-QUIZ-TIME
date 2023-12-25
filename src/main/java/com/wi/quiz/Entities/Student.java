@@ -19,4 +19,8 @@ public class Student extends Person {
     private LocalDate enrollmentDate;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<AssignQuiz> quizzes;
+
+    public Student(Long id) {
+        super(id);
+    }
 }

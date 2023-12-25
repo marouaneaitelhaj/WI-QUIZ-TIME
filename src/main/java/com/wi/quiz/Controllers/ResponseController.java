@@ -28,7 +28,7 @@ public class ResponseController {
     @PostMapping
     public ResponseEntity<?> save(@RequestBody ResponseDto response) {
         Map<String, Object> message = new HashMap<>();
-        ResponseDto responseDto = responseService.save(response);
+        ResponseDtoRsp responseDto = responseService.save(response);
         message.put("message", "Response created successfully");
         message.put("data", responseDto);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
@@ -48,7 +48,7 @@ public class ResponseController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody ResponseDto response, @PathVariable Long id) {
         Map<String, Object> message = new HashMap<>();
-        ResponseDto responseDto = responseService.update(response, id);
+        ResponseDtoRsp responseDto = responseService.update(response, id);
         message.put("message", "Response updated successfully");
         message.put("data", responseDto);
         return new ResponseEntity<>(message, HttpStatus.OK);
