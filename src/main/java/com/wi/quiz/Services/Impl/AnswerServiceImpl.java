@@ -93,7 +93,7 @@ public class AnswerServiceImpl implements AnswerService {
             }
             Answer answer = modelMapper.map(answerDto, Answer.class);
             answer.setAssignQuiz(assignQuiz);
-            answer.setValidation(validationRepository.findById(answerDto.getValidation_id()).orElseThrow(() -> new NotFoundEx("Validation not found for id: " + answerDto.getValidation_id())));
+            answer.setValidation(validation);
             return answer;
         }).toList();
         answerList = answerRepository.saveAll(answerList);

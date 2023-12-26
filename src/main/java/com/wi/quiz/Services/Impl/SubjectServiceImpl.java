@@ -30,21 +30,19 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectDtoRsp save(SubjectDto subjectDto) {
         Subject subject = modelMapper.map(subjectDto, Subject.class);
-        subject.setTop(new Subject(subjectDto.getTop()));
+        subject.setTop(new Subject(subjectDto.getTop_id()));
         subject = subjectRepository.save(subject);
         return modelMapper.map(subject, SubjectDtoRsp.class);
     }
 
     @Override
     public SubjectDtoRsp update(SubjectDto subjectDto, Long aLong) {
-        Optional<Subject> optionalSubject = subjectRepository.findById(aLong);
-        if (optionalSubject.isPresent()) {
-            Subject subject = modelMapper.map(subjectDto, Subject.class);
-            subject.setId(aLong);
-            return modelMapper.map(subjectRepository.save(subject), SubjectDtoRsp.class);
-        } else {
-            throw new NotFoundEx("Subject not found for id: " + aLong);
-        }
+        subjectRepository.findById(aLong).orElseThrow(() -> new NotFoundEx("Subject not found for id: " + aLong));
+        Subject subject = modelMapper.map(subjectDto, Subject.class);
+        subject.setTop(new Subject(subjectDto.getTop_id()));
+        subject.setId(aLong);
+        subject = subjectRepository.save(subject);
+        return modelMapper.map(subject, SubjectDtoRsp.class);
     }
 
     @Override

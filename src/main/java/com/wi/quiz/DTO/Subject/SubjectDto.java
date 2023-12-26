@@ -13,5 +13,5 @@ public class SubjectDto {
     @NotNull
     private String name;
     @NotNull
-    private Long top;
+    private Long top_id;
 }

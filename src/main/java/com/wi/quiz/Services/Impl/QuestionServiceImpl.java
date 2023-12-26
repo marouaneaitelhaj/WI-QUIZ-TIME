@@ -2,17 +2,16 @@ package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.Question.QuestionDto;
 import com.wi.quiz.DTO.Question.QuestionDtoRsp;
+import com.wi.quiz.Entities.Level;
 import com.wi.quiz.Entities.Question;
+import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Exceptions.NotFoundEx;
+import com.wi.quiz.Repositories.LevelRepository;
 import com.wi.quiz.Repositories.QuestionRepository;
+import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.Inter.QuestionService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,30 +22,34 @@ import java.util.Optional;
 public class QuestionServiceImpl implements QuestionService {
     
     private final QuestionRepository questionRepository;
+    private final LevelRepository levelRepository;
+    private final SubjectRepository subjectRepository;
 
     
     private final ModelMapper modelMapper;
 
     @Override
     public QuestionDtoRsp save(QuestionDto questionDto) {
-        
             Question question = modelMapper.map(questionDto, Question.class);
-        return modelMapper.map(questionRepository.save(question), QuestionDtoRsp.class);
-        
+        Level level = levelRepository.findById(questionDto.getLevel_id()).orElseThrow(() -> new NotFoundEx("Level not found for id: " + questionDto.getLevel_id()));
+        Subject subject = subjectRepository.findById(questionDto.getSubject_id()).orElseThrow(() -> new NotFoundEx("Subject not found for id: " + questionDto.getSubject_id()));
+        question.setLevel(level);
+        question.setSubject(subject);
+        question = questionRepository.save(question);
+        return modelMapper.map(question, QuestionDtoRsp.class);
     }
 
     @Override
     public QuestionDtoRsp update(QuestionDto questionDto, Long aLong) {
-        
-            Optional<Question> optionalQuestion = questionRepository.findById(aLong);
-            if (optionalQuestion.isPresent()) {
-                Question question = modelMapper.map(questionDto, Question.class);
-                question.setId(aLong);
-
-                return modelMapper.map(questionRepository.save(question), QuestionDtoRsp.class);
-            } else {
-                throw new NotFoundEx("Question not found for id: " + aLong);
-            }
+        questionRepository.findById(aLong).orElseThrow(() -> new NotFoundEx("Question not found for id: " + aLong));
+        Question question = modelMapper.map(questionDto, Question.class);
+        Level level = levelRepository.findById(questionDto.getLevel_id()).orElseThrow(() -> new NotFoundEx("Level not found for id: " + questionDto.getLevel_id()));
+        Subject subject = subjectRepository.findById(questionDto.getSubject_id()).orElseThrow(() -> new NotFoundEx("Subject not found for id: " + questionDto.getSubject_id()));
+        question.setLevel(level);
+        question.setSubject(subject);
+        question.setId(aLong);
+        question = questionRepository.save(question);
+        return modelMapper.map(question, QuestionDtoRsp.class);
         
     }
 
