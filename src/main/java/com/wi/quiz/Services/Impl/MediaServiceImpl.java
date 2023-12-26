@@ -3,9 +3,11 @@ package com.wi.quiz.Services.Impl;
 import com.wi.quiz.DTO.Media.MediaDto;
 import com.wi.quiz.DTO.Media.MediaDtoRsp;
 import com.wi.quiz.Entities.Media;
+import com.wi.quiz.Entities.Question;
 import com.wi.quiz.Exceptions.DuplicateEx;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.MediaRepository;
+import com.wi.quiz.Repositories.QuestionRepository;
 import com.wi.quiz.Services.Inter.MediaService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class MediaServiceImpl implements MediaService {
     
     private final MediaRepository mediaRepository;
+    private final QuestionRepository questionRepository;
     
     private final ModelMapper modelMapper;
 
@@ -31,6 +34,8 @@ public class MediaServiceImpl implements MediaService {
     public MediaDtoRsp save(MediaDto mediaDto) {
         Media media = modelMapper.map(mediaDto, Media.class);
         checkIfMediaExist(mediaDto);
+        Question question= questionRepository.findById(mediaDto.getQuestion_id()).orElseThrow(() -> new NotFoundEx("Question not found for id: " + mediaDto.getQuestion_id()));
+        media.setQuestion(question);
         media = mediaRepository.save(media);
         return modelMapper.map(media, MediaDtoRsp.class);
     }
@@ -43,6 +48,9 @@ public class MediaServiceImpl implements MediaService {
         }
         Media media = modelMapper.map(mediaDto, Media.class);
         checkIfMediaExist(mediaDto);
+        Question question= questionRepository.findById(mediaDto.getQuestion_id()).orElseThrow(() -> new NotFoundEx("Question not found for id: " + mediaDto.getQuestion_id()));
+        media.setQuestion(question);
+        media.setId(aLong);
         media = mediaRepository.save(media);
         return modelMapper.map(media, MediaDtoRsp.class);
     }
