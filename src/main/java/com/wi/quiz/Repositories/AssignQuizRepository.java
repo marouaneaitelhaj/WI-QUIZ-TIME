@@ -11,4 +11,7 @@ public interface AssignQuizRepository extends JpaRepository<AssignQuiz, Long> {
     Page<AssignQuiz> findAll(Pageable pageable);
     Optional<AssignQuiz> findByStudentIdAndQuizId(Long studentId, Long quizId);
 
+    // i want to find one assignQuiz by quizId that has the highest chance
+    Optional<AssignQuiz> findFirstByQuizIdOrderByChanceDesc(Long quizId);
+
 }

@@ -32,6 +32,12 @@ public class AssignQuizServiceImpl implements AssignQuizService {
     @Override
     public AssignQuizDtoRsp save(AssignQuizDto assignQuizDto) {
         Quiz quiz = quizRepository.findById(assignQuizDto.getQuiz_id()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + assignQuizDto.getQuiz_id()));
+        assignQuizRepository.findFirstByQuizIdOrderByChanceDesc(quiz.getId()).ifPresent(assignQuiz1 -> {
+            assignQuizDto.setChance(assignQuiz1.getChance() + 1);
+        });
+        if (assignQuizDto.getChance() > quiz.getNumberOfChances()) {
+            throw new NotFoundEx("You have reached the maximum number of chances for this quiz");
+        }
         Student student = studentRepository.findById(assignQuizDto.getStudent_id()).orElseThrow(() -> new NotFoundEx("Student not found for id: " + assignQuizDto.getStudent_id()));
         AssignQuiz assignQuiz = modelMapper.map(assignQuizDto, AssignQuiz.class);
         assignQuiz.setQuiz(quiz);
