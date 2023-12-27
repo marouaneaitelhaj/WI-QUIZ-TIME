@@ -1,5 +1,7 @@
 package com.wi.quiz.DTO.Room;
 
+import com.wi.quiz.DTO.RoomMembers.RoomMembersDto;
+import com.wi.quiz.DTO.RoomMembers.RoomMembersDtoForRoom;
 import com.wi.quiz.Entities.Message;
 import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.RoomMembers;
@@ -22,6 +24,6 @@ public class RoomDtoRsp {
     private Long id;
     private String name;
     private Person owner;
-    private List<RoomMembers> persons;
+    private List<RoomMembersDtoForRoom> members;
     private List<Message> messages;
 }

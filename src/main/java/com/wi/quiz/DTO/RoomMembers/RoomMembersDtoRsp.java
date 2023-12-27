@@ -1,5 +1,6 @@
 package com.wi.quiz.DTO.RoomMembers;
 
+import com.wi.quiz.DTO.Room.RoomDto;
 import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.Room;
 import jakarta.persistence.GeneratedValue;
@@ -15,5 +16,5 @@ import lombok.NoArgsConstructor;
 public class RoomMembersDtoRsp {
     private Long id;
     private Person member;
-    private Room room;
+    private RoomDto room;
 }

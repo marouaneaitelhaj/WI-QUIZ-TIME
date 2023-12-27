@@ -18,8 +18,8 @@ public class Room {
     private String name;
     @OneToOne
     private Person owner;
-    @OneToMany
-    private List<RoomMembers> persons;
-    @OneToMany
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<RoomMembers> members;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Message> messages;
 }

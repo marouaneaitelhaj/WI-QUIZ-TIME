@@ -1,26 +1,19 @@
-package com.wi.quiz.DTO.Room;
+package com.wi.quiz.DTO.RoomMembers;
 
-import com.wi.quiz.Entities.Message;
 import com.wi.quiz.Entities.Person;
-import com.wi.quiz.Entities.RoomMembers;
+import com.wi.quiz.Entities.Room;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RoomDto {
+public class RoomMembersDtoForRoom {
     private Long id;
-    @NotNull
-    private String name;
-    @NotNull
-    private Long owner_id;
+    private Person member;
 }

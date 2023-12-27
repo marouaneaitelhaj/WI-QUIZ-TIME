@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 @RestController
-@RequestMapping("/roomMembers")
+@RequestMapping("/roomembers")
 @RequiredArgsConstructor
 public class RoomMembersController {
     private final RoomMembersService roomMembersService;

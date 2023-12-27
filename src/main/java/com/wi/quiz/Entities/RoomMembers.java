@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class RoomMembers {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private  Person member;
+    private Person member;
     @ManyToOne
     private Room room;
 }
