@@ -1,8 +1,8 @@
 package com.wi.quiz.Services.Impl;
 
-import com.wi.quiz.DTO.Room.RoomDto;
-import com.wi.quiz.DTO.Room.RoomDtoRsp;
-import com.wi.quiz.Services.Inter.RoomService;
+import com.wi.quiz.DTO.Message.MessageDto;
+import com.wi.quiz.DTO.Message.MessageDtoRsp;
+import com.wi.quiz.Services.Inter.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +10,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RoomServiceImpl implements RoomService {
+public class MessageServiceImpl implements MessageService {
     @Override
-    public RoomDtoRsp save(RoomDto roomDto) {
+    public MessageDtoRsp save(MessageDto messageDto) {
         return null;
     }
 
     @Override
-    public RoomDtoRsp update(RoomDto roomDto, Long aLong) {
+    public MessageDtoRsp update(MessageDto messageDto, Long aLong) {
         return null;
     }
 
@@ -27,12 +27,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDtoRsp findOne(Long aLong) {
+    public MessageDtoRsp findOne(Long aLong) {
         return null;
     }
 
     @Override
-    public List<RoomDtoRsp> findAll() {
+    public List<MessageDtoRsp> findAll() {
         return null;
     }
 }

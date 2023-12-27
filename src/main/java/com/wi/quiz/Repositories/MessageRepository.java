@@ -1,2 +1,9 @@
-package com.wi.quiz.Repositories;public interface MessageRepository {
+package com.wi.quiz.Repositories;
+
+import com.wi.quiz.Entities.Message;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface MessageRepository extends JpaRepository<Message, Long> {
 }
