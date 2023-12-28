@@ -2,6 +2,8 @@ package com.wi.quiz.DTO.Message;
 
 import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.Room;
+
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,8 +18,11 @@ import java.time.LocalTime;
 @Data
 public class MessageDto {
     private long id;
+    @NonNull
     private String content;
+    @NonNull
     private Long room_id;
-    private Person sender_id;
+    @NonNull
+    private Long sender_id;
     private LocalTime time;
 }

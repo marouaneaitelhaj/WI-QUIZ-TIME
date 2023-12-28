@@ -1,5 +1,6 @@
 package com.wi.quiz.DTO.Message;
 
+import com.wi.quiz.DTO.Room.RoomDto;
 import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.Room;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import java.time.LocalTime;
 public class MessageDtoRsp {
     private long id;
     private String content;
-    private Room room;
+    private RoomDto room;
     private Person sender;
     private LocalTime time;
 }

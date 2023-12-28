@@ -69,6 +69,9 @@ public class RoomMembersServiceImpl implements RoomMembersService {
 
     @Override
     public List<RoomMembersDtoRsp> findAll() {
-        return null;
+        List<RoomMembers> roomMembers = membersRepository.findAll();
+        List<RoomMembersDtoRsp> roomMembersDtoRsps = roomMembers.stream()
+                .map(roomMember -> modelMapper.map(roomMember, RoomMembersDtoRsp.class)).toList();
+        return roomMembersDtoRsps;
     }
 }
