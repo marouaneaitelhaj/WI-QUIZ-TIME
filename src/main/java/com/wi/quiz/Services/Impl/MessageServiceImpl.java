@@ -2,6 +2,7 @@ package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.Message.MessageDto;
 import com.wi.quiz.DTO.Message.MessageDtoRsp;
+import com.wi.quiz.DTO.Person.PersonDto;
 import com.wi.quiz.Entities.Message;
 import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.Room;
@@ -40,9 +41,9 @@ public class MessageServiceImpl implements MessageService {
         message.setSender(person);
         message.setRoom(room);
         message.setTime(LocalTime.now());
+        System.out.println(message.getSender().getId());
         message = messageRepository.save(message);
-        MessageDtoRsp messageDtoRsp = modelMapper.map(message, MessageDtoRsp.class);
-        return messageDtoRsp;
+        return modelMapper.map(message, MessageDtoRsp.class);
     }
 
     @Override
@@ -77,5 +78,11 @@ public class MessageServiceImpl implements MessageService {
         List<Message> messages = messageRepository.findAll();
         List<MessageDtoRsp> messageDtoRsps = messages.stream().map(message -> modelMapper.map(message, MessageDtoRsp.class)).toList();
         return messageDtoRsps;
+    }
+
+    @Override
+    public List<MessageDtoRsp> findAll(Long room_id) {
+        List<Message> messages = messageRepository.findAllByRoomId(room_id);
+        return messages.stream().map(message -> modelMapper.map(message, MessageDtoRsp.class)).toList();
     }
 }

@@ -1,5 +1,7 @@
 package com.wi.quiz.DTO.Room;
 
+import com.wi.quiz.DTO.Message.MessageDto;
+import com.wi.quiz.DTO.Person.PersonDto;
 import com.wi.quiz.DTO.RoomMembers.RoomMembersDto;
 import com.wi.quiz.DTO.RoomMembers.RoomMembersDtoForRoom;
 import com.wi.quiz.Entities.Message;
@@ -23,7 +25,7 @@ public class RoomDtoRsp {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Person owner;
+    private PersonDto owner;
     private List<RoomMembersDtoForRoom> members;
-    private List<Message> messages;
+    //private List<MessageDto> messages;
 }

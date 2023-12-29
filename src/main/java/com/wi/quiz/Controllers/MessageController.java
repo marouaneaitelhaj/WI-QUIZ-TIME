@@ -28,10 +28,10 @@ public class MessageController {
         return new ResponseEntity<>(messageResponseHashMap, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<?> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    @GetMapping("/room/{id}")
+    public ResponseEntity<?> findAll(@PathVariable Long id) {
         Map<String, Object> messageResponseHashMap = new HashMap<>();
-        messageResponseHashMap.put("content", messageService.findAll());
+        messageResponseHashMap.put("content", messageService.findAll(id));
         return ResponseEntity.ok(messageResponseHashMap);
     }
 

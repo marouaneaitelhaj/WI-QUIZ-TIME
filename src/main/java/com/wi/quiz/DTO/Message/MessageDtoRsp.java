@@ -1,5 +1,6 @@
 package com.wi.quiz.DTO.Message;
 
+import com.wi.quiz.DTO.Person.PersonDto;
 import com.wi.quiz.DTO.Room.RoomDto;
 import com.wi.quiz.Entities.Person;
 import com.wi.quiz.Entities.Room;
@@ -19,6 +20,6 @@ public class MessageDtoRsp {
     private long id;
     private String content;
     private RoomDto room;
-    private Person sender;
+    private PersonDto sender;
     private LocalTime time;
 }

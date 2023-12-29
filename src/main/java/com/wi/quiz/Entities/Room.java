@@ -16,7 +16,7 @@ public class Room {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
+    @ManyToOne
     private Person owner;
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<RoomMembers> members;
