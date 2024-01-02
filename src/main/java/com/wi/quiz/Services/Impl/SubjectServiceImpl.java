@@ -6,13 +6,8 @@ import com.wi.quiz.Entities.Subject;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.SubjectRepository;
 import com.wi.quiz.Services.Inter.SubjectService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +25,11 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectDtoRsp save(SubjectDto subjectDto) {
         Subject subject = modelMapper.map(subjectDto, Subject.class);
-        subject.setTop(new Subject(subjectDto.getTop_id()));
+        if (subjectDto.getTop_id() != null) {
+            Subject top = subjectRepository.findById(subjectDto.getTop_id())
+                    .orElseThrow(() -> new NotFoundEx("Subject not found for id: " + subjectDto.getTop_id()));
+            subject.setTop(top);
+        }
         subject = subjectRepository.save(subject);
         return modelMapper.map(subject, SubjectDtoRsp.class);
     }

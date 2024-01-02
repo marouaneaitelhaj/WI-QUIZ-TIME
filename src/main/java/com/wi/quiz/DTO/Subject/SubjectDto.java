@@ -12,6 +12,5 @@ public class SubjectDto {
     private Long id;
     @NotNull
     private String name;
-    @NotNull
     private Long top_id;
 }
