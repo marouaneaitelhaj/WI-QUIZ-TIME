@@ -2,9 +2,13 @@ package com.wi.quiz.Services.Impl;
 
 import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDto;
 import com.wi.quiz.DTO.QuestionOfQuiz.QuestionOfQuizDtoRsp;
+import com.wi.quiz.Entities.Question;
 import com.wi.quiz.Entities.QuestionOfQuiz;
+import com.wi.quiz.Entities.Quiz;
 import com.wi.quiz.Exceptions.NotFoundEx;
 import com.wi.quiz.Repositories.QuestionOfQuizRepository;
+import com.wi.quiz.Repositories.QuestionRepository;
+import com.wi.quiz.Repositories.QuizRepository;
 import com.wi.quiz.Services.Inter.QuestionOfQuizService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +24,8 @@ import java.util.Optional;
 public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
     
     private final QuestionOfQuizRepository questionOfQuizRepository;
+    private  final QuizRepository quizRepository;
+    private  final QuestionRepository questionRepository;
     
     private final ModelMapper modelMapper;
 
@@ -27,18 +33,24 @@ public class QuestionOfQuizServiceImpl implements QuestionOfQuizService {
     public QuestionOfQuizDtoRsp save(QuestionOfQuizDto questionOfQuizDto) {
         QuestionOfQuiz questionOfQuiz = modelMapper.map(questionOfQuizDto, QuestionOfQuiz.class);
         checkIfExist(questionOfQuizDto);
+        Question question = questionRepository.findById(questionOfQuizDto.getQuestion_id()).orElseThrow(() -> new NotFoundEx("Question not found for id: " + questionOfQuizDto.getQuestion_id()));
+        Quiz quiz = quizRepository.findById(questionOfQuizDto.getQuiz_id()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + questionOfQuizDto.getQuiz_id()));
+        questionOfQuiz.setQuestion(question);
+        questionOfQuiz.setQuiz(quiz);
         questionOfQuiz = questionOfQuizRepository.save(questionOfQuiz);
         return modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class);
     }
 
     @Override
     public QuestionOfQuizDtoRsp update(QuestionOfQuizDto questionOfQuizDto, Long aLong) {
-        Optional<QuestionOfQuiz> optionalQuestionOfQuiz = questionOfQuizRepository.findById(aLong);
-        if (optionalQuestionOfQuiz.isEmpty()) {
-            throw new NotFoundEx("QuestionOfQuiz not found for id: " + aLong);
-        }
+        questionOfQuizRepository.findById(aLong).orElseThrow(() -> new NotFoundEx("QuestionOfQuiz not found for id: " + aLong));
         QuestionOfQuiz questionOfQuiz = modelMapper.map(questionOfQuizDto, QuestionOfQuiz.class);
         checkIfExist(questionOfQuizDto);
+        Question question = questionRepository.findById(questionOfQuizDto.getQuestion_id()).orElseThrow(() -> new NotFoundEx("Question not found for id: " + questionOfQuizDto.getQuestion_id()));
+        Quiz quiz = quizRepository.findById(questionOfQuizDto.getQuiz_id()).orElseThrow(() -> new NotFoundEx("Quiz not found for id: " + questionOfQuizDto.getQuiz_id()));
+        questionOfQuiz.setQuestion(question);
+        questionOfQuiz.setQuiz(quiz);
+        questionOfQuiz.setId(aLong);
         questionOfQuiz = questionOfQuizRepository.save(questionOfQuiz);
         return modelMapper.map(questionOfQuiz, QuestionOfQuizDtoRsp.class);
     }
