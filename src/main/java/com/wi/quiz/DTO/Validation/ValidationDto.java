@@ -15,7 +15,7 @@ public class ValidationDto {
     @NotNull
     private Long response_id;
     @NotNull
-    private boolean isCorrect;
+    private boolean correct;
     @NotNull
     private int points;
 }

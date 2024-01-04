@@ -17,6 +17,6 @@ public class ValidationDtoRsp {
     private QuestionDto question;
     private ResponseDto response;
     private List<AnswerDto> answers;
-    private boolean isCorrect;
+    private boolean correct;
     private int points;
 }

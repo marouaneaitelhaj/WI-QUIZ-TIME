@@ -19,8 +19,6 @@ public class Validation {
     private Response response;
     @OneToMany(mappedBy = "validation", cascade = CascadeType.ALL)
     private List<Answer> answers;
-    @Getter
-    @Setter
-    private boolean isCorrect;
+    private boolean correct;
     private int points;
 }
