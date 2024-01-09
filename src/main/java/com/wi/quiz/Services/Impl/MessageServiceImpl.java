@@ -84,7 +84,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageDtoRsp> findAll(Long room_id) {
-        List<Message> messages = messageRepository.findAllByRoomId(room_id);
+        List<Message> messages = messageRepository.findAllByRoomIdOrderByTimeDesc(room_id);
         return messages.stream().map(message -> modelMapper.map(message, MessageDtoRsp.class)).toList();
     }
 }

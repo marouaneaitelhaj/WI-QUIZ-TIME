@@ -21,8 +21,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ChatController {
     private final MessageService messageService;
-    private  final PersonServiceImpl personService;
-
+    private final PersonServiceImpl personService;
 
     @MessageMapping("/chat/{roomId}")
     @SendTo("/topic/{roomId}")
@@ -35,6 +34,16 @@ public class ChatController {
     public ResponseEntity<?> login(PersonDtoLogin dtoLogin) {
         Map<String, Object> message = new HashMap<>();
         Optional<PersonDtoLogin> person = personService.login(dtoLogin);
+        message.put("login", person.isPresent());
+        message.put("content", person.orElse(null));
+        return ResponseEntity.ok(message);
+    }
+
+    @MessageMapping("/login/{id}")
+    @SendTo("/topic/login/{id}")
+    public ResponseEntity<?> checkLogin(@DestinationVariable Long id) {
+        Map<String, Object> message = new HashMap<>();
+        Optional<PersonDtoLogin> person = personService.findById(id);
         message.put("login", person.isPresent());
         message.put("content", person.orElse(null));
         return ResponseEntity.ok(message);

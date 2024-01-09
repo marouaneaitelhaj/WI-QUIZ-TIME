@@ -19,4 +19,8 @@ public class PersonServiceImpl {
         Optional<Person> person = personRepository.findByFirstNameAndLastName(personDtoLogin.getFirstName(), personDtoLogin.getLastName());
         return person.map(value -> modelMapper.map(value, PersonDtoLogin.class));
     }
+    public Optional<PersonDtoLogin> findById(Long id) {
+        Optional<Person> person = personRepository.findById(id);
+        return person.map(value -> modelMapper.map(value, PersonDtoLogin.class));
+    }
 }
