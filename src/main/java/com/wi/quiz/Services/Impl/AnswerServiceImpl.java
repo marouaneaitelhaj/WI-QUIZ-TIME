@@ -14,6 +14,7 @@ import com.wi.quiz.Services.Inter.AnswerService;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
